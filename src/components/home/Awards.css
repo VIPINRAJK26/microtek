@@ -1,0 +1,28 @@
+.awards h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+}
+
+.awards p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: auto;
+}
+
+.award-card {
+  border: 3px solid #b4b4b4;
+  padding: 20px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.award-card:hover {
+  transform: scale(1.05);
+}
+
+.award-card img {
+  max-height: 150px;
+  object-fit: contain;
+}

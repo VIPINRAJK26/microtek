@@ -4,7 +4,7 @@ import "./Footer.css"
 
 const Footer = () => {
   return (
-    <footer className="footer border-top-2 pt-5 ">
+    <footer className="footer  pt-5 ">
       <div className="container">
         <div className="row">
           {/* Products Section */}

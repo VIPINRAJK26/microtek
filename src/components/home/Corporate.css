@@ -1,0 +1,51 @@
+.corporate h2{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 800;
+    font-size: 2.5rem;
+}
+
+.corporate p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: auto;
+}
+
+.csr-card {
+  border-radius: 12px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.csr-card:hover {
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.image-container img {
+  transition: transform 0.3s ease;
+  width: 100%;
+  height: auto;
+}
+
+.image-container:hover img {
+  transform: scale(1.1);
+}
+
+.csr-card h5 {
+  font-weight: bold;
+  text-align: left;
+}
+
+.csr-card p {
+  text-align: left;
+  color: #666;
+}
