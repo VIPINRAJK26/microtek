@@ -1,0 +1,17 @@
+.navbar-custom {
+  background-color: #f8f9fa;
+}
+.nav-link {
+  color: #000;
+  font-weight: bold;
+}
+.dropdown-menu {
+  background-color: #f8f9fa;
+}
+.navbar-toggler-icon {
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1828/1828859.png"); /* Hamburger icon */
+}
+.navbar-brand img {
+  height: 50px;
+}
+

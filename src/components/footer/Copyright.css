@@ -1,0 +1,35 @@
+.copyright-section {
+  background-color: #ebebeb; /* Light background */
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.copyright-main{
+  border-top: 1px solid rgb(200, 200, 200);
+
+}
+
+.copyright-section p {
+  margin: 0;
+  color: #333;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center; /* Center the links */
+  gap: 20px; /* Add space between each link */
+  margin-top: 5px; /* Add a small margin between text and links */
+}
+
+.footer-links a {
+  color: #007bff; /* Bootstrap primary color */
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  display: none; /* Hide the dividers since we're using Flexbox */
+}
