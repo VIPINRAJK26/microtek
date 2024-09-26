@@ -1,0 +1,45 @@
+.service{
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.step-number {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+}
+.step-number {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+}
+
+.service-left{
+    border-radius: 30px 0 30px 0px;
+    background-image: linear-gradient(to bottom, rgb(2, 19, 50),rgb(7, 7, 186));
+}
+
+.image img{
+    border-radius: 0px 30px 0px 30px;
+}
+
+.image h5{
+    position: relative;
+    top: -50px;
+    color:white;
+    font-weight: 800;
+}
+
+.image2 img{
+    border-radius: 0px 0px 30px 30px;
+}
+
+@media screen and (max-width: 425px) {
+    
+}

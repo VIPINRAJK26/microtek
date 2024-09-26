@@ -1,0 +1,42 @@
+.card-slider{
+    box-sizing: border-box;
+}
+
+.nav-pills .nav-link {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: .9rem;
+  padding: 4px 15px;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #245284;
+  color: white;
+}
+
+.carousel-item {
+  transition: transform 0.5s ease-in-out;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+
+}
+
+@media (max-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .card{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
