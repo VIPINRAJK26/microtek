@@ -6,7 +6,7 @@ const Service = () => {
     <div className="service container rounded-5 my-5">
       <div className="row">
         {/* Left Section (Paperless Warranty) */}
-        <div className="col-lg-4 col-md-12 p-0 ">
+        <div className="col-lg-4 col-md-12 p-sm-0 py-3 ">
           <div className="service-left p-4  text-white h-100">
             <h4 className="mb-3">How to register for a paperless warranty?</h4>
             <p>RAHO ON FULL ON WITH PAPERLESS WARRANTY IN 3 SIMPLE STEPS.</p>

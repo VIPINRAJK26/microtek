@@ -6,7 +6,7 @@ const About =()=> {
     <div className="container d-flex justify-content-center  about py-5">
       <div className="about-left col-md-4 rounded-4 col-12 ">
         <h3 className=" px-4 py-3 fw-semi-bold">About Microtek</h3>
-        <p className="px-4">
+        <p className="px-4 ">
           Microtek is India's #1 home UPS brand with a big range of
           technologically advanced products in Power backup, Solar and
           Electrical solutions. With 4 manufacturing units across India and
@@ -14,7 +14,7 @@ const About =()=> {
           more than 12 crore happy customers. Our 2000+ employees dedicatedly
           work towards providing customer delight to the entire nation
         </p>
-        <a href="" className="view-more">
+        <a href="" className="view-more ">
           view more
         </a>
       </div>
