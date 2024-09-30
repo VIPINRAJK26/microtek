@@ -14,6 +14,11 @@
   object-fit: cover;
 }
 
+
+body::-webkit-scrollbar{
+  display: none;
+}
+
 .overlay {
   position: absolute;
   top: 0;

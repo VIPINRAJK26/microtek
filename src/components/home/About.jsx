@@ -13,7 +13,7 @@ function About() {
 
   return (
     <section>
-      <div className="container-fluid p-5 d-flex flex-column flex-md-row justify-content-center about py-5">
+      <div className=" p-3 p-md-5 d-flex flex-column flex-md-row justify-content-center about py-md-5 py-3">
         <div
           className="about-left col-12 col-md-4 rounded-4"
           data-aos="zoom-in"

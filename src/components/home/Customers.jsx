@@ -42,7 +42,7 @@ const Customers = () => {
       let servicePointCount = 0;
 
       const customerInterval = setInterval(() => {
-        if (customerCount < 12) {
+        if (customerCount < 2) {
           customerCount += 1; // Incrementing customers by 1 lakh
           setHappyCustomers(customerCount);
         } else {
@@ -51,7 +51,7 @@ const Customers = () => {
       }, 300); // Faster speed for smoother counting
 
       const dealerInterval = setInterval(() => {
-        if (dealerCount < 10) {
+        if (dealerCount < 4) {
           dealerCount += 1; // Incrementing dealers by 500
           setDealerNetwork(dealerCount);
         } else {
@@ -59,18 +59,10 @@ const Customers = () => {
         }
       }, 350);
 
-      const serviceEngineerInterval = setInterval(() => {
-        if (serviceEngineerCount < 1200) {
-          serviceEngineerCount += 100; // Incrementing service engineers by 500
-          setServiceEngineers(serviceEngineerCount);
-        } else {
-          clearInterval(serviceEngineerInterval);
-        }
-      }, 350);
 
       const servicePointInterval = setInterval(() => {
-        if (servicePointCount < 500) {
-          servicePointCount += 50; // Incrementing service points by 500
+        if (servicePointCount < 2384) {
+          servicePointCount += 298; // Incrementing service points by 500
           setServicePoints(servicePointCount);
         } else {
           clearInterval(servicePointInterval);
@@ -91,7 +83,7 @@ const Customers = () => {
       <div className="overlay">
         <div className="overlay-content">
           <h1 className="overlay-text display-3">
-            {happyCustomers.toLocaleString()} Cr+
+            {happyCustomers.toLocaleString()} L+
           </h1>
           <h2 className="overlay-text2">Happy Customers</h2>
         </div>
@@ -100,12 +92,6 @@ const Customers = () => {
             {dealerNetwork.toLocaleString()} L+
           </h1>
           <h2 className="overlay-text2  ">Dealer Network</h2>
-        </div>
-        <div className="overlay-content">
-          <h1 className="overlay-text display-3">
-            {serviceEngineers.toLocaleString()} +
-          </h1>
-          <h2 className="overlay-text2  ">Service Engineer</h2>
         </div>
         <div className="overlay-content">
           <h1 className="overlay-text display-3">

@@ -3,7 +3,7 @@ import "./Service.css"; // Optional custom styling for finer details
 
 const Service = () => {
   return (
-    <div className="service container rounded-5 my-5">
+    <div className="service m-md-5 m-2 rounded-5 my-5">
       <div className="row">
         {/* Left Section (Paperless Warranty) */}
         <div className="col-lg-4 col-md-12 p-sm-0 py-3 ">
@@ -56,7 +56,7 @@ const Service = () => {
 
         {/* Right Section (Customer Support Options) */}
         <div className="col-lg-4 col-md-6 mb-4 p-0">
-          <div className="bg-white p-4 rounded h-100 d-flex flex-column">
+          <div className="service-right bg-white p-4 h-100 d-flex flex-column">
             <h4>Unmatched Customer Support</h4>
             <p className="text-muted">
               Microtek prioritizes customer satisfaction to ensure the best pre

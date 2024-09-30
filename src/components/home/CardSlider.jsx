@@ -59,7 +59,7 @@ const CardSlider = () => {
   };
 
   return (
-    <div className="card-slider container p-0">
+    <div className="card-slider container p-0 pb-5">
       {/* Headings */}
       <h2 className="text-center pt-5 pb-3">
         Reinventing the Spirit of Innovation

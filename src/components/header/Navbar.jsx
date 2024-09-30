@@ -208,7 +208,7 @@ function Navbar() {
               >
                 <input
                   type="text"
-                  className="form-control search-input"
+                  className="form-control search-input p-0"
                   placeholder="Search..."
                   autoFocus
                 />
