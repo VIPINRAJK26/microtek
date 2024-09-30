@@ -6,7 +6,7 @@ const CopyrightSection = () => {
   return (
     <div className="copyright-section mt-4  ">
       <div className="copyright-main container text-center pt-3 pb-2">
-        <p>&copy; 2024 Microtek. All Rights Reserved.</p>
+        <p>&copy; 2024 warrior. All Rights Reserved.</p>
         <div className="footer-links">
           <Link to="/terms-and-conditions">Terms & Conditions</Link>
           <span className="divider">|</span>

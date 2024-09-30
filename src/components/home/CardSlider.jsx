@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
-import { Carousel, Card } from 'react-bootstrap';
-import "./CardSlider.css"
+import React, { useState } from "react";
+import { Carousel, Card } from "react-bootstrap";
+import "./CardSlider.css";
 
 const CardSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const categories = ['Newly Launched', 'Home UPS', 'Inverter Batteries', 'Commercial UPS'];
+  const categories = [
+    "Newly Launched",
+    "Home UPS",
+    "Inverter Batteries",
+    "Commercial UPS",
+  ];
 
   const cardsData = {
     "Newly Launched": [
@@ -56,12 +61,14 @@ const CardSlider = () => {
   return (
     <div className="card-slider container p-0">
       {/* Headings */}
-      <h2 className='text-center pt-5 pb-3'>Reinventing the Spirit of Innovation</h2>
+      <h2 className="text-center pt-5 pb-3">
+        Reinventing the Spirit of Innovation
+      </h2>
       <ul className="nav nav-pills justify-content-center my-3">
         {categories.map((category, index) => (
           <li key={index} className="nav-item">
             <button
-              className={`nav-link ${activeIndex === index ? 'active' : ''}`}
+              className={`nav-link ${activeIndex === index ? "active" : ""}`}
               onClick={() => handleSelect(index)}
             >
               {category}
@@ -71,14 +78,23 @@ const CardSlider = () => {
       </ul>
 
       {/* Card Carousel */}
-      <Carousel activeIndex={activeIndex} onSelect={handleSelect} interval={null}>
+      <Carousel
+        activeIndex={activeIndex}
+        onSelect={handleSelect}
+        interval={null}
+      >
         {categories.map((category, index) => (
           <Carousel.Item key={index}>
             <div className="row">
               {cardsData[category].map((card, i) => (
                 <div key={i} className="col-lg-3 col-md-6 mb-4">
                   <Card className="h-100 rounded-5 mt-3">
-                    <Card.Img className="rounded-top-5" variant="top" src={card.image} alt={card.title} />
+                    <Card.Img
+                      className="rounded-top-5"
+                      variant="top"
+                      src={card.image}
+                      alt={card.title}
+                    />
                     <Card.Body>
                       <Card.Title>{card.title}</Card.Title>
                     </Card.Body>

@@ -1,17 +1,133 @@
 .navbar-custom {
-  background-color: #f8f9fa;
-}
-.nav-link {
-  color: #000;
-  font-weight: bold;
-}
-.dropdown-menu {
-  background-color: #f8f9fa;
-}
-.navbar-toggler-icon {
-  background-image: url("https://cdn-icons-png.flaticon.com/512/1828/1828859.png"); /* Hamburger icon */
-}
-.navbar-brand img {
-  height: 50px;
+    background-color: #f8f9fa;
 }
 
+.nav-link {
+    color: #000;
+    font-weight: bold;
+}
+
+.dropdown-menu {
+    background-color: #f8f9fa;
+}
+
+.navbar-toggler-icon {
+    background-image: url("https://cdn-icons-png.flaticon.com/512/1828/1828859.png");
+    /* Hamburger icon */
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+
+/* Initial styles for search input */
+.search-container {
+    position: relative;
+    display: inline-block;
+    width: 0;
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.5s ease;
+    /* Smooth transition */
+}
+
+/* Show the search input on click */
+.search-container.show {
+    width: 200px;
+    /* Adjust width as per your design */
+    opacity: 1;
+    /* Fade in effect */
+}
+
+/* Style for the search input */
+.search-input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 5px 15px;
+    outline: none;
+    transition: all 0.3s ease;
+
+}
+
+/* Add focus styles */
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+}
+
+
+
+
+.nav-text{
+
+
+    font-weight: 400;
+
+}
+
+
+
+/* Mega Dropdown Styling */
+.mega-dropdown {
+    position: absolute;
+    top: 2rem;
+    left: -5rem;
+    width: 50vw;
+    background-color: white;
+    padding: 2.5rem;
+    border-top: none;
+    z-index: 1000;
+    opacity: 0; /* Start hidden */
+    transform: translateY(-10px); /* Start slightly above */
+    animation: fadeDown 0.3s forwards; /* Apply the fade-down animation */
+}
+
+/* Define the fade-down animation */
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); /* Start from above */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* End at normal position */
+    }
+}
+
+.category-item {
+    padding: 0.5rem 0;
+    cursor: pointer;
+}
+
+.category-item.active {
+    font-weight: bold;
+    color: #1d4694;
+}
+
+.product-card {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.product-card img {
+    width: 80px;
+    height: 80px;
+}
+
+.product-card p {
+    margin-top: 0.5rem;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Dropdown visibility */
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.care{
+
+    font-weight: 800;
+    color: #1d4694;
+}
