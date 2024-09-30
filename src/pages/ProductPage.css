@@ -1,0 +1,14 @@
+.product-page {
+  display: flex;
+  margin: 20px;
+}
+
+.filter-container {
+  padding: 15px;
+  background-color: #f8f9fa; /* Light background for filter */
+  border-right: 1px solid #dee2e6; /* Add border to separate */
+}
+
+.card {
+  margin-bottom: 20px;
+}
