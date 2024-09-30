@@ -118,7 +118,9 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item me-3 ">
-                <Link className="nav-link nav-text">Home</Link>
+                <Link className="nav-link nav-text" to={"/"}>
+                  Home
+                </Link>
               </li>
 
               {/* Products Dropdown */}
@@ -133,7 +135,7 @@ function Navbar() {
                   role="button"
                   aria-expanded="false"
                 >
-                  Products
+                  <Link to={"/products"} className="text-decoration-none text-black">Products</Link>
                 </a>
 
                 {/* Dropdown content */}

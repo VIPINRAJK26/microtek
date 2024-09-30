@@ -67,6 +67,7 @@ const Footer = () => {
               <i className="fab fa-twitter"></i>
               <i className="fab fa-linkedin"></i>
               <i className="fab fa-youtube"></i>
+              <i className="fab fa-pinterest"></i>
               <i className="fab fa-instagram"></i>
             </div>
           </div>

@@ -2,7 +2,7 @@ import React from "react";
 import HomeSlider from "../components/home/HomeSlider";
 import About from "../components/home/About";
 // import SecondSlider from '../components/home/SecondSlider'
-import Awards from "../components/home/Awards";
+// import Awards from "../components/home/Awards";
 // import CorporateSocial from '../components/home/CorporateSocial'
 import CSR from "../components/home/CorporateSocial";
 import Service from "../components/home/Service";
@@ -19,13 +19,13 @@ const HomePage = () => {
         <About />
       </div>
       <div>
-        <Customers />
+        <Service/>
       </div>
       <div>
-        <Awards />
+        {/* <Awards /> */}
       </div>
       <div>
-        <Service />
+        <Customers/>
       </div>
       <div>
         <CSR />

@@ -8,27 +8,12 @@ const Service = () => {
         {/* Left Section (Paperless Warranty) */}
         <div className="col-lg-4 col-md-12 p-sm-0 py-3 ">
           <div className="service-left p-4  text-white h-100">
-            <h4 className="mb-3">How to register for a paperless warranty?</h4>
-            <p>RAHO ON FULL ON WITH PAPERLESS WARRANTY IN 3 SIMPLE STEPS.</p>
+            <h4 className="mb-3">Product Installation</h4>
+            <p>All the Products and systems are delivered within the committed time and installed by the service engineers or designated technical personnel & relevant instructions to system operations will be provided to the Customers  </p>
             <div className="steps">
-              <div className="step mb-3">
-                <span className="step-number bg-danger text-white rounded-circle me-2">
-                  1
-                </span>
-                Click on Customer Care.
-              </div>
-              <div className="step mb-3">
-                <span className="step-number bg-danger text-white rounded-circle me-2">
-                  2
-                </span>
-                Select Product Registration.
-              </div>
-              <div className="step mb-3">
-                <span className="step-number bg-danger text-white rounded-circle me-2">
-                  3
-                </span>
-                Enter your registered mobile number and relevant details.
-              </div>
+
+                <h4 className="pt-3">Vision Statement</h4>
+                <p>Our Vision is to be the global leader in sustainable energy and water solutions, providing innovative inverters, UPS systems , batteries ,solar systems , and water purifiers, We aim to empower communities with reliable , eco-friendly technologies , promoting a healthier planet and ensuring energy and water independence for all. </p>
             </div>
           </div>
         </div>
@@ -59,8 +44,8 @@ const Service = () => {
           <div className="service-right bg-white p-4 h-100 d-flex flex-column">
             <h4>Unmatched Customer Support</h4>
             <p className="text-muted">
-              Microtek prioritizes customer satisfaction to ensure the best pre
-              and post sales experience. We would be happy to help you.
+              Warrior prioritizes customer satisfaction to ensure the best pre
+              and post sales experience. 24 Hr customer support is available.
             </p>
 
             <div className="d-flex justify-content-between align-items-center">

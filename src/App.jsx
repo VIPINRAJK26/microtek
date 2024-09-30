@@ -5,6 +5,7 @@ const Landing = lazy(() => import("./pages/HomePage"));
 const Header = lazy(() => import("./components/header/Navbar"));
 const Footer = lazy(() => import("./components/footer/Footer"));
 const Copy = lazy(() => import("./components/footer/CopyRight"));
+const Products = lazy(() => import("./pages/Products"));
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Suspense>
             <Routes>
               <Route path="/" element={<Landing />} />
+              <Route path="/products" element={<Products />} />
             </Routes>
           </Suspense>
         </main>
