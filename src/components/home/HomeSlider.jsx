@@ -33,11 +33,7 @@ const HomeSlider = () => {
       <div className="carousel-inner">
         {/* Slide 1 */}
         <div className="carousel-item active">
-          <img
-            src="https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fcmscontent%2F24299-Microtek-Inverter-Batter-KV-Men-For-Website-1920x867pixel-1726969173415.jpg&w=1920&q=75"
-            className="d-block w-100"
-            alt="First slide"
-          />
+          <img src="public/warrior-front.jpg" className="d-block w-100" alt="First slide" />
         </div>
 
         {/* Slide 2 */}
