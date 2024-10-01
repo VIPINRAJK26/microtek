@@ -19,7 +19,7 @@ const HighlightSpecifications = () => {
   ];
 
   return (
-    <div className="battery-section container rounded-top-5 mt-5">
+    <div className="highlight-section container rounded-top-5 mt-5">
       <h2 className="section-title">Specifications</h2>
       <div className="spec-grid">
         {specifications.map((spec, index) => (
