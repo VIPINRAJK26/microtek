@@ -61,7 +61,7 @@ const CardSlider = () => {
   return (
     <div className="card-slider p-2 p-md-5 pb-5">
       {/* Headings */}
-      <h2 className="text-center pt-5 pb-3">
+      <h2 className="text-center fw-bold pt-5 pb-3">
         Reinventing the Spirit of Innovation
       </h2>
       <ul className="nav nav-pills justify-content-center my-3">

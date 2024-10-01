@@ -24,6 +24,22 @@
   border-radius: 1rem;
 }
 
+.about-right p {
+  position: absolute;
+  top: 80%;
+  opacity: 0;
+  font-size: 1.2rem;
+  transition: opacity 0.5s ease;
+  background-color: rgba(0, 0, 0, 0.534);
+  padding: 10px;
+  border-radius: 15px;
+  line-height: 30px;
+}
+
+.about-right:hover p {
+  opacity: 1; /* Show the text on hover */
+}
+
 /* Mobile Responsiveness */
 @media screen and (max-width: 767px) {
   .about {
@@ -45,4 +61,23 @@
     text-align: center;
     margin-top: 10px;
   }
+
+  .about-right p {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    line-height: 25px;
+    transition: opacity 0.5s ease;
+    background-color: rgba(0, 0, 0, 0.534);
+    padding: 10px;
+    border-radius: 14px;
+    font-size: .9rem;
+  }
 }
+
+/* @media (max-width: 576px) {
+  .about-right p {
+    font-size: 1rem; 
+    padding: 3px;
+  }
+} */

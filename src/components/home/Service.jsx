@@ -8,11 +8,11 @@ const Service = () => {
         {/* Left Section (Paperless Warranty) */}
         <div className="col-lg-4 col-md-12 p-sm-0 py-3 ">
           <div className="service-left p-4  text-white h-100">
-            <h4 className="mb-3">Product Installation</h4>
+            <h4 className="mb-3 fw-bold">Product Installation</h4>
             <p>All the Products and systems are delivered within the committed time and installed by the service engineers or designated technical personnel & relevant instructions to system operations will be provided to the Customers  </p>
             <div className="steps">
 
-                <h4 className="pt-3">Vision Statement</h4>
+                <h4 className="pt-3 fw-bold">Vision Statement</h4>
                 <p>Our Vision is to be the global leader in sustainable energy and water solutions, providing innovative inverters, UPS systems , batteries ,solar systems , and water purifiers, We aim to empower communities with reliable , eco-friendly technologies , promoting a healthier planet and ensuring energy and water independence for all. </p>
             </div>
           </div>
@@ -42,7 +42,7 @@ const Service = () => {
         {/* Right Section (Customer Support Options) */}
         <div className="col-lg-4 col-md-6 mb-4 p-0">
           <div className="service-right bg-white p-4 h-100 d-flex flex-column">
-            <h4>Unmatched Customer Support</h4>
+            <h4 className="fw-bold">Unmatched Customer Support</h4>
             <p className="text-muted">
               Warrior prioritizes customer satisfaction to ensure the best pre
               and post sales experience. 24 Hr customer support is available.

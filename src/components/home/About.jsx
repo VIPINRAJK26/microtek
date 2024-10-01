@@ -18,7 +18,7 @@ function About() {
           className="about-left col-12 col-md-4 rounded-4"
           data-aos="zoom-in"
         >
-          <h3 className="px-4 py-3 fw-semi-bold">About Warrior</h3>
+          <h3 className="px-4 py-3 fs-4 fw-bold">About Warrior</h3>
           <p className="px-4">
             With 15 years of experience, Warrior Inverter excels in
             manufacturing and installing high-quality inverters, batteries,
@@ -48,8 +48,14 @@ function About() {
             src="https://avaada.com/wp-content/uploads/types-ofsolar-panels-min-1-scaled-1.jpg"
             alt=""
             className="img-fluid rounded-4"
-            
           />
+          <p className=" text-white text-center">
+            Powering a Sustainable Future. With pioneering inverters, UPS
+            systems, batteries, solar solutions, and water purifiers, Warrior
+            leads in innovation and reliability. Trust Warrior for eco-friendly
+            technologies that ensure energy independence and clean water,
+            enhancing lives and protecting the planet
+          </p>
         </div>
       </div>
     </section>

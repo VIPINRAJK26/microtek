@@ -1,7 +1,14 @@
-import React from 'react';
-import { Accordion, Form } from 'react-bootstrap';
+import React, { useState } from "react"; // Correctly import useState
+import { Accordion, Form } from "react-bootstrap";
 
 const ProductFilter = () => {
+  const [priceRange, setPriceRange] = useState([1000, 50000]); // Initial price range
+
+  // Handle price range change
+  const handlePriceChange = (event) => {
+    setPriceRange([priceRange[0], event.target.value]); // Update only the max value, keeping min intact
+  };
+
   return (
     <div className="filter-container">
       <h5>Filters</h5>
@@ -25,7 +32,6 @@ const ProductFilter = () => {
             <Form.Check type="checkbox" label="1KVA" />
             <Form.Check type="checkbox" label="2KVA" />
             <Form.Check type="checkbox" label="3KVA" />
-            {/* Add more options as necessary */}
           </Accordion.Body>
         </Accordion.Item>
 
@@ -35,7 +41,6 @@ const ProductFilter = () => {
           <Accordion.Body>
             <Form.Check type="checkbox" label="230V" />
             <Form.Check type="checkbox" label="415V" />
-            {/* Add more options as necessary */}
           </Accordion.Body>
         </Accordion.Item>
 
@@ -57,7 +62,8 @@ const ProductFilter = () => {
           </Accordion.Body>
         </Accordion.Item>
 
-        <Accordion.Item eventKey="4">
+        {/* Mobile Connectivity */}
+        <Accordion.Item eventKey="5">
           <Accordion.Header>Mobile Connectivity</Accordion.Header>
           <Accordion.Body>
             <Form.Check type="checkbox" label="Yes" />
@@ -65,7 +71,19 @@ const ProductFilter = () => {
           </Accordion.Body>
         </Accordion.Item>
 
-
+        {/* Price Range Slider */}
+        <Accordion.Item eventKey="6">
+          <Accordion.Header>Price Range</Accordion.Header>
+          <Accordion.Body>
+            <Form.Label>Max Price: ₹{priceRange[1]}</Form.Label>
+            <Form.Range
+              min={priceRange[0]} // Use the initial minimum price
+              max={50000} // Set your maximum price limit here
+              value={priceRange[1]}
+              onChange={handlePriceChange}
+            />
+          </Accordion.Body>
+        </Accordion.Item>
       </Accordion>
     </div>
   );

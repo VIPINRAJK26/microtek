@@ -24,7 +24,9 @@ const ProductCard = ({ image, title, sku, price, oldPrice }) => {
           )}
           <div className="text-muted small">Inclusive of all Taxes</div>
         </Card.Text>
-        <Button variant="outline-primary">View More</Button>
+        <Link to={"/single"}>
+          <Button variant="outline-primary">View More</Button>
+        </Link> 
       </Card.Body>
     </Card>
   );

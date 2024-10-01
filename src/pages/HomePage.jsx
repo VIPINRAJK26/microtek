@@ -9,6 +9,8 @@ import Service from "../components/home/Service";
 import CardSlider from "../components/home/CardSlider";
 import Customers from "../components/home/Customers";
 import Strategy from "../components/home/Strategy";
+import BatterySection from "../components/home/BatterySection";
+import HighlightSpecifications from "../components/home/HighlightSpec";
 
 const HomePage = () => {
   return (
@@ -32,7 +34,10 @@ const HomePage = () => {
         <Customers/>
       </div>
       <div>
-        {/* <CSR /> */}
+        <HighlightSpecifications/>
+      </div>
+      <div>
+        <BatterySection/>
       </div>
       <div>
         <CardSlider />

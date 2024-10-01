@@ -87,6 +87,11 @@ function Navbar() {
     ],
   };
 
+  const navStyle={
+    textDecoration:"none",
+    color:"black"
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -135,7 +140,12 @@ function Navbar() {
                   role="button"
                   aria-expanded="false"
                 >
-                  <Link to={"/products"} className="text-decoration-none text-black">Products</Link>
+                  <Link
+                    to={"/products"}
+                    className="text-decoration-none text-black"
+                  >
+                    Products
+                  </Link>
                 </a>
 
                 {/* Dropdown content */}
@@ -156,7 +166,7 @@ function Navbar() {
                               }`}
                               onMouseEnter={() => setSelectedCategory(category)}
                             >
-                              {category}
+                              <Link to={"/products"} style={navStyle}>{category}</Link>
                             </li>
                           ))}
                         </ul>
@@ -192,7 +202,9 @@ function Navbar() {
               </li>
 
               <li className="nav-item me-3">
-                <Link to={"/store"} className="nav-link nav-text">Store Locator</Link>
+                <Link to={"/store"} className="nav-link nav-text">
+                  Store Locator
+                </Link>
               </li>
             </ul>
           </div>
