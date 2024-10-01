@@ -192,7 +192,7 @@ function Navbar() {
               </li>
 
               <li className="nav-item me-3">
-                <Link className="nav-link nav-text">Store Locator</Link>
+                <Link to={"/store"} className="nav-link nav-text">Store Locator</Link>
               </li>
             </ul>
           </div>

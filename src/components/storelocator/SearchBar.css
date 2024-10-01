@@ -1,0 +1,15 @@
+.search{
+    max-width: 600px;
+    min-height: 50px;
+}
+
+.locator-btn{
+    background-color: #245284;
+    color: white;
+    width: 120px;
+}
+
+.locator-btn p{
+    transform: translateY(20%);
+}
+
