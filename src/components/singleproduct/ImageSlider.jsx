@@ -35,7 +35,7 @@ const ImageSlider = ({ mainImage, relatedImages }) => {
           <Image
             src={currentImage}
             style={mainImageStyle}
-            className="single-image"
+            className="single-image rounded-3 "
             alt="Main Product"
             fluid
           />

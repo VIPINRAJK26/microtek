@@ -44,13 +44,11 @@ function About() {
           className="about-right col-12 col-md-8 mt-4 mt-md-0 ms-md-3"
           data-aos="zoom-in"
         >
-          <video
-            src="https://cms.microtek.in/upload/cmspage/about-video-1717712396302.mp4"
-            preload="auto"
-            autoPlay
-            loop
-            muted
-            playsInline
+          <img
+            src="https://avaada.com/wp-content/uploads/types-ofsolar-panels-min-1-scaled-1.jpg"
+            alt=""
+            className="img-fluid rounded-4"
+            
           />
         </div>
       </div>

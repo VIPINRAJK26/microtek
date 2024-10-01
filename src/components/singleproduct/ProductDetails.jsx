@@ -30,25 +30,25 @@ const ProductDetails = ({
           <h3>₹{price}</h3>
 
           {/* Product Specifications */}
-          <Row className="mt-4 no-gutters">
+          <Row className="mt-4 no-gutters ">
             {" "}
             {/* Add no-gutters class to eliminate gutters */}
             <Col md={3} className="p-0">
-              <div className="info-box ">
+              <div className="info-box bg-white ">
                 <p>
                   <strong>Weight:</strong> <br /> {weight}
                 </p>
               </div>
             </Col>
             <Col md={3} className="p-0">
-              <div className="info-box ">
+              <div className="info-box bg-white ">
                 <p>
                   <strong>Output Voltage:</strong> <br /> {voltage}
                 </p>
               </div>
             </Col>
             <Col md={3} className="p-0">
-              <div className="info-box ">
+              <div className="info-box bg-white">
                 <p>
                   <strong>Dimensions (LxWxH):</strong> <br /> {dimensions}
                 </p>

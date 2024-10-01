@@ -1,4 +1,5 @@
 // import { useState } from 'react';
+import "./App.css"
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 const Landing = lazy(() => import("./pages/HomePage"));
