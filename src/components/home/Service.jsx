@@ -6,7 +6,7 @@ const Service = () => {
     <div className="service m-md-5 m-2 rounded-5 my-5">
       <div className="row">
         {/* Left Section (Paperless Warranty) */}
-        <div className="col-lg-4 col-md-12 p-sm-0 py-3 ">
+        <div className="col-lg-4 col-md-12 p-sm-0 py-0 ">
           <div className="service-left p-4  text-white h-100">
             <h4 className="mb-3 fw-bold">Product Installation</h4>
             <p>All the Products and systems are delivered within the committed time and installed by the service engineers or designated technical personnel & relevant instructions to system operations will be provided to the Customers  </p>

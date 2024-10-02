@@ -60,15 +60,16 @@ body::-webkit-scrollbar {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 20px;
+  border-radius: 15px;
   font-size: 1.1rem;
-  display: none; /* Hidden by default */
   max-width: 400px;
-  transition: opacity 0.3s ease;
+  z-index: 2;
+  /* transition: opacity 0.3s ease; */
 }
 
-.full-width-container:hover .chairman-message {
+/* .full-width-container:hover .chairman-message {
   display: block;
-}
+} */
 
 /* Media Queries for Responsive Design */
 
@@ -111,12 +112,10 @@ body::-webkit-scrollbar {
 
   .chairman-message {
     font-size: 0.9rem;
-    padding: 10px;
-    bottom: 10px;
-    left: 10px;
+    display: none;
   }
 
   .full-width-container {
-    height: 60vh; /* Adjust for smaller screens */
+    height: 70vh; /* Adjust for smaller screens */
   }
 }

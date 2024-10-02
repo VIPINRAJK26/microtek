@@ -97,7 +97,6 @@ const Customers = () => {
         </div>
       </div>
 
-      {/* Hoverable chairman message */}
       <div className="chairman-message">
         <p>
           "I am so proud of our dedicated and very responsive team in
