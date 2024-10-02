@@ -6,7 +6,7 @@ import {
   FaMicrochip,
   FaTemperatureLow,
 } from "react-icons/fa"; // Icons
-import "./Highlight.css"
+import "./HIghlight.css"
 
 const HighlightSpecifications = () => {
   const specifications = [

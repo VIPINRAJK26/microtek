@@ -34,7 +34,7 @@ const HomeSlider = () => {
         {/* Slide 1 */}
         <div className="carousel-item active">
           <img
-            src="public/IM-VIJAYAN.jpg"
+            src="/IM-VIJAYAN.jpg"
             className="d-block w-100"
             alt="First slide"
           />
