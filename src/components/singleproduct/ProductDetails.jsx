@@ -34,7 +34,7 @@ const ProductDetails = ({
             {" "}
             {/* Add no-gutters class to eliminate gutters */}
             <Col md={3} className="p-0">
-              <div className="info-box bg-white ">
+              <div className="info-box rounded-start-4 bg-white ">
                 <p>
                   <strong>Weight:</strong> <br /> {weight}
                 </p>
@@ -48,7 +48,7 @@ const ProductDetails = ({
               </div>
             </Col>
             <Col md={3} className="p-0">
-              <div className="info-box bg-white">
+              <div className="info-box rounded-end-4 bg-white">
                 <p>
                   <strong>Dimensions (LxWxH):</strong> <br /> {dimensions}
                 </p>

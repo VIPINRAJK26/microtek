@@ -5,7 +5,6 @@ const Customers = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [happyCustomers, setHappyCustomers] = useState(0);
   const [dealerNetwork, setDealerNetwork] = useState(0);
-  const [serviceEngineers, setServiceEngineers] = useState(0);
   const [servicePoints, setServicePoints] = useState(0);
 
   const containerRef = useRef(null);
@@ -38,7 +37,6 @@ const Customers = () => {
     if (isVisible) {
       let customerCount = 0;
       let dealerCount = 0;
-      let serviceEngineerCount = 0;
       let servicePointCount = 0;
 
       const customerInterval = setInterval(() => {
@@ -59,7 +57,6 @@ const Customers = () => {
         }
       }, 350);
 
-
       const servicePointInterval = setInterval(() => {
         if (servicePointCount < 2384) {
           servicePointCount += 298; // Incrementing service points by 500
@@ -72,7 +69,6 @@ const Customers = () => {
       return () => {
         clearInterval(customerInterval);
         clearInterval(dealerInterval);
-        clearInterval(serviceEngineerInterval);
         clearInterval(servicePointInterval);
       };
     }
@@ -100,7 +96,23 @@ const Customers = () => {
           <h2 className="overlay-text2  ">Service Points</h2>
         </div>
       </div>
-      
+
+      {/* Hoverable chairman message */}
+      <div className="chairman-message">
+        <p>
+          "I am so proud of our dedicated and very responsive team in
+          manufacturing and installing premium inverters, batteries, solar
+          systems, and water purifiers. Our journey has been driven by a
+          commitment to innovation, quality, and sustainability. We have
+          consistently delivered reliable energy solutions tailored to meet the
+          diverse needs of our residential, commercial, and industrial clients.
+          Our success is a testament to our dedicated team and loyal customers.
+          As we look to the future, we remain steadfast in our mission to lead
+          the renewable energy sector, providing advanced technologies that
+          promote environmental stewardship and energy independence."
+        </p>
+      </div>
+
       <img
         className="background-image2"
         src="https://img.freepik.com/free-photo/cute-family-playing-summer-field_1157-37659.jpg?t=st=1727339822~exp=1727343422~hmac=2366186ebf725a816a3e45dc06b6dfe6485184c161340b472c9f31b7c7ce2ba2&w=1060" // Replace with actual image
