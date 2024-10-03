@@ -9,6 +9,7 @@ const Copy = lazy(() => import("./components/footer/CopyRight"));
 const Products = lazy(() => import("./pages/ProductPage"));
 const Single = lazy(() => import("./pages/SingleProduct"));
 const Store = lazy(() => import("./pages/StoreLocator"));
+const Preview = lazy(() => import("./pages/ProductPreview"));
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/single" element={<Single />} />
               <Route path="/store" element={<Store />} />
+              <Route path="/preview" element={<Preview />} />
             </Routes>
           </Suspense>
         </main>

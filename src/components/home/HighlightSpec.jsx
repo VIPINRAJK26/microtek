@@ -20,7 +20,7 @@ const HighlightSpecifications = () => {
 
   return (
     <div className="highlight-section container rounded-top-5 pt-0 mt-5">
-      <h2 className="section-title">Specifications</h2>
+      <h2 className="section-title pt-5">Specifications</h2>
       <div className="spec-grid">
         {specifications.map((spec, index) => (
           <div key={index} className="spec-item">

@@ -87,10 +87,10 @@ function Navbar() {
     ],
   };
 
-  const navStyle={
-    textDecoration:"none",
-    color:"black"
-  }
+  const navStyle = {
+    textDecoration: "none",
+    color: "black",
+  };
 
   return (
     <>
@@ -140,12 +140,12 @@ function Navbar() {
                   role="button"
                   aria-expanded="false"
                 >
-                  <Link
+                  {/* <Link
                     to={"/products"}
                     className="text-decoration-none text-black"
-                  >
-                    Products
-                  </Link>
+                  > */}
+                  Products
+                  {/* </Link> */}
                 </a>
 
                 {/* Dropdown content */}
@@ -166,7 +166,9 @@ function Navbar() {
                               }`}
                               onMouseEnter={() => setSelectedCategory(category)}
                             >
-                              <Link to={"/products"} style={navStyle}>{category}</Link>
+                              <Link to={"/preview"} style={navStyle}>
+                                {category}
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -181,11 +183,13 @@ function Navbar() {
                                 className="product-card"
                                 style={{ cursor: "pointer" }}
                               >
-                                <img
-                                  src={product.img}
-                                  alt={product.name}
-                                  className="img-fluid"
-                                />
+                                <Link to={"/preview"}>
+                                  <img
+                                    src={product.img}
+                                    alt={product.name}
+                                    className="img-fluid"
+                                  />
+                                </Link>
                                 <p>{product.name}</p>
                               </div>
                             </div>
