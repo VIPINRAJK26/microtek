@@ -1,12 +1,11 @@
-import React, { useState } from "react"; // Correctly import useState
+import React, { useState } from "react";
 import { Accordion, Form } from "react-bootstrap";
 
 const ProductFilter = () => {
-  const [priceRange, setPriceRange] = useState([1000, 50000]); // Initial price range
+  const [priceRange, setPriceRange] = useState([1000, 50000]);
 
-  // Handle price range change
   const handlePriceChange = (event) => {
-    setPriceRange([priceRange[0], event.target.value]); // Update only the max value, keeping min intact
+    setPriceRange([priceRange[0], event.target.value]); 
   };
 
   return (

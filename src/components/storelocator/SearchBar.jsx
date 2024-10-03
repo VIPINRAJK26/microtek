@@ -5,15 +5,12 @@ import "./SearchBar.css"
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Handle change in the search input
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  // Handle search button click
   const handleSearchClick = () => {
     console.log("Searching for:", searchTerm);
-    // Add your search logic here
   };
 
   return (

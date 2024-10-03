@@ -17,7 +17,6 @@ const ProductDetails = ({
     <Container>
       <Row>
         <Col>
-          {/* Product Name, SKU, and Category */}
           <h2>E-Rickshaw Charger - TC 4816Q</h2>
           <p>
             <strong>SKU:</strong> {sku}
@@ -26,13 +25,10 @@ const ProductDetails = ({
             <strong>Category:</strong> {category}
           </p>
 
-          {/* Price */}
           <h3>₹{price}</h3>
 
-          {/* Product Specifications */}
           <Row className="mt-4 no-gutters ">
             {" "}
-            {/* Add no-gutters class to eliminate gutters */}
             <Col md={3} className="p-0">
               <div className="info-box rounded-start-4 bg-white ">
                 <p>
@@ -56,7 +52,6 @@ const ProductDetails = ({
             </Col>
           </Row>
 
-          {/* Features */}
           <h4>Salient Features:</h4>
           <ul>
             {features.map((feature, index) => (

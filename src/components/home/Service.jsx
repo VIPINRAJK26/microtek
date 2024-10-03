@@ -1,5 +1,5 @@
 import React from "react";
-import "./Service.css"; // Optional custom styling for finer details
+import "./Service.css"; 
 
 const Service = () => {
   return (
@@ -18,7 +18,6 @@ const Service = () => {
           </div>
         </div>
 
-        {/* Middle Section (Image and Taglines) */}
         <div className="service-middle col-lg-4 col-md-6 mb-0 d-flex  flex-column justify-content-between">
           <div className="bg-light text-center  mb-4 h-50 d-flex flex-column justify-content-center">
             <div className="image mt-md-0 mt-4">

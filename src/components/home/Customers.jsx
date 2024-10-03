@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Customers.css"; // Import custom CSS for styling
+import "./Customers.css"; 
 
 const Customers = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +19,7 @@ const Customers = () => {
         });
       },
       { threshold: 0.5 }
-    ); // Adjust threshold to trigger halfway through
+    ); 
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
@@ -32,7 +32,6 @@ const Customers = () => {
     };
   }, []);
 
-  // Counter animation for Happy Customers and Dealer Network
   useEffect(() => {
     if (isVisible) {
       let customerCount = 0;
@@ -41,16 +40,16 @@ const Customers = () => {
 
       const customerInterval = setInterval(() => {
         if (customerCount < 2) {
-          customerCount += 1; // Incrementing customers by 1 lakh
+          customerCount += 1; 
           setHappyCustomers(customerCount);
         } else {
           clearInterval(customerInterval);
         }
-      }, 300); // Faster speed for smoother counting
+      }, 300); 
 
       const dealerInterval = setInterval(() => {
         if (dealerCount < 4) {
-          dealerCount += 1; // Incrementing dealers by 500
+          dealerCount += 1; 
           setDealerNetwork(dealerCount);
         } else {
           clearInterval(dealerInterval);
@@ -59,7 +58,7 @@ const Customers = () => {
 
       const servicePointInterval = setInterval(() => {
         if (servicePointCount < 2384) {
-          servicePointCount += 298; // Incrementing service points by 500
+          servicePointCount += 298;
           setServicePoints(servicePointCount);
         } else {
           clearInterval(servicePointInterval);

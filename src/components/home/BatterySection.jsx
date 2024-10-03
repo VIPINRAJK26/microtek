@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBatteryHalf, FaShieldAlt } from "react-icons/fa"; // Battery Icons
+import { FaBatteryHalf, FaShieldAlt } from "react-icons/fa"; 
 import "./Battery.css";
 
 const BatterySection = () => {

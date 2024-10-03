@@ -22,7 +22,6 @@ const ImageSlider = ({ mainImage, relatedImages }) => {
     cursor: "pointer",
   };
 
-  // Function to change the main image
   const handleImageChange = (image) => {
     setCurrentImage(image);
   };

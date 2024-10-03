@@ -5,7 +5,6 @@ import { Row, Col } from "react-bootstrap";
 import "./ProductPage.css"
 
 const Products = () => {
-  // Sample data for product cards
   const products = [
     {
       image:
@@ -47,7 +46,6 @@ const Products = () => {
       price: "$500",
       oldPrice: "$520",
     },
-    // Add more products as needed
   ];
 
   return (

@@ -6,8 +6,8 @@ import "./About.css";
 function About() {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // animation duration
-      once: true, // trigger animation only once on scroll
+      duration: 1000,
+      once: true, 
     });
   }, []);
 

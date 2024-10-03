@@ -5,7 +5,7 @@ import {
   FaShieldAlt,
   FaMicrochip,
   FaTemperatureLow,
-} from "react-icons/fa"; // Icons
+} from "react-icons/fa"; 
 import "./HIghlight.css"
 
 const HighlightSpecifications = () => {

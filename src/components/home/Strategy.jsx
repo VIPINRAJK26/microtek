@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCogs, FaTools, FaIndustry, FaCheckCircle } from "react-icons/fa"; // Icons from react-icons
+import { FaCogs, FaTools, FaIndustry, FaCheckCircle } from "react-icons/fa"; 
 import "./Strategy.css"
 const Strategy = () => {
   return (

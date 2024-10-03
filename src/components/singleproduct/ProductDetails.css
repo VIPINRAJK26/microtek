@@ -1,8 +1,8 @@
 .info-box {
-  background-color: #f0f0f0; /* Light gray background */
-  border: .7px solid #ccc; /* Optional: border for the box */
-  border-radius: 2px; /* Optional: rounded corners */
-  padding-right: 0; /* Padding inside the box */
+  background-color: #f0f0f0; 
+  border: .7px solid #ccc; 
+  border-radius: 2px; 
+  padding-right: 0; 
   padding-top: 10px;
   box-shadow: 0 1px 5px rgba(163, 163, 163, 0.1);
   display: flex;

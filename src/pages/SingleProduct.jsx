@@ -13,7 +13,7 @@ const ProductPage = () => {
     "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct%2Fe-rickshaw-charger-tc-4816q-industrial-charger-3-1720502713781.jpg&w=1920&q=75",
     "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct%2Fe-rickshaw-charger-tc-4816q-industrial-charger-3--1--1720867748068.jpg&w=1920&q=75",
     "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct%2Fe-rickshaw-charger-tc-4816q-industrial-charger-3-1720502713781.jpg&w=1920&q=75",
-  ]; // Related product images
+  ]; 
 
   const productDetails = {
     sku: "899-TC1-4816",

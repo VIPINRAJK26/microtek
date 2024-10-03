@@ -37,10 +37,10 @@
 }
 
 .about-right:hover p {
-  opacity: 1; /* Show the text on hover */
+  opacity: 1; 
 }
 
-/* Mobile Responsiveness */
+
 @media screen and (max-width: 767px) {
   .about {
     flex-direction: column;
