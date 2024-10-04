@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
   FaBolt,
   FaBatteryFull,
@@ -7,8 +7,17 @@ import {
   FaTemperatureLow,
 } from "react-icons/fa"; 
 import "./HIghlight.css"
+import AOS from "aos";
+import "aos/dist/aos.css";
+ 
 
 const HighlightSpecifications = () => {
+   useEffect(() => {
+     AOS.init({
+       duration: 1000,
+       once: true,
+     });
+   }, []);
   const specifications = [
     { icon: <FaMicrochip />, title: "32-bit Processor" },
     { icon: <FaBolt />, title: "Smart Charging" },
@@ -23,7 +32,7 @@ const HighlightSpecifications = () => {
       <h2 className="section-title pt-5">Specifications</h2>
       <div className="spec-grid">
         {specifications.map((spec, index) => (
-          <div key={index} className="spec-item">
+          <div key={index} className="spec-item" data-aos="zoom-in">
             <div className="spec-icon">{spec.icon}</div>
             <h3>{spec.title}</h3>
           </div>
