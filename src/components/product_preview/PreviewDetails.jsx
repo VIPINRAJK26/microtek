@@ -169,7 +169,7 @@ const PreviewDetails = () => {
                 </p>
 
                 <div className="detail-section">
-                  <ul className="list-unstyled fw-bold">
+                  <ul className="list-unstyled text-white fw-bold" style={{lineHeight:"30px"}}>
                     {product.features1.map((feature, idx) => (
                       <li key={idx}>{feature}</li>
                     ))}
