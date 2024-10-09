@@ -2,6 +2,7 @@ import React from "react";
 import "./PreviewDetails.css";
 import { Link, useParams } from "react-router-dom";
 
+
 const batteryData = [
   {
     name: "Nikola",
@@ -11,6 +12,7 @@ const batteryData = [
       "Ultra Low Maintenance",
       "Ecofriendly",
       "Specially designed for Solar Power",
+      "Designed for all types of UPS and inverters",
     ],
     features2: [
       "Advance Dura Core",
@@ -19,7 +21,7 @@ const batteryData = [
       "Warranty: Upto 42 Months",
     ],
     Image:
-      "https://img.freepik.com/free-vector/blank-square-colorful-abstract-frame_53876-100820.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/passport-red-case-toy-plane_23-2148169798.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
   },
   {
     name: "Max",
@@ -29,6 +31,7 @@ const batteryData = [
       "Ultra Low Maintenance",
       "Ecofriendly",
       "Specially designed for Solar Power",
+      "Designed for all types of UPS and inverters",
     ],
     features2: [
       "Advance Dura Core",
@@ -37,7 +40,7 @@ const batteryData = [
       "Warranty: Upto 42 Months",
     ],
     Image:
-      "https://img.freepik.com/free-vector/blank-square-colorful-abstract-frame_53876-100820.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/passport-red-case-toy-plane_23-2148169798.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
   },
   {
     name: "Power",
@@ -46,6 +49,7 @@ const batteryData = [
       "Ultra Low Maintenance",
       "Ecofriendly",
       "Specially designed for Solar Power",
+      "Designed for all types of UPS and inverters",
     ],
     features2: [
       "Advance Dura Core",
@@ -54,15 +58,16 @@ const batteryData = [
       "Warranty: Upto 42 Months",
     ],
     Image:
-      "https://img.freepik.com/free-vector/blank-square-colorful-abstract-frame_53876-100820.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/passport-red-case-toy-plane_23-2148169798.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
   },
   {
     name: "Extreme G",
-    slogan: "Maximize your uptime with high-performance.",
+    slogan: "Maximize your Up-time with the High-Performance.",
     features1: [
       "Ultra Low Maintenance",
       "Ecofriendly",
       "Specially designed for Solar Power",
+      "Designed for all types of UPS and inverters",
     ],
     features2: [
       "Advance Dura Core",
@@ -71,80 +76,62 @@ const batteryData = [
       "Warranty: Upto 42 Months",
     ],
     Image:
-      "https://img.freepik.com/free-vector/blank-square-colorful-abstract-frame_53876-100820.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/passport-red-case-toy-plane_23-2148169798.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
   },
 ];
 
 const upsData = [
   {
     name: "Spider",
-    slogan:
-      "The power that lasts, keep your devices running longer and stronger.",
-    features1: [
-      "Ultra Low Maintenance",
-      "Ecofriendly",
-      "Specially designed for Solar Power",
-    ],
+    slogan: "Switch on to a brighter tomorrow with out inverter or UPS.",
+    features1: ["IPS TECHNOLOGY", "32 BIT", "OVERLOAD PROTECTION"],
     features2: [
-      "Advance Dura Core",
-      "Capacity: 135 Ah - 150 Ah",
-      "Tubular Type: Long Backup",
-      "Warranty: Upto 42 Months",
+      "Technology: Pure Sinewave",
+      "Range: 1500 VA",
+      "Comfortable Battery: Flat, Tubular & SMF",
+      "Warranty: 3 Years",
     ],
     Image:
-      "https://img.freepik.com/free-vector/blank-square-colorful-abstract-frame_53876-118334.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/top-view-airplane-with-copy-space_23-2148608798.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
   },
   {
     name: "Fighter",
-    slogan:
-      "Uninterrupted energy for every moment, batteries for reliable performance.",
-    features1: [
-      "Ultra Low Maintenance",
-      "Ecofriendly",
-      "Specially designed for Solar Power",
-    ],
+    slogan: "Switch on to a brighter tomorrow with out inverter or UPS.",
+    features1: ["IPS TECHNOLOGY", "32 BIT", "OVERLOAD PROTECTION"],
     features2: [
-      "Advance Dura Core",
-      "Capacity: 135 Ah - 150 Ah",
-      "Tubular Type: Long Backup",
-      "Warranty: Upto 42 Months",
+      "Technology: Pure Sinewave",
+      "Range: 1500 VA",
+      "Comfortable Battery: Flat, Tubular & SMF",
+      "Warranty: 3 Years",
     ],
     Image:
-      "https://img.freepik.com/free-vector/blank-square-colorful-abstract-frame_53876-118334.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/top-view-airplane-with-copy-space_23-2148608798.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
   },
   {
     name: "Hurricane",
-    slogan: "Charge up with confidence, exceptional durability and longevity.",
-    features1: [
-      "Ultra Low Maintenance",
-      "Ecofriendly",
-      "Specially designed for Solar Power",
-    ],
+    slogan: "Restoring Power , Empowering Each Journey.",
+    features1: ["IPS TECHNOLOGY", "32 BIT", "OVERLOAD PROTECTION"],
     features2: [
-      "Advance Dura Core",
-      "Capacity: 135 Ah - 150 Ah",
-      "Tubular Type: Long Backup",
-      "Warranty: Upto 42 Months",
+      "Technology: Pure Sinewave",
+      "Range: 1500 VA",
+      "Comfortable Battery: Flat, Tubular & SMF",
+      "Warranty: 3 Years",
     ],
     Image:
-      "https://img.freepik.com/free-vector/blank-square-colorful-abstract-frame_53876-118334.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/top-view-airplane-with-copy-space_23-2148608798.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
   },
   {
     name: "Radeon",
-    slogan: "Maximize your uptime with high-performance.",
-    features1: [
-      "Ultra Low Maintenance",
-      "Ecofriendly",
-      "Specially designed for Solar Power",
-    ],
+    slogan: "Uninterrupted Power, Unmatched Reliability.",
+    features1: ["IPS TECHNOLOGY", "32 BIT", "OVERLOAD PROTECTION"],
     features2: [
-      "Advance Dura Core",
-      "Capacity: 135 Ah - 150 Ah",
-      "Tubular Type: Long Backup",
-      "Warranty: Upto 42 Months",
+      "Technology: Pure Sinewave",
+      "Range: 1500 VA",
+      "Comfortable Battery: Flat, Tubular & SMF",
+      "Warranty: 3 Years",
     ],
     Image:
-      "https://img.freepik.com/free-vector/blank-square-colorful-abstract-frame_53876-118334.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
+      "https://img.freepik.com/free-photo/top-view-airplane-with-copy-space_23-2148608798.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid",
   },
 ];
 
@@ -163,35 +150,48 @@ const PreviewDetails = () => {
     <div className="preview container mx-0 px-0 mt-5">
       <div className="preview-main row">
         {productData.map((product, index) => (
-          <div className="col-md-8 col-lg-6 p-1 mb-4" key={index}>
-            <div className="preview-main-card rounded-0 card bg-info">
+          <div className="col-md-8 col-lg-6 col-12 p-1 mb-4 " key={index}>
+            <div
+              className="preview-main-card rounded-0 card bg-info"
+              style={{
+                backgroundImage: `url(${product.Image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                height: "550px", // Adjust the height of the card to your needs
+              }}
+            >
               <div className="preview-body ps-5 card-body">
-                <h2 className="fw-bold card-title">{product.name}</h2>
-                <p className="card-text fw-medium fs-5 w-75">
+                <h2 className="fw-bold card-title text-white">
+                  {product.name}
+                </h2>
+                <p className="card-text fw-medium fs-5 w-75 text-white">
                   {product.slogan}
                 </p>
-                {/* Render features and buttons */}
-                <ul className="list-unstyled">
-                  {product.features1.map((features1, idx) => (
-                    <li key={idx}>{features1}</li>
-                  ))}
-                </ul>
-                <div className="text-start pt-5">
-                  <Link to={"/single"}>
-                    <button className="btn btn-primary rounded-5 me-3">
-                      View All Variants
+
+                <div className="detail-section">
+                  <ul className="list-unstyled fw-bold">
+                    {product.features1.map((feature, idx) => (
+                      <li key={idx}>{feature}</li>
+                    ))}
+                  </ul>
+                  <div className="text-start pt-5">
+                    <Link to={"/products"}>
+                      <button className="btn btn-primary rounded-5 me-3">
+                        View All Variants
+                      </button>
+                    </Link>
+                    <button className="btn btn-transparent rounded-5">
+                      <i className="fa-solid fa-download me-2" />
+                      Download Brochure
                     </button>
-                  </Link>
-                  <button className="btn btn-secondary rounded-5">
-                    Download Brochure
-                  </button>
+                  </div>
                 </div>
               </div>
             </div>
             <div className="d-flex text-center fw-bold small gap-3">
-              {product.features2.map((features2, idx) => (
+              {product.features2.map((feature, idx) => (
                 <li className="list-unstyled" key={idx}>
-                  {features2}
+                  {feature}
                 </li>
               ))}
             </div>

@@ -13,6 +13,7 @@ const ProductDetails = ({
   dimensions,
   features,
 }) => {
+  
   return (
     <Container>
       <Row>
