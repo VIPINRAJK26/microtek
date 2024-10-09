@@ -13,7 +13,7 @@ function Navbar() {
 
   // State for managing hovered category
   const [selectedCategory, setSelectedCategory] = useState(
-    "Inverter / Home Ups"
+    "Home Ups"
   );
 
   // State to track if the dropdown is being hovered
@@ -21,7 +21,7 @@ function Navbar() {
 
   // Categories and their corresponding products
   const categories = {
-    "Inverter / Home Ups": [
+    "Home Ups": [
       {
         name: "Online Ups",
         img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FInverterHome-Ups-menu-1721899901612.png&w=128&q=75",
@@ -53,7 +53,7 @@ function Navbar() {
         img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
       },
     ],
-    "Power Backup Batteries ": [
+    "Batteries ": [
       {
         name: "Tubular Batteries",
         img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
@@ -166,7 +166,10 @@ function Navbar() {
                               }`}
                               onMouseEnter={() => setSelectedCategory(category)}
                             >
-                              <Link to={"/preview"} style={navStyle}>
+                              <Link
+                                to={`/preview/${category}`}
+                                style={navStyle}
+                              >
                                 {category}
                               </Link>
                             </li>
@@ -217,7 +220,7 @@ function Navbar() {
           <div className="d-flex align-items-center">
             <div className="me-3">
               <a className="me-2" onClick={handleSearchClick}>
-                <i className="fas fa-search text-black ps-3 ps-md-0"></i>
+                <i className="fas fa-search text-black ps-4 ps-md-0"></i>
               </a>
 
               {/* Conditionally render the search input with fade-in animation */}

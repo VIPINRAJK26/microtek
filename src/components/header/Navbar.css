@@ -129,3 +129,10 @@
     font-weight: 800;
     color: #1d4694;
 }
+
+
+@media (max-width:768px){
+    .collapse{
+        padding-left: 20px;
+    }
+}

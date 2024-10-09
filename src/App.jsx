@@ -22,13 +22,13 @@ function App() {
         </Suspense>
 
         <main>
-          <Suspense >
+          <Suspense>
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/products" element={<Products />} />
               <Route path="/single" element={<Single />} />
               <Route path="/store" element={<Store />} />
-              <Route path="/preview" element={<Preview />} />
+              <Route path="/preview/:category" element={<Preview />} />
             </Routes>
           </Suspense>
         </main>
