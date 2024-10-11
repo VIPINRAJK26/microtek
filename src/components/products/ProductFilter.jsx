@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Accordion, Form } from "react-bootstrap";
 
 const ProductFilter = () => {
-  const [priceRange, setPriceRange] = useState([1000, 50000]);
+  const [priceRange, setPriceRange] = useState([1000, 25000]);
 
   const handlePriceChange = (event) => {
     setPriceRange([priceRange[0], event.target.value]); 
@@ -14,7 +14,7 @@ const ProductFilter = () => {
       <Accordion defaultActiveKey="0">
         {/* Product Series */}
         <Accordion.Item eventKey="0">
-          <Accordion.Header>Product Series</Accordion.Header>
+          <Accordion.Header>Warrior Series</Accordion.Header>
           <Accordion.Body>
             <Form.Check type="checkbox" label="E² Series" />
             <Form.Check type="checkbox" label="iMAXX Series" />
@@ -26,7 +26,7 @@ const ProductFilter = () => {
 
         {/* KVA Rating */}
         <Accordion.Item eventKey="1">
-          <Accordion.Header>KVA Rating</Accordion.Header>
+          <Accordion.Header>Rating (VA)</Accordion.Header>
           <Accordion.Body>
             <Form.Check type="checkbox" label="1KVA" />
             <Form.Check type="checkbox" label="2KVA" />
@@ -77,7 +77,7 @@ const ProductFilter = () => {
             <Form.Label>Max Price: ₹{priceRange[1]}</Form.Label>
             <Form.Range
               min={priceRange[0]} // Use the initial minimum price
-              max={50000} // Set your maximum price limit here
+              max={25000} // Set your maximum price limit here
               value={priceRange[1]}
               onChange={handlePriceChange}
             />

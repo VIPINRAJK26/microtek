@@ -8,12 +8,12 @@ const ProductCard = ({ image, title, sku, price, oldPrice }) => {
       <Link to="/single">
         <Card.Img
           variant="top"
-          src="https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct%2FUPS-LUXE-SW-1720744407295-1721177647946.jpg&w=384&q=75"
+          src={image}
           alt={title}
         />
       </Link>
       <Card.Body>
-        <Card.Title>Inverter</Card.Title>
+        <Card.Title>{title}</Card.Title>
         <Card.Text>SKU: {sku}</Card.Text>
         <Card.Text>
           <span className="text-primary fw-bold">{price}</span>
@@ -26,7 +26,7 @@ const ProductCard = ({ image, title, sku, price, oldPrice }) => {
         </Card.Text>
         <Link to={"/single"}>
           <Button variant="outline-primary">View More</Button>
-        </Link> 
+        </Link>
       </Card.Body>
     </Card>
   );

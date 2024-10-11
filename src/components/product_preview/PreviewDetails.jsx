@@ -83,7 +83,7 @@ const batteryData = [
 const upsData = [
   {
     name: "Spider",
-    slogan: "Switch on to a brighter tomorrow with out inverter or UPS.",
+    slogan: "Switch on to a brighter tomorrow with our inverter or UPS.",
     features1: ["IPS TECHNOLOGY", "32 BIT", "OVERLOAD PROTECTION"],
     features2: [
       "Technology: Pure Sinewave",
@@ -96,7 +96,7 @@ const upsData = [
   },
   {
     name: "Fighter",
-    slogan: "Switch on to a brighter tomorrow with out inverter or UPS.",
+    slogan: "Switch on to a brighter tomorrow with our inverter or UPS.",
     features1: ["IPS TECHNOLOGY", "32 BIT", "OVERLOAD PROTECTION"],
     features2: [
       "Technology: Pure Sinewave",
@@ -157,7 +157,7 @@ const PreviewDetails = () => {
                 backgroundImage: `url(${product.Image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                height: "550px", // Adjust the height of the card to your needs
+                height: "550px", 
               }}
             >
               <div className="preview-body ps-5 card-body">
@@ -175,7 +175,7 @@ const PreviewDetails = () => {
                     ))}
                   </ul>
                   <div className="text-start pt-5">
-                    <Link to={"/products"}>
+                    <Link to={`/products/${category}`}>
                       <button className="btn btn-primary rounded-5 me-3">
                         View All Variants
                       </button>
@@ -188,7 +188,7 @@ const PreviewDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="d-flex text-center fw-bold small gap-3">
+            <div className="d-flex text-center fw-bold small gap-1">
               {product.features2.map((feature, idx) => (
                 <li className="list-unstyled" key={idx}>
                   {feature}

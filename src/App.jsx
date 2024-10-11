@@ -25,7 +25,7 @@ function App() {
           <Suspense>
             <Routes>
               <Route path="/" element={<Landing />} />
-              <Route path="/products" element={<Products />} />
+              <Route path="/products/:category" element={<Products />} />
               <Route path="/single" element={<Single />} />
               <Route path="/store" element={<Store />} />
               <Route path="/preview/:category" element={<Preview />} />
