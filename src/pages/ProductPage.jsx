@@ -8,40 +8,45 @@ import { useParams } from "react-router-dom";
 
 const batteryData = [
   {
+    id: 1,
     image:
-      "https://www.tatagreenbattery.com/wp-content/uploads/2020/12/SLV-1000R.png",
+      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
     title: "Battery 1",
     sku: "SKU123",
     price: "$100",
     oldPrice: "$120",
   },
   {
+    id: 2,
     image:
-      "https://www.tatagreenbattery.com/wp-content/uploads/2020/12/SLV-1000R.png",
+      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
     title: "Battery 2",
     sku: "SKU124",
     price: "$200",
     oldPrice: "$220",
   },
   {
+    id: 3,
     image:
-      "https://www.tatagreenbattery.com/wp-content/uploads/2020/12/SLV-1000R.png",
+      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
     title: "Battery 3",
     sku: "SKU125",
     price: "$300",
     oldPrice: "$320",
   },
   {
+    id: 4,
     image:
-      "https://www.tatagreenbattery.com/wp-content/uploads/2020/12/SLV-1000R.png",
+      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
     title: "Battery 4",
     sku: "SKU126",
     price: "$400",
     oldPrice: "$420",
   },
   {
+    id: 5,
     image:
-      "https://www.tatagreenbattery.com/wp-content/uploads/2020/12/SLV-1000R.png",
+      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
     title: "Battery 5",
     sku: "SKU127",
     price: "$500",
@@ -50,41 +55,46 @@ const batteryData = [
 ];
 const upsData = [
   {
+    id: 1,
     image:
       "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
-    title: "ups 1",
+    title: "UPS 1",
     sku: "SKU123",
     price: "$100",
     oldPrice: "$120",
   },
   {
+    id: 2,
     image:
       "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
-    title: "ups 2",
+    title: "UPS 2",
     sku: "SKU124",
     price: "$200",
     oldPrice: "$220",
   },
   {
+    id: 3,
     image:
       "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
-    title: "ups 3",
+    title: "UPS 3",
     sku: "SKU125",
     price: "$300",
     oldPrice: "$320",
   },
   {
+    id: 4,
     image:
       "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
-    title: "ups 4",
+    title: "UPS 4",
     sku: "SKU126",
     price: "$400",
     oldPrice: "$420",
   },
   {
+    id: 5,
     image:
       "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
-    title: "ups 5",
+    title: "UPS 5",
     sku: "SKU127",
     price: "$500",
     oldPrice: "$520",

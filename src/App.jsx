@@ -1,6 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import ReturnRefundPolicy from "./pages/Refund";
+import PrivacyPolicy from "./pages/Privacy";
+import TermsAndConditions from "./pages/Terms";
 
 const Landing = lazy(() => import("./pages/HomePage"));
 const Header = lazy(() => import("./components/header/Navbar"));
@@ -29,6 +32,9 @@ function App() {
               <Route path="/single" element={<Single />} />
               <Route path="/store" element={<Store />} />
               <Route path="/preview/:category" element={<Preview />} />
+              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/refund-policy" element={<ReturnRefundPolicy />} />
             </Routes>
           </Suspense>
         </main>

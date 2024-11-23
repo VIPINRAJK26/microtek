@@ -58,13 +58,13 @@ const Footer = () => {
             </p>
             <h5 className="pb-md-3 pt-md-3">Corporate Office</h5>
             <p>
-              <i className="fas fa-map-marker-alt"></i>{" "}
-              Warrior Power India,Manjeri,Malappuram,Kerala, 676517 <br />
+              <i className="fas fa-map-marker-alt"></i> Warrior Power
+              India,Manjeri,Malappuram,Kerala, 676517 <br />
             </p>
             <h5 className="pt-md-3">Follow Us</h5>
             <div className="d-flex gap-2 pt-md-3">
               <i className="fab fa-facebook"></i>
-              <i className="fab fa-twitter"></i>
+              <i class="fa-brands fa-x-twitter"></i>
               <i className="fab fa-linkedin"></i>
               <i className="fab fa-youtube"></i>
               <i className="fab fa-pinterest"></i>
@@ -73,7 +73,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
 
       <CopyRight />
     </footer>

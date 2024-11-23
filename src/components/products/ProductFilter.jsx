@@ -76,8 +76,8 @@ const ProductFilter = () => {
           <Accordion.Body>
             <Form.Label>Max Price: ₹{priceRange[1]}</Form.Label>
             <Form.Range
-              min={priceRange[0]} // Use the initial minimum price
-              max={25000} // Set your maximum price limit here
+              min={priceRange[0]} 
+              max={25000} 
               value={priceRange[1]}
               onChange={handlePriceChange}
             />
