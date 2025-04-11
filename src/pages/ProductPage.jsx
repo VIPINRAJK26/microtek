@@ -10,7 +10,7 @@ const batteryData = [
   {
     id: 1,
     image:
-      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
+      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
     title: "Battery 1",
     sku: "SKU123",
     price: "$100",
@@ -19,7 +19,7 @@ const batteryData = [
   {
     id: 2,
     image:
-      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
+      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
     title: "Battery 2",
     sku: "SKU124",
     price: "$200",
@@ -28,7 +28,7 @@ const batteryData = [
   {
     id: 3,
     image:
-      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
+      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
     title: "Battery 3",
     sku: "SKU125",
     price: "$300",
@@ -37,7 +37,7 @@ const batteryData = [
   {
     id: 4,
     image:
-      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
+      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
     title: "Battery 4",
     sku: "SKU126",
     price: "$400",
@@ -46,7 +46,7 @@ const batteryData = [
   {
     id: 5,
     image:
-      "https://www.okaya.in/storage/images/product/ob-28_656b1247d58ab.jpg",
+      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
     title: "Battery 5",
     sku: "SKU127",
     price: "$500",
@@ -57,7 +57,7 @@ const upsData = [
   {
     id: 1,
     image:
-      "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
+      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
     title: "UPS 1",
     sku: "SKU123",
     price: "$100",
@@ -66,7 +66,7 @@ const upsData = [
   {
     id: 2,
     image:
-      "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
+      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
     title: "UPS 2",
     sku: "SKU124",
     price: "$200",
@@ -75,7 +75,7 @@ const upsData = [
   {
     id: 3,
     image:
-      "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
+      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
     title: "UPS 3",
     sku: "SKU125",
     price: "$300",
@@ -84,7 +84,7 @@ const upsData = [
   {
     id: 4,
     image:
-      "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
+      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
     title: "UPS 4",
     sku: "SKU126",
     price: "$400",
@@ -93,7 +93,7 @@ const upsData = [
   {
     id: 5,
     image:
-      "https://www.elistaworld.com/productimg/product_1_1689570642ffff.png",
+      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
     title: "UPS 5",
     sku: "SKU127",
     price: "$500",

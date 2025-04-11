@@ -7,7 +7,7 @@ const MainPreview = () => {
         src="https://www.megamaxsolar.com/blogs/wp-content/uploads/2023/10/Solar-InRoof.jpg"
         alt=""
         className="img-fluid"
-        style={{ width: "100%" }}
+        style={{ width: "100%" , height:"100vh"}}
       />
     </div>
   );

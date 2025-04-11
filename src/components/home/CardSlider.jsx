@@ -16,22 +16,19 @@ const CardSlider = () => {
     "Newly Launched": [
       {
         title: "Luxe Wifi",
-        image:
-          "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fcmscontent%2Fluxe-1719486926283.jpg&w=1200&q=75",
+        image: "https://mma.prnewswire.com/media/2285901/Huasun_Energy.jpg",
       },
       {
         title: "Solar Batteries",
         image: "https://mma.prnewswire.com/media/2285901/Huasun_Energy.jpg",
       },
       {
-        title: "SMF Batteries",
-        image:
-          "https://i0.wp.com/www.upsinverter.com/wp-content/uploads/2022/05/What-are-SMF-Batteries.jpg?fit=1989%2C1124&ssl=1",
+        title: " Batteries",
+        image: "https://mma.prnewswire.com/media/2285901/Huasun_Energy.jpg",
       },
       {
         title: "Inverter Batteries",
-        image:
-          "https://www.inverterhome.in/wp-content/uploads/2022/12/Luminous-Hercules-1500-Inverter-And-Luminous-RC18000-150AH-Tall-Tubular-Battery-And-Trolley-jpg.webp",
+        image: "https://mma.prnewswire.com/media/2285901/Huasun_Energy.jpg",
       },
     ],
     "Home UPS": [

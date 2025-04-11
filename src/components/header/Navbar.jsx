@@ -243,7 +243,7 @@ function Navbar() {
                 href="tel:7283838383"
                 className="care text-decoration-none p-0"
               >
-                7283838383
+                +91 9846151900
               </a>
             </div>
           </div>
