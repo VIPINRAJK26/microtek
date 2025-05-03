@@ -6,3 +6,60 @@
     font-optical-sizing: auto;
     
 }
+
+
+.product-page {
+  min-height: 100vh;
+}
+
+/* Fixed filter column */
+.filter-column {
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding-right: 15px;
+}
+
+/* Fixed width for filter container */
+.filter-container {
+  width: 100%;
+  min-width: 250px; /* Set a minimum width */
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Products grid container */
+.products-grid {
+  width: 100%;
+}
+
+/* No products message styling */
+.no-products-message {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+  .filter-column {
+    position: static;
+    margin-bottom: 20px;
+  }
+  
+  .filter-container {
+    min-width: 100%;
+  }
+}
+
+
+
+::-webkit-scrollbar{
+  display: none;
+}

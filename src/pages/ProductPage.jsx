@@ -1,62 +1,90 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProductFilter from "../components/products/ProductFilter";
 import ProductCard from "../components/products/ProductCard";
-import { Row, Col } from "react-bootstrap";
-import "./ProductPage.css"
+import { Row, Col, Container } from "react-bootstrap";
+import "./ProductPage.css";
 import { useParams } from "react-router-dom";
 import useProducts from "../hooks/useProducts";
 
-
-
 const Products = () => {
-  
-  const { products} = useProducts();
-  const { category,variant } = useParams();
+  const { products } = useProducts();
+  const { category, variant } = useParams();
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
+  useEffect(() => {
+    if (products) {
+      let result = products;
 
-  const selectedProducts = products?.filter(
-    (product) =>
-      product.category?.toLowerCase().trim() ===
-        category?.toLowerCase().trim() &&
-      product.variant_slug?.toLowerCase().trim() ===
-        variant?.toLowerCase().trim()
-  );
+      if (category && variant) {
+        result = products.filter(
+          (product) =>
+            product.category?.toLowerCase().trim() ===
+              category?.toLowerCase().trim() &&
+            product.variant_slug?.toLowerCase().trim() ===
+              variant?.toLowerCase().trim()
+        );
+      }
 
-
-  console.log(products, "products");
-
-  console.log(category, "category from URL");
+      setFilteredProducts(result || []);
+    }
+  }, [category, variant, products]);
 
   console.log(variant, "variant");
 
-  console.log("product.category:", products[0]);
+  const handleDataChange = (filteredData) => {
+    let result = filteredData;
 
-  console.log("selectedProducts:", selectedProducts);
+    if (category && variant) {
+      result = filteredData.filter(
+        (product) =>
+          product.category?.toLowerCase().trim() ===
+            category?.toLowerCase().trim() &&
+          product.variant_slug?.toLowerCase().trim() ===
+            variant?.toLowerCase().trim()
+      );
+    }
+
+    setFilteredProducts(result || []);
+  };
 
   return (
-    <div className="product-page pt-5">
-      <Row>
-        <Col md={3}>
-          <ProductFilter />
+    <Container fluid className="product-page">
+      <Row className="main-content-row">
+        {/* Filter Column - fixed width always visible */}
+        <Col xs={12} md={3} className="filter-column">
+          <div className="sticky-filter-wrapper">
+            <ProductFilter
+              onDataChange={handleDataChange}
+              initialProducts={products}
+            />
+          </div>
         </Col>
-        <Col md={9}>
-          <Row>
-            {selectedProducts?.length > 0 ? (
-              selectedProducts.map((product, index) => (
+
+        {/* Products Column - takes remaining space */}
+        <Col xs={12} md={9} className="products-column">
+          <h2>
+            Showing Results for : <span className="text-capitalize font-weight-bold">{variant}</span>
+          </h2>
+          {filteredProducts.length > 0 ? (
+            <Row className="products-grid">
+              {filteredProducts.map((product, index) => (
                 <Col key={index} xs={12} sm={6} md={4} lg={3}>
                   <ProductCard {...product} />
                 </Col>
-              ))
-            ) : (
-              <p>No products found for this variant.</p>
-            )}
-          </Row>
+              ))}
+            </Row>
+          ) : (
+            <div className="empty-products-container">
+              <div className="empty-state-message">
+                <h4>No products found</h4>
+                <p>Try adjusting your filters or search criteria</p>
+              </div>
+            </div>
+          )}
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
-
-
 
 export default Products;

@@ -28,12 +28,13 @@ const Footer = () => {
           <div className="col-md-3 mb-3">
             <h5>Services</h5>
             <ul className="list-unstyled small pt-md-3">
-              <li className="pb-md-2">Product Registration</li>
-              <li className="pb-md-2">AMC Registration</li>
-              <li className="pb-md-2">Installation Request</li>
-              <li className="pb-md-2">Complaint Registration</li>
-              <li className="pb-md-2">Store Locator</li>
-              <li>Service Centre Locator</li>
+              <Link to={"/contact"} className="text-decoration-none text-black">
+                <li className="pb-md-2">Product Installation</li>
+                <li className="pb-md-2">AMC Request</li>
+                <li className="pb-md-2">General Service Request</li>
+                <li className="pb-md-2">Complaint Registration</li>
+                <li className="pb-md-2">Business Enquiry</li>
+              </Link>
             </ul>
           </div>
 
@@ -44,7 +45,10 @@ const Footer = () => {
               <Link to={"/"} className="text-decoration-none text-black">
                 <li className="pb-md-2">Home</li>
               </Link>
-              <Link to={"/products/:category"} className="text-decoration-none text-black">
+              <Link
+                to={"/products/:category"}
+                className="text-decoration-none text-black"
+              >
                 <li className="pb-md-2">Products</li>
               </Link>
               <Link to={"/store"} className="text-decoration-none text-black">

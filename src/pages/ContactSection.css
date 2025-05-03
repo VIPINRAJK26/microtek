@@ -1,0 +1,31 @@
+.contact-header {
+  background: url('/rm218-bb-07.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 60px 0;
+}
+
+.contact-info {
+    position: relative;
+    z-index: 1;
+    top : -30px;
+}
+
+.contact-info .info-box {
+  background-color: rgb(6, 29, 59);
+  color: #fff;
+  display: inline-block;
+}
+
+.form-section {
+  background-color: rgb(17, 29, 62);
+}
+
+.form-control {
+  background-color: #222;
+  color: #fff;
+  border: none;
+}
+
+.form-control::placeholder {
+  color: #ccc;
+}

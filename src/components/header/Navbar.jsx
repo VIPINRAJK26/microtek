@@ -82,7 +82,7 @@ function Navbar() {
         img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
       },
     ],
-    "Water Purifier": [
+    "Li-Ion Batteries": [
       {
         name: "",
         img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
@@ -97,7 +97,7 @@ function Navbar() {
     "Batteries": "batteries",
     "Ev Charger": "ev_charger",
     "Auto Stabilizer": "auto_stabilizer",
-    "Water Purifier": "water_purifier",
+    "Li-Ion Batteries": "li_ion_batteries",
   };
 
 
@@ -219,7 +219,7 @@ function Navbar() {
               </li>
 
               <li className="nav-item me-3">
-                <Link className="nav-link nav-text">Support</Link>
+                <Link to={"/contact"} className="nav-link nav-text">Support & Contact</Link>
               </li>
 
               <li className="nav-item me-3">
@@ -252,7 +252,7 @@ function Navbar() {
 
             {/* Customer Care Info */}
             <div className="customer-care me-2 d-md-block d-none">
-              <span className="small">Customer Care</span> <br />
+              <span className="small">Customer Support</span> <br />
               <a
                 href="tel:7283838383"
                 className="care text-decoration-none p-0"

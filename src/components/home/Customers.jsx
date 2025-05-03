@@ -74,7 +74,7 @@ const Customers = () => {
   }, [isVisible]);
 
   return (
-    <div ref={containerRef} className="full-width-container mt-5">
+    <div ref={containerRef} className="full-width-container customers mt-5">
       <div className="overlay">
         <div className="overlay-content">
           <h1 className="overlay-text display-3">
@@ -96,7 +96,7 @@ const Customers = () => {
         </div>
       </div>
 
-      <div className="chairman-message">
+      {/* <div className="chairman-message">
         <p>
           "I am so proud of our dedicated and very responsive team in
           manufacturing and installing premium inverters, batteries, solar
@@ -109,7 +109,7 @@ const Customers = () => {
           the renewable energy sector, providing advanced technologies that
           promote environmental stewardship and energy independence."
         </p>
-      </div>
+      </div> */}
 
       <img
         className="background-image2"

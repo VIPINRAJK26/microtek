@@ -14,22 +14,22 @@ const Strategy = () => {
   },[]);
   return (
     <div className="strategy-section py-4">
-      <h2 className="section-title py-5">Our Strategy</h2>
+      <h2 className="section-title py-2">Our Strategy</h2>
       <div className="strategy-grid container pb-3">
         <div className="strategy-item" data-aos="zoom-in">
           <FaCogs className="strategy-icon" />
           <h3>Engineering & Design</h3>
-          <p>
+          <p >
             With all consideration of engineering parameter aspects with respect
             tot the power and power backup system , we will design inverters and
             UPS systems. Batteries for all Power back systems and solar power
             generation units are designed with the considerations of all
             technical guidance and regulations
           </p>
-          <strong>
+          <p className="bottom-p">
             All the water purification systems are designed with consideration
             of drinking and other water analytical reports and its compliance
-          </strong>
+          </p>
         </div>
         <div className="strategy-item" data-aos="zoom-in">
           <FaCheckCircle className="strategy-icon" />

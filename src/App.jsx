@@ -4,6 +4,7 @@ import "./App.css";
 import ReturnRefundPolicy from "./pages/Refund";
 import PrivacyPolicy from "./pages/Privacy";
 import TermsAndConditions from "./pages/Terms";
+import ContactSection from "./pages/Support&Contact";
 
 const Landing = lazy(() => import("./pages/HomePage"));
 const Header = lazy(() => import("./components/header/Navbar"));
@@ -41,6 +42,7 @@ function App() {
               />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/refund-policy" element={<ReturnRefundPolicy />} />
+              <Route path="/contact" element={<ContactSection />} />
             </Routes>
           </Suspense>
         </main>
