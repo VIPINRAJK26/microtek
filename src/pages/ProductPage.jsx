@@ -4,114 +4,34 @@ import ProductCard from "../components/products/ProductCard";
 import { Row, Col } from "react-bootstrap";
 import "./ProductPage.css"
 import { useParams } from "react-router-dom";
+import useProducts from "../hooks/useProducts";
 
 
-const batteryData = [
-  {
-    id: 1,
-    image:
-      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
-    title: "Battery 1",
-    sku: "SKU123",
-    price: "$100",
-    oldPrice: "$120",
-  },
-  {
-    id: 2,
-    image:
-      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
-    title: "Battery 2",
-    sku: "SKU124",
-    price: "$200",
-    oldPrice: "$220",
-  },
-  {
-    id: 3,
-    image:
-      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
-    title: "Battery 3",
-    sku: "SKU125",
-    price: "$300",
-    oldPrice: "$320",
-  },
-  {
-    id: 4,
-    image:
-      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
-    title: "Battery 4",
-    sku: "SKU126",
-    price: "$400",
-    oldPrice: "$420",
-  },
-  {
-    id: 5,
-    image:
-      "https://media.istockphoto.com/id/1197345162/photo/dead-car-rusty-battery-recycling.jpg?s=612x612&w=0&k=20&c=3cA_4qKuT6gn4krZMUStBVcZDIw_HksC8eqzf-9jNbQ=",
-    title: "Battery 5",
-    sku: "SKU127",
-    price: "$500",
-    oldPrice: "$520",
-  },
-];
-const upsData = [
-  {
-    id: 1,
-    image:
-      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
-    title: "UPS 1",
-    sku: "SKU123",
-    price: "$100",
-    oldPrice: "$120",
-  },
-  {
-    id: 2,
-    image:
-      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
-    title: "UPS 2",
-    sku: "SKU124",
-    price: "$200",
-    oldPrice: "$220",
-  },
-  {
-    id: 3,
-    image:
-      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
-    title: "UPS 3",
-    sku: "SKU125",
-    price: "$300",
-    oldPrice: "$320",
-  },
-  {
-    id: 4,
-    image:
-      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
-    title: "UPS 4",
-    sku: "SKU126",
-    price: "$400",
-    oldPrice: "$420",
-  },
-  {
-    id: 5,
-    image:
-      "https://4.imimg.com/data4/NL/LM/MY-11247646/ups-uninterruptible-power-supply.jpg",
-    title: "UPS 5",
-    sku: "SKU127",
-    price: "$500",
-    oldPrice: "$520",
-  },
-];
 
 const Products = () => {
   
-  const { category } = useParams();
+  const { products} = useProducts();
+  const { category,variant } = useParams();
 
-  let productData = [];
 
-  if (category === "Batteries") {
-    productData = batteryData;
-  } else if (category === "Home Ups") {
-    productData = upsData;
-  }
+  const selectedProducts = products?.filter(
+    (product) =>
+      product.category?.toLowerCase().trim() ===
+        category?.toLowerCase().trim() &&
+      product.variant_slug?.toLowerCase().trim() ===
+        variant?.toLowerCase().trim()
+  );
+
+
+  console.log(products, "products");
+
+  console.log(category, "category from URL");
+
+  console.log(variant, "variant");
+
+  console.log("product.category:", products[0]);
+
+  console.log("selectedProducts:", selectedProducts);
 
   return (
     <div className="product-page pt-5">
@@ -121,11 +41,15 @@ const Products = () => {
         </Col>
         <Col md={9}>
           <Row>
-            {productData.map((product, index) => (
-              <Col key={index} xs={12} sm={6} md={4} lg={3}>
-                <ProductCard {...product} />
-              </Col>
-            ))}
+            {selectedProducts?.length > 0 ? (
+              selectedProducts.map((product, index) => (
+                <Col key={index} xs={12} sm={6} md={4} lg={3}>
+                  <ProductCard {...product} />
+                </Col>
+              ))
+            ) : (
+              <p>No products found for this variant.</p>
+            )}
           </Row>
         </Col>
       </Row>

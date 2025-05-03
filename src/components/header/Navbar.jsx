@@ -2,9 +2,12 @@ import React from "react";
 import "./Navbar.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Navbar() {
   const [showSearchInput, setShowSearchInput] = useState(false);
+  const { variant } = useParams();
+  console.log(variant, "variant navbar");
 
   // Toggle the search input visibility
   const handleSearchClick = () => {
@@ -53,7 +56,7 @@ function Navbar() {
         img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
       },
     ],
-    "Batteries ": [
+    "Batteries": [
       {
         name: "Tubular Batteries",
         img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
@@ -86,6 +89,17 @@ function Navbar() {
       },
     ],
   };
+
+
+  const categorySlugMap = {
+    "Home Ups": "home_ups",
+    "Solar Power": "solar_power",
+    "Batteries": "batteries",
+    "Ev Charger": "ev_charger",
+    "Auto Stabilizer": "auto_stabilizer",
+    "Water Purifier": "water_purifier",
+  };
+
 
   const navStyle = {
     textDecoration: "none",
@@ -167,7 +181,7 @@ function Navbar() {
                               onMouseEnter={() => setSelectedCategory(category)}
                             >
                               <Link
-                                to={`/preview/${category}`}
+                                to={`/preview/${categorySlugMap[category]}`}
                                 style={navStyle}
                               >
                                 {category}
@@ -205,7 +219,7 @@ function Navbar() {
               </li>
 
               <li className="nav-item me-3">
-                <Link className="nav-link nav-text">Customer Service</Link>
+                <Link className="nav-link nav-text">Support</Link>
               </li>
 
               <li className="nav-item me-3">

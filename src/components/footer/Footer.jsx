@@ -1,6 +1,7 @@
 import React from "react";
 import CopyRight from "./CopyRight";
-import "./Footer.css"
+import "./Footer.css";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -40,10 +41,15 @@ const Footer = () => {
           <div className="col-md-3 mb-3">
             <h5>Quick Links</h5>
             <ul className="list-unstyled small pt-md-3">
-              <li className="pb-md-2">About Us</li>
-              <li className="pb-md-2">Careers</li>
-              <li className="pb-md-2">Careers</li>
-              <li className="pb-md-2">Contact Us</li>
+              <Link to={"/"} className="text-decoration-none text-black">
+                <li className="pb-md-2">Home</li>
+              </Link>
+              <Link to={"/products/:category"} className="text-decoration-none text-black">
+                <li className="pb-md-2">Products</li>
+              </Link>
+              <Link to={"/store"} className="text-decoration-none text-black">
+                <li className="pb-md-2">Store Locator</li>
+              </Link>
             </ul>
           </div>
 
@@ -63,12 +69,21 @@ const Footer = () => {
             </p>
             <h5 className="pt-md-3">Follow Us</h5>
             <div className="d-flex gap-2 pt-md-3">
-              <i className="fab fa-facebook"></i>
-              <i class="fa-brands fa-x-twitter"></i>
-              <i className="fab fa-linkedin"></i>
-              <i className="fab fa-youtube"></i>
-              <i className="fab fa-pinterest"></i>
-              <i className="fab fa-instagram"></i>
+              <a href="https://www.facebook.com/warriorpowerindia/">
+                <i className="fab fa-facebook"></i>
+              </a>
+              <a href="https://x.com/warriorpowerind">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="https://www.linkedin.com/company/102684799/admin/dashboard/">
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a href="https://in.pinterest.com/warriorpowerindia/">
+                <i className="fab fa-pinterest"></i>
+              </a>
+              <a href="https://www.instagram.com/warriorpowerindia/">
+                <i className="fab fa-instagram"></i>
+              </a>
             </div>
           </div>
         </div>

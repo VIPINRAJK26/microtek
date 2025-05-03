@@ -28,11 +28,17 @@ function App() {
           <Suspense>
             <Routes>
               <Route path="/" element={<Landing />} />
-              <Route path="/products/:category" element={<Products />} />
-              <Route path="/single" element={<Single />} />
+              <Route
+                path="/products/:category/:variant"
+                element={<Products />}
+              />
+              <Route path="/single/:id" element={<Single />} />
               <Route path="/store" element={<Store />} />
               <Route path="/preview/:category" element={<Preview />} />
-              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+              <Route
+                path="/terms-and-conditions"
+                element={<TermsAndConditions />}
+              />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/refund-policy" element={<ReturnRefundPolicy />} />
             </Routes>

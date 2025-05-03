@@ -1,63 +1,51 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import useHeroCarousel from "../../hooks/useHeroCarousel";
+
 
 const HomeSlider = () => {
+
+  const { hero, loading, error } = useHeroCarousel();
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  console.log(hero, "hero");
+
   return (
     <div id="mainCarousel" className="carousel slide" data-bs-ride="carousel">
       {/* Indicators */}
       <div className="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#mainCarousel"
-          data-bs-slide-to="0"
-          className="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#mainCarousel"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#mainCarousel"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
+        {hero.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide-to={index}
+            className={index === 0 ? "active" : ""}
+            aria-current={index === 0 ? "true" : undefined}
+            aria-label={`Slide ${index + 1}`}
+          ></button>
+        ))}
       </div>
 
       {/* Carousel Items */}
       <div className="carousel-inner">
-        {/* Slide 1 */}
-        <div className="carousel-item active">
-          <img
-            src="/hero carousel-01.jpg"
-            className="d-block w-100"
-            alt="First slide"
-          />
-        </div>
-
-        {/* Slide 2 */}
-        <div className="carousel-item">
-          <img
-            src="/hero carousel-02.jpg"
-            className="d-block w-100"
-            alt="Second slide"
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src="/hero carousel-03.jpg"
-            className="d-block w-100"
-            alt="Second slide"
-          />
-        </div>
+        {hero.map((image, index) => (
+          <div
+            key={index}
+            className={`carousel-item ${index === 0 ? "active" : ""}`}
+          >
+            <img
+              src={image.image}
+              className="d-block w-100 h-100"
+              alt={`Slide ${index + 1}`}
+            />
+          </div>
+        ))}
       </div>
 
-      {/* Previous and Next controls */}
+      {/* Controls */}
       <button
         className="carousel-control-prev"
         type="button"
