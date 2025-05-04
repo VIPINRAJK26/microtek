@@ -2,25 +2,39 @@ import React from "react";
 import CopyRight from "./CopyRight";
 import "./Footer.css";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Footer = () => {
+  const { category } = useParams();
+  console.log(category, "category");
+
+  const categorySlugMap = {
+    "Home Ups": "home_ups",
+    "Solar Power": "solar_power",
+    Batteries: "batteries",
+    "Ev Charger": "ev_charger",
+    "Auto Stabilizer": "auto_stabilizer",
+    "Li-Ion Batteries": "li_ion_batteries",
+  };
+
   return (
     <footer className="footer  pt-5 ">
       <div className="container">
         <div className="row">
           {/* Products Section */}
-          <div className="col-md-3 mb-3">
-            <h5>Products</h5>
-            <ul className="list-unstyled small pt-md-3">
-              <li className="pb-md-2">Inverter/Home UPS</li>
-              <li className="pb-md-2">Solar Power</li>
-              <li className="pb-md-2">Power Backup Batteries</li>
-              <li className="pb-md-2">Solar Batteries</li>
-              <li className="pb-md-2">Tubular Batteries</li>
-              <li className="pb-md-2">Lithium ion Battery</li>
-              <li className="pb-md-2">EV Charger</li>
-              <li className="pb-md-2">Auto Stabilizer</li>
-              <li>Water Purifier</li>
+          <div className="col-md-3">
+            <h5 className="text-uppercase mb-3">Products</h5>
+            <ul className="list-unstyled">
+              {Object.entries(categorySlugMap).map(([category, slug]) => (
+                <li key={slug}>
+                  <Link
+                    to={`/preview/${slug}`}
+                    className="text-black text-decoration-none"
+                  >
+                    {category}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

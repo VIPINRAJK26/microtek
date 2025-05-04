@@ -94,7 +94,7 @@ const ProductFilter = ({ onDataChange, initialProducts = [] }) => {
   return (
     <div className="filter-container">
       <h5>Filters</h5>
-      <Accordion alwaysOpen={true}>
+      <Accordion alwaysOpen={true} defaultActiveKey={"0"}>
         {Object.entries(options).map(([key, values], idx) => (
           <Accordion.Item key={key} eventKey={String(idx)}>
             <Accordion.Header>

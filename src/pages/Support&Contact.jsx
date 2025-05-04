@@ -6,7 +6,7 @@ import axiosInstance from "../api/axios";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    supportType: "",
+    support_type: "", // ✅ match backend field name
     name: "",
     email: "",
     message: "",
@@ -22,20 +22,21 @@ const ContactSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosInstance.post("/contact-support/", formData);
+      const response = await axiosInstance.post("contact_support/", formData);
       setStatus({ success: true, message: "Message sent successfully!" });
-      setFormData({ supportType: "", name: "", email: "", message: "" });
+      setFormData({ support_type: "", name: "", email: "", message: "" });
     } catch (error) {
-      setStatus({
-        success: false,
-        message: error.response?.data?.message || "Something went wrong.",
-      });
+      const detail =
+        error.response?.data?.support_type?.[0] ||
+        error.response?.data?.message ||
+        "Something went wrong.";
+      setStatus({ success: false, message: detail });
     }
   };
 
   return (
     <div className="pb-5">
-      {/* Top Section with Background */}
+      {/* Top Section */}
       <div className="contact-header text-white text-center">
         <Container>
           <h2 className="fs-1 fw-bold pt-5">Customer Support</h2>
@@ -44,9 +45,10 @@ const ContactSection = () => {
           </p>
           <Form.Select
             className="w-50 mx-auto rounded-5 mb-4"
-            name="supportType"
-            value={formData.supportType}
+            name="support_type" // ✅ match backend field name
+            value={formData.support_type}
             onChange={handleChange}
+            required
           >
             <option value="">Select Support Type</option>
             <option value="installation">Product Installation</option>
@@ -64,7 +66,7 @@ const ContactSection = () => {
           <Col md={4} className="mb-3">
             <div className="info-box py-4 px-5 rounded">
               <GeoAltFill size={20} className="me-2" />
-              India,Manjeri,Malappuram
+              India, Manjeri, Malappuram
             </div>
           </Col>
           <Col md={4} className="mb-3">
@@ -95,6 +97,7 @@ const ContactSection = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  className="bg-light text-black"
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -105,6 +108,7 @@ const ContactSection = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  className="bg-light text-black"
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -116,6 +120,7 @@ const ContactSection = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
+                  className="bg-light text-black"
                 />
               </Form.Group>
               <Button variant="danger" type="submit">
