@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://server.warriorind.in/api/",
+  baseURL: "https://server.warriorind.in/api/",
   headers: {
     "Content-Type": "application/json",
   },
