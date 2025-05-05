@@ -6,17 +6,6 @@ const Service = () => {
     <div className="service m-md-5 m-2 rounded-5 my-5">
       <div className="row">
         {/* Left Section (Paperless Warranty) */}
-        <div className="col-lg-4 col-md-12 p-sm-0 py-0 ">
-          <div className="service-left p-4  text-white h-100">
-            <h4 className="mb-3 fw-bold">Product Installation</h4>
-            <p>All the Products and systems are delivered within the committed time and installed by the service engineers or designated technical personnel & relevant instructions to system operations will be provided to the Customers  </p>
-            <div className="steps">
-
-                <h4 className="pt-3 fw-bold">Vision Statement</h4>
-                <p>Our Vision is to be the global leader in sustainable energy and water solutions, providing innovative inverters, UPS systems , batteries ,solar systems , and water purifiers, We aim to empower communities with reliable , eco-friendly technologies , promoting a healthier planet and ensuring energy and water independence for all. </p>
-            </div>
-          </div>
-        </div>
 
         <div className="service-middle col-lg-4 col-md-6 mb-0 d-flex  flex-column justify-content-between">
           <div className="bg-light text-center  mb-4 h-50 d-flex flex-column justify-content-center">
@@ -25,8 +14,8 @@ const Service = () => {
                 src="https://t4.ftcdn.net/jpg/03/24/96/81/360_F_324968111_sArrasbZoPu3xeKMedtQAWGk2ZqDeivM.jpg"
                 alt="Customer Support"
                 className="img-fluid "
-                />
-                {/* <h5>Delighting customers is our philosophy</h5> */}
+              />
+              {/* <h5>Delighting customers is our philosophy</h5> */}
             </div>
           </div>
           <div className="image2 bg-light h-50 d-flex flex-column justify-content-center">
@@ -35,6 +24,22 @@ const Service = () => {
               alt="Customer Support Agent"
               className="img-fluid"
             />
+          </div>
+        </div>
+
+        <div className="col-lg-4 col-md-12 p-sm-0 py-0 ">
+          <div className="service-left p-4  text-white h-100">
+            <div className="steps">
+              <h4 className="pt-3 fw-bold">Vision Statement</h4>
+              <p>
+                Our Vision is to be the global leader in sustainable energy and
+                water solutions, providing innovative inverters, UPS systems ,
+                batteries ,solar systems , and water purifiers, We aim to
+                empower communities with reliable , eco-friendly technologies ,
+                promoting a healthier planet and ensuring energy and water
+                independence for all.{" "}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -59,9 +64,25 @@ const Service = () => {
               </button>
             </div>
             <div className="mt-auto text-end">
-              <a href="/services" className="text-primary text-decoration-none">
+              {/* <a href="/services" className="text-primary text-decoration-none">
                 View Services &gt;
-              </a>
+              </a> */}
+            </div>
+
+            <div>
+              <p className="service-text text-justify">
+                "I am so proud of our dedicated and very responsive team in
+                manufacturing and installing premium inverters, batteries, solar
+                systems, and water purifiers. Our journey has been driven by a
+                commitment to innovation, quality, and sustainability. We have
+                consistently delivered reliable energy solutions tailored to
+                meet the diverse needs of our residential, commercial, and
+                industrial clients. Our success is a testament to our dedicated
+                team and loyal customers. As we look to the future, we remain
+                steadfast in our mission to lead the renewable energy sector,
+                providing advanced technologies that promote environmental
+                stewardship and energy independence."
+              </p>
             </div>
           </div>
         </div>

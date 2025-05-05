@@ -19,7 +19,7 @@ const Strategy = () => {
         <div className="strategy-item" data-aos="zoom-in">
           <FaCogs className="strategy-icon" />
           <h3>Engineering & Design</h3>
-          <p >
+          <p>
             With all consideration of engineering parameter aspects with respect
             tot the power and power backup system , we will design inverters and
             UPS systems. Batteries for all Power back systems and solar power
@@ -51,13 +51,12 @@ const Strategy = () => {
         </div>
         <div className="strategy-item" data-aos="zoom-in">
           <FaTools className="strategy-icon" />
-          <h3>Vision Statement</h3>
+          <h3>Product Installation</h3>
           <p>
-            Our vision is to be the global leader in sustainable energy and
-            water solutions, providing innovative inverters, UPS systems,
-            batteries , solar systems , and water purifiers, We aim to empower
-            communities with reliable , eco-friendly technologies ,promoting a
-            healthier planet and ensuring energy and water independence for all.
+            All the Products and systems are delivered within the committed time
+            and installed by the service engineers or designated technical
+            personnel & relevant instructions to system operations will be
+            provided to the Customers
           </p>
         </div>
       </div>

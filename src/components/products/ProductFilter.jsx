@@ -20,6 +20,10 @@ const ProductFilter = ({ onDataChange, initialProducts = [] }) => {
     dimensions: [],
   });
 
+  
+
+
+  console.log(initialProducts, "initialProducts");
   const getUnit = (key) => {
     switch (key) {
       case "voltage": return "V";

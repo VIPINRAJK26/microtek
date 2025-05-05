@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Carousel, Card } from "react-bootstrap";
 import "./CardSlider.css";
 import useProducts from "../../hooks/useProducts";
-
+import { Link } from "react-router-dom";
 
 const CardSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -15,7 +15,6 @@ const CardSlider = () => {
     "Commercial UPS",
   ];
 
-
   const groupedProducts = {
     "Newly Launched": products.slice(-4), // last 4 items
     "Home UPS": products.filter((p) => p.category === "home_ups").slice(0, 4),
@@ -26,8 +25,6 @@ const CardSlider = () => {
       .filter((p) => p.category === "solar_power")
       .slice(0, 4),
   };
-
-
 
   const handleSelect = (index) => {
     setActiveIndex(index);
@@ -62,17 +59,19 @@ const CardSlider = () => {
             <div className="row">
               {groupedProducts[category]?.map((card, i) => (
                 <div key={i} className="col-lg-3 col-md-6 mb-4">
-                  <Card className="h-100 rounded-5 mt-3">
-                    <Card.Img
-                      className="rounded-top-5"
-                      variant="top"
-                      src={card.image}
-                      alt={card.title}
-                    />
-                    <Card.Body>
-                      <Card.Title>{card.title}</Card.Title>
-                    </Card.Body>
-                  </Card>
+                  <Link to={`/single/${card.id}`} className="text-decoration-none">
+                    <Card className="h-100 rounded-5 mt-3">
+                      <Card.Img
+                        className="rounded-top-5"
+                        variant="top"
+                        src={card.image}
+                        alt={card.title}
+                      />
+                      <Card.Body>
+                        <Card.Title>{card.title}</Card.Title>
+                      </Card.Body>
+                    </Card>
+                  </Link>
                 </div>
               ))}
             </div>
