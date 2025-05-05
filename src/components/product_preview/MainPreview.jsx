@@ -18,25 +18,25 @@ const MainPreview = () => {
   console.log(selectedPreview,"main selectedPreview");
   return (
     <div className="header-section mb-5 ">
-      {
-        selectedPreview ? (
-          <img
-            src={selectedPreview.image}
-            alt="no image"
-            className="img-fluid"
-            style={{ width: "100%", height: "50vh" }}
-          />
-        ) :
-        (
-          <img
-            src="https://t4.ftcdn.net/jpg/03/24/96/81/360_F_324968111_sArrasbZoPu3xeKMedtQAWGk2ZqDeivM.jpg"
-            alt="no image"
-            className="img-fluid"
-            style={{ width: "100%", height: "100vh" }}
-          />
-        )
-      }
-      
+      {selectedPreview ? (
+        <img
+          src={selectedPreview.image}
+          alt="no image"
+          className="img-fluid"
+          style={{ width: "100%", height: "50vh" }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "/No_image.jpg";
+          }}
+        />
+      ) : (
+        <img
+          src="https://t4.ftcdn.net/jpg/03/24/96/81/360_F_324968111_sArrasbZoPu3xeKMedtQAWGk2ZqDeivM.jpg"
+          alt="no image"
+          className="img-fluid"
+          style={{ width: "100%", height: "100vh" }}
+        />
+      )}
     </div>
   );
 };
