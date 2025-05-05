@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./contactSection.css";
+import "./ContactSection.css";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { EnvelopeFill, TelephoneFill, GeoAltFill } from "react-bootstrap-icons";
 import axiosInstance from "../api/axios";
