@@ -1,0 +1,141 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axiosInstance from "../api/axios";
+
+function Login() {
+  const [formData, setFormData] = useState({
+    username_or_email: "", // Changed from 'email' to match backend
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.username_or_email)
+      newErrors.username_or_email = "Username or email is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    return newErrors;
+  };
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      setLoading(true);
+      try {
+        const response = await axiosInstance.post("/login/", formData);
+
+        // Store tokens and user data (adjust based on your backend response)
+        localStorage.setItem("access_token", response.data.access);
+        localStorage.setItem("refresh_token", response.data.refresh);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+
+        // Set token in axios headers for future requests
+        axiosInstance.defaults.headers[
+          "Authorization"
+        ] = `Bearer ${response.data.access}`;
+
+        // Redirect to home page
+        navigate("/");
+      } catch (error) {
+        if (error.response) {
+          // Handle backend validation errors
+          if (error.response.status === 401) {
+            setErrors({ general: "Invalid credentials" });
+          } else {
+            setErrors(error.response.data);
+          }
+        } else if (error.message) {
+          console.error("Network error:", error);
+          setErrors({ general: "Network error. Please try again." });
+        } else {
+          console.error("Unexpected error:", error);
+          setErrors({ general: "An unexpected error occurred." });
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+
+  return (
+    <div className="container d-flex align-items-center justify-content-center min-vh-100">
+      <div className="w-100" style={{ maxWidth: "400px" }}>
+        <h2 className="mb-5 text-center">Login to Your Account</h2>
+
+        {errors.general && (
+          <div className="alert alert-danger">{errors.general}</div>
+        )}
+
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="p-5 shadow rounded-4"
+        >
+          <div className="mb-3">
+            <label htmlFor="username_or_email" className="form-label">
+              Username or Email
+            </label>
+            <input
+              type="text"
+              className={`form-control ${
+                errors.username_or_email ? "is-invalid" : ""
+              }`}
+              id="username_or_email"
+              name="username_or_email"
+              value={formData.username_or_email}
+              onChange={handleChange}
+            />
+            {errors.username_or_email && (
+              <div className="invalid-feedback">{errors.username_or_email}</div>
+            )}
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              type="password"
+              className={`form-control ${errors.password ? "is-invalid" : ""}`}
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password}</div>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <p className="mt-3 text-center">
+          Don't have an account? <a href="/register">Register here</a>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default Login;

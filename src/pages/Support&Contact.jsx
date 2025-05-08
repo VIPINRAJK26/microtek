@@ -88,7 +88,7 @@ const ContactSection = () => {
       <Container className="form-section rounded-4 py-5">
         <Row>
           <Col md={6}>
-            <Form className="ps-4" onSubmit={handleSubmit}>
+            <Form className="ps-md-4" onSubmit={handleSubmit}>
               <Form.Group className="mb-3">
                 <Form.Control
                   type="text"

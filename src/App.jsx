@@ -5,6 +5,13 @@ import ReturnRefundPolicy from "./pages/Refund";
 import PrivacyPolicy from "./pages/Privacy";
 import TermsAndConditions from "./pages/Terms";
 import ContactSection from "./pages/Support&Contact";
+import ScrollToTop from "./components/header/Scrolltotop";
+import BuyNow from "./pages/BuyNow";
+import Cart from "./pages/Cart";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+
+
 
 const Landing = lazy(() => import("./pages/HomePage"));
 const Header = lazy(() => import("./components/header/Navbar"));
@@ -24,6 +31,7 @@ function App() {
             <Header />
           </div>
         </Suspense>
+        <ScrollToTop/>
 
         <main>
           <Suspense>
@@ -43,6 +51,10 @@ function App() {
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/refund-policy" element={<ReturnRefundPolicy />} />
               <Route path="/contact" element={<ContactSection />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/buy" element={<BuyNow/>} />
+              <Route path="/register" element={<Register/>} />
+              <Route path="/login" element={<Login/>} />
             </Routes>
           </Suspense>
         </main>

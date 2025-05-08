@@ -23,7 +23,7 @@ const Footer = () => {
         <div className="row">
           {/* Products Section */}
           <div className="col-md-3">
-            <h5 className="text-uppercase mb-3">Products</h5>
+            <h5 className="mb-3">Products</h5>
             <ul className="list-unstyled">
               {Object.entries(categorySlugMap).map(([category, slug]) => (
                 <li key={slug}>

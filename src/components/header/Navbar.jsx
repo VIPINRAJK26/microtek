@@ -1,246 +1,291 @@
-import React from "react";
-import "./Navbar.css";
-import { useState } from "react";
+import React, { useRef, useEffect,useState } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import "./Navbar.css";
 
 function Navbar() {
   const [showSearchInput, setShowSearchInput] = useState(false);
-  const { variant } = useParams();
-  console.log(variant, "variant navbar");
-
-  // Toggle the search input visibility
-  const handleSearchClick = () => {
-    setShowSearchInput(!showSearchInput);
-  };
-
-  // State for managing hovered category
-  const [selectedCategory, setSelectedCategory] = useState(
-    "Home Ups"
-  );
-
-  // State to track if the dropdown is being hovered
+  const [selectedCategory, setSelectedCategory] = useState("Home Ups");
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [isUserDropdownVisible, setIsUserDropdownVisible] = useState(false);
+  // const { variant } = useParams();
 
-  // Categories and their corresponding products
+  const dropdownRef = useRef(null);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setUserDropdownVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+
   const categories = {
     "Home Ups": [
       {
         name: "Online Ups",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FInverterHome-Ups-menu-1721899901612.png&w=128&q=75",
+        img: "/1. ONLINE UPS.png",
       },
       {
         name: "Offline Ups",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FInverterHome-Ups-menu-1721899901612.png&w=128&q=75",
+        img: "/2. OFF LINE UPS.png",
       },
       {
         name: "HKVA UPS",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FInverterHome-Ups-menu-1721899901612.png&w=128&q=75",
+        img: "/3. HKVA UPS.png",
       },
     ],
     "Solar Power": [
       {
         name: "Solar Ups",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
+        img: "/4. SOLAR UPS.png",
       },
       {
         name: "Solar Panels",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
+        img: "/5. SOLAR PANEL.png",
       },
       {
         name: "Lithium Solar Inverter",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
+        img: "/5. LITHIUM SOLAR INVERTER.png",
       },
       {
         name: "Mppts",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
+        img: "/6. MPPT.png",
       },
     ],
-    "Batteries": [
+    Batteries: [
       {
         name: "Tubular Batteries",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
+        img: "/7. TUBULAR BATTERY.png",
       },
       {
         name: "Solar Batteries",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
+        img: "/8. SOLAR BATTERY.png",
       },
       {
         name: "Lithium Ion Battery",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
+        img: "/9.LITHIUM ION BATTERY.png",
       },
     ],
-    "Ev Charger": [
-      {
-        name: "",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
-      },
-    ],
-    "Auto Stabilizer": [
-      {
-        name: "",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
-      },
-    ],
-    "Li-Ion Batteries": [
-      {
-        name: "",
-        img: "https://www.microtek.in/_next/image?url=https%3A%2F%2Fcms.microtek.in%2Fupload%2Fproduct_subcategory%2FJumboHome-ups-menu-1721342056999.png&w=128&q=75",
-      },
-    ],
+    "Ev Charger": [],
+    "Auto Stabilizer": [],
+    "Li-Ion Batteries": [],
   };
-
 
   const categorySlugMap = {
     "Home Ups": "home_ups",
     "Solar Power": "solar_power",
-    "Batteries": "batteries",
+    Batteries: "batteries",
     "Ev Charger": "ev_charger",
     "Auto Stabilizer": "auto_stabilizer",
     "Li-Ion Batteries": "li_ion_batteries",
   };
 
-
-  const navStyle = {
-    textDecoration: "none",
-    color: "black",
+  const handleSearchClick = () => {
+    setShowSearchInput(!showSearchInput);
   };
 
   return (
-    <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-white">
-        <div className="container-fluid ps-md-5 pe-md-5 ps-0 pe-0">
-          {/* Left Section: Logo */}
-          <Link className="navbar-brand" to={"/"}>
-            <img
-              src="/Warrior logo Png-01.png"
-              alt="Logo"
-              loading="lazy"
-              className="logo-img ms-auto"
-            />
-          </Link>
+    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+      <div className="container-fluid ps-md-5 pe-md-5 ps-0 pe-0">
+        {/* Logo */}
+        <Link className="navbar-brand" to={"/"}>
+          <img
+            src="/Warrior logo Png-01.png"
+            alt="Logo"
+            loading="lazy"
+            className="logo-img ms-auto"
+          />
+        </Link>
 
-          {/* Right-aligned Hamburger Toggler on small screens */}
-          <button
-            className="navbar-toggler ms-auto"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+        {/* Mobile Toggle */}
+        <button
+          className="navbar-toggler ms-auto"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-          {/* Center Section: Links */}
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav mx-auto">
-              <li className="nav-item me-3 ">
-                <Link className="nav-link nav-text" to={"/"}>
-                  Home
-                </Link>
-              </li>
+        {/* Nav Links */}
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mx-auto">
+            <li className="nav-item me-3">
+              <Link className="nav-link nav-text" to={"/"}>
+                Home
+              </Link>
+            </li>
 
-              {/* Products Dropdown */}
-              <li
-                className="nav-item dropdown me-3"
-                onMouseEnter={() => setIsDropdownVisible(true)}
-                onMouseLeave={() => setIsDropdownVisible(false)}
-              >
-                <a
-                  className="nav-link dropdown-toggle nav-text"
-                  id="navbarDropdown"
-                  role="button"
-                  aria-expanded="false"
-                >
-                  {/* <Link
-                    to={"/products"}
-                    className="text-decoration-none text-black"
-                  > */}
-                  Products
-                  {/* </Link> */}
-                </a>
+            {/* Products Dropdown */}
+            <li
+              className="nav-item dropdown me-3"
+              onMouseEnter={() => setIsDropdownVisible(true)}
+              onMouseLeave={() => setIsDropdownVisible(false)}
+            >
+              <span className="nav-link dropdown-toggle nav-text">
+                Products
+              </span>
 
-                {/* Dropdown content */}
-                {isDropdownVisible && (
-                  <div className="dropdown-menu p-4 mega-dropdown border-0">
-                    <div className="row">
-                      {/* Left: Category List */}
-                      <div
-                        className="col-md-3"
-                        style={{ borderRight: "1px solid #ccc" }}
-                      >
-                        <ul className="list-unstyled">
-                          {Object.keys(categories).map((category) => (
-                            <li
-                              key={category}
-                              className={`category-item ${
-                                selectedCategory === category ? "active" : ""
-                              }`}
-                              onMouseEnter={() => setSelectedCategory(category)}
+              {isDropdownVisible && (
+                <div className="dropdown-menu p-4 mega-dropdown border-0">
+                  <div className="row">
+                    {/* Left: Category List */}
+                    <div
+                      className="col-md-3"
+                      style={{ borderRight: "1px solid #ccc" }}
+                    >
+                      <ul className="list-unstyled">
+                        {Object.keys(categories).map((category) => (
+                          <li
+                            key={category}
+                            className={`category-item ${
+                              selectedCategory === category ? "active" : ""
+                            }`}
+                            onMouseEnter={() => setSelectedCategory(category)}
+                          >
+                            <Link
+                              to={`/preview/${categorySlugMap[category]}`}
+                              className="text-decoration-none text-black"
                             >
-                              <Link
-                                to={`/preview/${categorySlugMap[category]}`}
-                                style={navStyle}
-                              >
-                                {category}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                              {category}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                      {/* Right: Product Grid */}
-                      <div className="col-md-9">
-                        <div className="row">
-                          {categories[selectedCategory].map((product) => (
-                            <div className="col-md-4" key={product.name}>
-                              <div
-                                className="product-card"
-                                style={{ cursor: "pointer" }}
-                              >
-                                <Link to={"/preview"}>
-                                  <img
-                                    src={product.img}
-                                    alt={product.name}
-                                    className="img-fluid"
-                                  />
+                    {/* Right: Subcategories */}
+                    <div className="col-md-9">
+                      <div className="row">
+                        {(categories[selectedCategory] || []).map(
+                          (product, index) =>
+                            product.name && (
+                              <div className="col-md-4" key={index}>
+                                <Link
+                                  to={`/products/${product.name
+                                    .toLowerCase()
+                                    .replace(/\s+/g, "-")}`}
+                                  className="text-decoration-none"
+                                >
+                                  <div className="product-card text-center">
+                                    <img
+                                      src={product.img}
+                                      alt={product.name}
+                                      className="img-fluid"
+                                    />
+                                    <p>{product.name}</p>
+                                  </div>
                                 </Link>
-                                <p>{product.name}</p>
                               </div>
-                            </div>
-                          ))}
-                        </div>
+                            )
+                        )}
                       </div>
                     </div>
                   </div>
-                )}
-              </li>
+                </div>
+              )}
+            </li>
 
-              <li className="nav-item me-3">
-                <Link to={"/contact"} className="nav-link nav-text">Support & Contact</Link>
-              </li>
+            <li className="nav-item me-3">
+              <Link to="/contact" className="nav-link nav-text">
+                Support & Contact
+              </Link>
+            </li>
+            <li className="nav-item me-3">
+              <Link to="/store" className="nav-link nav-text">
+                Store Locator
+              </Link>
+            </li>
+          </ul>
+        </div>
 
-              <li className="nav-item me-3">
-                <Link to={"/store"} className="nav-link nav-text">
-                  Store Locator
-                </Link>
-              </li>
-            </ul>
+        {/* User Icon with Dropdown */}
+        <div
+          className="position-relative me-3 cursor-pointer"
+          onMouseEnter={() => setIsUserDropdownVisible(true)}
+          onMouseLeave={() => setIsUserDropdownVisible(false)}
+        >
+          <div className="nav-link nav-text cursor-pointer">
+            <i className="fas fa-user p-1"></i>
           </div>
+          {isUserDropdownVisible && (
+            <div
+              className="user-dropdown position-absolute end-0 mt-2 bg-white rounded shadow-sm p-2"
+              style={{ width: "150px", zIndex: 1000 }}
+              onMouseEnter={() => setUserDropdownVisible(true)}
+              onMouseLeave={() =>
+                setTimeout(() => setUserDropdownVisible(false), 300)
+              }
+            >
+              {user ? (
+                <button
+                  className="dropdown-item text-danger"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    localStorage.clear();
+                    window.location.href = "/";
+                  }}
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="dropdown-item"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setUserDropdownVisible(false);
+                    }}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="dropdown-item"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setUserDropdownVisible(false);
+                    }}
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
+        </div>
 
-          {/* Right Section: Search Icon and Customer Care */}
-          <div className="d-flex align-items-center">
-            <div className="me-3">
-              <a className="me-2" onClick={handleSearchClick}>
-                <i className="fas fa-search text-black ps-4 ps-md-0"></i>
-              </a>
+        {/* Cart Icon */}
+        <div className="position-relative me-3">
+          <Link to="/cart" className="nav-link nav-text">
+            <i className="fas fa-shopping-cart p-1"></i>
+            <span className="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              3
+            </span>
+          </Link>
+        </div>
 
-              {/* Conditionally render the search input with fade-in animation */}
-              <div
-                className={`search-container ${showSearchInput ? "show" : ""}`}
-              >
+        {/* Search Icon */}
+        <div className="d-flex align-items-center">
+          <div className="me-3">
+            <span onClick={handleSearchClick} role="button">
+              <i className="fas fa-search text-black ps-4 ps-md-0"></i>
+            </span>
+            {showSearchInput && (
+              <div className="search-container show">
                 <input
                   type="text"
                   className="form-control search-input p-0"
@@ -248,22 +293,18 @@ function Navbar() {
                   autoFocus
                 />
               </div>
-            </div>
-
-            {/* Customer Care Info */}
-            <div className="customer-care me-2 d-md-block d-none">
-              <span className="small">Customer Support</span> <br />
-              <a
-                href="tel:7283838383"
-                className="care text-decoration-none p-0"
-              >
-                +91 9846151900
-              </a>
-            </div>
+            )}
           </div>
         </div>
-      </nav>
-    </>
+        {/* Customer Care Info */}
+        <div className="customer-care text-center  d-md-block d-none">
+          <span className="small ">Customer Support</span> <br />
+          <a href="tel:7283838383" className="care text-decoration-none p-0">
+            +91 9846151900
+          </a>
+        </div>
+      </div>
+    </nav>
   );
 }
 
