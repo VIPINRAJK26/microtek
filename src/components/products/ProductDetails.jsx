@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
-
-// Decode the access token
-
 
 const ProductDetails = ({
   id,
@@ -20,16 +17,9 @@ const ProductDetails = ({
   features,
 }) => {
   const navigate = useNavigate();
-
-  const token = localStorage.getItem("access_token");
-
-  if (token) {
-    const decodedToken = jwtDecode(token);
-    console.log("Token expiration time:", decodedToken.exp); // This will show the expiration time in Unix timestamp format
-  }
-
-
-  console.log(token, "token");
+  const [loading, setLoading] = useState(false);
+  const [cartItems, setCartItems] = useState([]); // Correctly defined as an array
+  const token = localStorage.getItem("access_token"); // Get token from localStorage
 
   const featureList = Array.isArray(features)
     ? features
@@ -37,23 +27,85 @@ const ProductDetails = ({
     ? features.split(",").map((f) => f.trim())
     : [];
 
-  const handleAddToCart = async () => {
-    try {
-      await axiosInstance.post("cart_item/", {
-        product: id,
-        quantity: 1,
-      });
+  // Check if the token is expired or invalid (for actions like adding to cart)
+  useEffect(() => {
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      console.log("Token expiration time:", decodedToken.exp);
+    }
+  }, [token]);
 
-      navigate("/cart", {
-        state: { message: "Product added to cart!" },
-      });
+  // Check cart on page load
+  const fetchCart = async () => {
+    setLoading(true);
+    try {
+      let url = "/cart/";
+
+      if (token) {
+        const res = await axiosInstance.get(url);
+        setCartItems(Array.isArray(res.data) ? res.data : []); // Ensure cartItems is an array
+      } else {
+        const sessionKey = sessionStorage.getItem("session_key");
+        const res = await axiosInstance.get(url, {
+          params: { session_key: sessionKey },
+        });
+        setCartItems(Array.isArray(res.data) ? res.data : []); // Ensure cartItems is an array
+      }
     } catch (error) {
-      console.error("Error adding to cart:", error);
-      toast.error("Failed to add product to cart.");
+      console.error("Error fetching cart:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  console.log(id, "productId");
+  useEffect(() => {
+    fetchCart();
+  }, [token]); // Fetch cart when the token changes or when the page loads
+
+  const handleAddToCart = async () => {
+    setLoading(true);
+
+    // Ensure cartItems is an array before calling .some()
+    if (!Array.isArray(cartItems)) {
+      setCartItems([]);
+    }
+
+    // Check if the product is already in the cart
+    const alreadyInCart = cartItems.some((item) => item.product.id === id);
+
+    if (alreadyInCart) {
+      toast.info("Product is already in cart!");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("access_token");
+
+      if (token) {
+        // Add to authenticated user's cart
+        await axiosInstance.post("/cart_item/", {
+          product_id: id,
+          quantity: 1,
+        });
+      } else {
+        // Add to anonymous cart (based on session)
+        await axiosInstance.post("/cart_item/", {
+          product_id: id,
+          quantity: 1,
+          session_key: sessionStorage.getItem("session_key"), // use session key for anonymous user
+        });
+      }
+
+      toast.success("Added to cart!");
+      navigate("/cart");
+    } catch (error) {
+      toast.error(error.response?.data?.detail || "Failed to add to cart");
+      console.error("Add to cart error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Card className="p-0 p-md-3 border-0 shadow-none">
@@ -114,14 +166,19 @@ const ProductDetails = ({
       </Card.Body>
 
       <div className="d-flex ps-4 gap-3 pb-4">
-        <Link to="/buy">
+        {/* Buy Now Button */}
+        <Link to={`/buy/${id}`}>
           <button className="btn btn-primary rounded-3">Buy Now</button>
         </Link>
+
+        {/* Add to Cart Button */}
         <button
-          className="btn btn-outline-primary rounded-3"
+          variant="primary"
+          className="btn btn-secondary rounded-3"
           onClick={handleAddToCart}
+          disabled={loading}
         >
-          Add to Cart
+          {loading ? "Adding..." : "Add to Cart"}
         </button>
       </div>
     </Card>

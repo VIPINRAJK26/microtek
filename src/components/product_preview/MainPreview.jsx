@@ -1,4 +1,3 @@
-import React from "react";
 import useMainPreview from "../../hooks/useMainPreview";
 import { useParams } from "react-router-dom";
 

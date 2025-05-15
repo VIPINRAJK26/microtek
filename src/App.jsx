@@ -11,8 +11,6 @@ import Cart from "./pages/Cart";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 
-
-
 const Landing = lazy(() => import("./pages/HomePage"));
 const Header = lazy(() => import("./components/header/Navbar"));
 const Footer = lazy(() => import("./components/footer/Footer"));
@@ -21,6 +19,7 @@ const Products = lazy(() => import("./pages/ProductPage"));
 const Single = lazy(() => import("./pages/SingleProduct"));
 const Store = lazy(() => import("./pages/StoreLocator"));
 const Preview = lazy(() => import("./pages/ProductPreview"));
+const BatteryInverter = lazy(() => import("./pages/LiBatInverter"));
 
 function App() {
   return (
@@ -31,7 +30,7 @@ function App() {
             <Header />
           </div>
         </Suspense>
-        <ScrollToTop/>
+        <ScrollToTop />
 
         <main>
           <Suspense>
@@ -43,7 +42,7 @@ function App() {
               />
               <Route path="/single/:id" element={<Single />} />
               <Route path="/store" element={<Store />} />
-              <Route path="/preview/:category" element={<Preview />} />
+              <Route path="/preview/:category/:subcategory" element={<Preview />} />
               <Route
                 path="/terms-and-conditions"
                 element={<TermsAndConditions />}
@@ -52,9 +51,10 @@ function App() {
               <Route path="/refund-policy" element={<ReturnRefundPolicy />} />
               <Route path="/contact" element={<ContactSection />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/buy" element={<BuyNow/>} />
-              <Route path="/register" element={<Register/>} />
-              <Route path="/login" element={<Login/>} />
+              <Route path="/buy/:id" element={<BuyNow />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/bat-inv" element={<BatteryInverter />} />
             </Routes>
           </Suspense>
         </main>

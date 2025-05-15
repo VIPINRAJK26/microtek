@@ -9,7 +9,7 @@
 }
 
 .customers {
-  height: 40vh;
+  height: 20vh;
 }
 
 .background-image2 {
@@ -29,7 +29,7 @@ body::-webkit-scrollbar {
 
 .overlay {
   position: absolute;
-  top: -350px;
+  top: -450px;
   left: 0;
   right: 0;
   bottom: 0;

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect,useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
@@ -7,17 +7,14 @@ function Navbar() {
   const [selectedCategory, setSelectedCategory] = useState("Home Ups");
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isUserDropdownVisible, setIsUserDropdownVisible] = useState(false);
-  // const { variant } = useParams();
 
   const dropdownRef = useRef(null);
-
   const user = JSON.parse(localStorage.getItem("user"));
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setUserDropdownVisible(false);
+        setIsUserDropdownVisible(false);
       }
     };
 
@@ -27,53 +24,23 @@ function Navbar() {
     };
   }, []);
 
-
   const categories = {
     "Home Ups": [
-      {
-        name: "Online Ups",
-        img: "/1. ONLINE UPS.png",
-      },
-      {
-        name: "Offline Ups",
-        img: "/2. OFF LINE UPS.png",
-      },
-      {
-        name: "HKVA UPS",
-        img: "/3. HKVA UPS.png",
-      },
+      { name: "Online Ups", img: "/1. ONLINE UPS.png" },
+      { name: "Offline Ups", img: "/2. OFF LINE UPS.png" },
+      { name: "HKVA UPS", img: "/3. HKVA UPS.png" },
+      { name: "Li-ion Battery Inverter", img: "/3. HKVA UPS.png" },
     ],
     "Solar Power": [
-      {
-        name: "Solar Ups",
-        img: "/4. SOLAR UPS.png",
-      },
-      {
-        name: "Solar Panels",
-        img: "/5. SOLAR PANEL.png",
-      },
-      {
-        name: "Lithium Solar Inverter",
-        img: "/5. LITHIUM SOLAR INVERTER.png",
-      },
-      {
-        name: "Mppts",
-        img: "/6. MPPT.png",
-      },
+      { name: "Solar Ups", img: "/4. SOLAR UPS.png" },
+      { name: "Solar Panels", img: "/5. SOLAR PANEL.png" },
+      { name: "Lithium Solar Inverter", img: "/5. LITHIUM SOLAR INVERTER.png" },
+      { name: "Mppts", img: "/6. MPPT.png" },
     ],
     Batteries: [
-      {
-        name: "Tubular Batteries",
-        img: "/7. TUBULAR BATTERY.png",
-      },
-      {
-        name: "Solar Batteries",
-        img: "/8. SOLAR BATTERY.png",
-      },
-      {
-        name: "Lithium Ion Battery",
-        img: "/9.LITHIUM ION BATTERY.png",
-      },
+      { name: "Tubular Batteries", img: "/7. TUBULAR BATTERY.png" },
+      { name: "Solar Batteries", img: "/8. SOLAR BATTERY.png" },
+      { name: "Lithium Ion Battery", img: "/9.LITHIUM ION BATTERY.png" },
     ],
     "Ev Charger": [],
     "Auto Stabilizer": [],
@@ -89,6 +56,20 @@ function Navbar() {
     "Li-Ion Batteries": "li_ion_batteries",
   };
 
+  const subcategorySlugMap = {
+    "Online Ups": "online_ups",
+    "Offline Ups": "offline_ups",
+    "HKVA UPS": "hkva_ups",
+    "Li-ion Battery Inverter": "li_ion_battery_inverter",
+    "Solar Ups": "solar_ups",
+    "Solar Panels": "solar_panels",
+    "Lithium Solar Inverter": "lithium_solar_inverter",
+    Mppts: "mppts",
+    "Tubular Batteries": "tubular_batteries",
+    "Solar Batteries": "solar_batteries",
+    "Lithium Ion Battery": "lithium_ion_battery",
+  };
+
   const handleSearchClick = () => {
     setShowSearchInput(!showSearchInput);
   };
@@ -96,7 +77,6 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
       <div className="container-fluid ps-md-5 pe-md-5 ps-0 pe-0">
-        {/* Logo */}
         <Link className="navbar-brand" to={"/"}>
           <img
             src="/Warrior logo Png-01.png"
@@ -106,7 +86,6 @@ function Navbar() {
           />
         </Link>
 
-        {/* Mobile Toggle */}
         <button
           className="navbar-toggler ms-auto"
           type="button"
@@ -119,7 +98,6 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Nav Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mx-auto">
             <li className="nav-item me-3">
@@ -128,7 +106,6 @@ function Navbar() {
               </Link>
             </li>
 
-            {/* Products Dropdown */}
             <li
               className="nav-item dropdown me-3"
               onMouseEnter={() => setIsDropdownVisible(true)}
@@ -141,7 +118,6 @@ function Navbar() {
               {isDropdownVisible && (
                 <div className="dropdown-menu p-4 mega-dropdown border-0">
                   <div className="row">
-                    {/* Left: Category List */}
                     <div
                       className="col-md-3"
                       style={{ borderRight: "1px solid #ccc" }}
@@ -155,28 +131,27 @@ function Navbar() {
                             }`}
                             onMouseEnter={() => setSelectedCategory(category)}
                           >
-                            <Link
+                            {/* <Link
                               to={`/preview/${categorySlugMap[category]}`}
                               className="text-decoration-none text-black"
-                            >
+                            > */}
                               {category}
-                            </Link>
+                            {/* </Link> */}
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    {/* Right: Subcategories */}
                     <div className="col-md-9">
                       <div className="row">
                         {(categories[selectedCategory] || []).map(
                           (product, index) =>
-                            product.name && (
+                            product.name ? (
                               <div className="col-md-4" key={index}>
                                 <Link
-                                  to={`/products/${product.name
-                                    .toLowerCase()
-                                    .replace(/\s+/g, "-")}`}
+                                  to={`/preview/${
+                                    categorySlugMap[selectedCategory]
+                                  }/${subcategorySlugMap[product.name]}`}
                                   className="text-decoration-none"
                                 >
                                   <div className="product-card text-center">
@@ -189,7 +164,7 @@ function Navbar() {
                                   </div>
                                 </Link>
                               </div>
-                            )
+                            ) : null
                         )}
                       </div>
                     </div>
@@ -211,11 +186,11 @@ function Navbar() {
           </ul>
         </div>
 
-        {/* User Icon with Dropdown */}
         <div
           className="position-relative me-3 cursor-pointer"
           onMouseEnter={() => setIsUserDropdownVisible(true)}
           onMouseLeave={() => setIsUserDropdownVisible(false)}
+          ref={dropdownRef}
         >
           <div className="nav-link nav-text cursor-pointer">
             <i className="fas fa-user p-1"></i>
@@ -224,10 +199,6 @@ function Navbar() {
             <div
               className="user-dropdown position-absolute end-0 mt-2 bg-white rounded shadow-sm p-2"
               style={{ width: "150px", zIndex: 1000 }}
-              onMouseEnter={() => setUserDropdownVisible(true)}
-              onMouseLeave={() =>
-                setTimeout(() => setUserDropdownVisible(false), 300)
-              }
             >
               {user ? (
                 <button
@@ -245,20 +216,14 @@ function Navbar() {
                   <Link
                     to="/login"
                     className="dropdown-item"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setUserDropdownVisible(false);
-                    }}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
                     className="dropdown-item"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setUserDropdownVisible(false);
-                    }}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Sign Up
                   </Link>
@@ -268,7 +233,6 @@ function Navbar() {
           )}
         </div>
 
-        {/* Cart Icon */}
         <div className="position-relative me-3">
           <Link to="/cart" className="nav-link nav-text">
             <i className="fas fa-shopping-cart p-1"></i>
@@ -278,7 +242,6 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Search Icon */}
         <div className="d-flex align-items-center">
           <div className="me-3">
             <span onClick={handleSearchClick} role="button">
@@ -296,10 +259,10 @@ function Navbar() {
             )}
           </div>
         </div>
-        {/* Customer Care Info */}
-        <div className="customer-care text-center  d-md-block d-none">
-          <span className="small ">Customer Support</span> <br />
-          <a href="tel:7283838383" className="care text-decoration-none p-0">
+
+        <div className="customer-care text-center d-md-block d-none">
+          <span className="small">Customer Support</span> <br />
+          <a href="tel:9846151900" className="care text-decoration-none p-0">
             +91 9846151900
           </a>
         </div>

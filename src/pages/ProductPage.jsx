@@ -9,45 +9,28 @@ import useProducts from "../hooks/useProducts";
 
 const Products = () => {
   const { products } = useProducts();
-  const { category, variant } = useParams();
+  const { category, variant, } = useParams();
+  const [baseProducts, setBaseProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const variantProducts = useMemo(() => {
-    return products.filter(
-      (p) => p.variant?.toLowerCase().trim() === variant?.toLowerCase().trim()
-    );
-  }, [products, variant]);
 
-  console.log(products, "products filter");
-  console.log(category, "category filter");
-  console.log(variant, "variant filter");
-
-  console.log(variantProducts, "variantProducts");
-  // Initialize with all products or category/variant filtered products
   useEffect(() => {
     if (category && variant) {
-      setFilteredProducts(variantProducts);
-    } else {
-      setFilteredProducts(products || []);
-    }
-  }, [category, variant, products, variantProducts]);
-
-
-  // Function to handle filter changes and update filtered products
-  const handleDataChange = (filteredData) => {
-    // If we have category/variant in URL, apply those filters first
-    if (category && variant) {
-      const baseFiltered = filteredData.filter(
-        (product) =>
-          product.category?.toLowerCase().trim() ===
-            category?.toLowerCase().trim() &&
-          product.variant_slug?.toLowerCase().trim() ===
-            variant?.toLowerCase().trim()
+      const filtered = products.filter(
+        (p) =>
+          p.category?.toLowerCase() === category.toLowerCase() &&
+          p.variant_slug?.toLowerCase() === variant.toLowerCase()
       );
-      setFilteredProducts(baseFiltered);
+      setBaseProducts(filtered);
+      setFilteredProducts(filtered);
     } else {
-      setFilteredProducts(filteredData);
+      setBaseProducts(products);
+      setFilteredProducts(products);
     }
+  }, [category, variant, products]);
+
+  const handleDataChange = (filteredData) => {
+    setFilteredProducts(filteredData);
   };
 
   return (
@@ -56,7 +39,7 @@ const Products = () => {
         <Col md={3}>
           <ProductFilter
             onDataChange={handleDataChange}
-            initialProducts={variantProducts}
+            initialProducts={baseProducts}
           />
         </Col>
         <Col md={9}>
@@ -84,5 +67,6 @@ const Products = () => {
     </div>
   );
 };
+
 
 export default Products;

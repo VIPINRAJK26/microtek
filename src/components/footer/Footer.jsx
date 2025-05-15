@@ -86,20 +86,20 @@ const Footer = () => {
               India,Manjeri,Malappuram,Kerala, 676517 <br />
             </p>
             <h5 className="pt-md-3">Follow Us</h5>
-            <div className="d-flex gap-2 pt-md-3">
-              <a href="https://www.facebook.com/warriorpowerindia/">
+            <div className="d-flex gap-2 pt-md-3 text-black">
+              <a href="https://www.facebook.com/warriorpowerindia/"  className="text-black">
                 <i className="fab fa-facebook"></i>
               </a>
-              <a href="https://x.com/warriorpowerind">
+              <a href="https://x.com/warriorpowerind" className="text-black">
                 <i class="fa-brands fa-x-twitter"></i>
               </a>
-              <a href="https://www.linkedin.com/company/102684799/admin/dashboard/">
+              <a href="https://www.linkedin.com/company/102684799/admin/dashboard/" className="text-black">
                 <i className="fab fa-linkedin"></i>
               </a>
-              <a href="https://in.pinterest.com/warriorpowerindia/">
+              <a href="https://in.pinterest.com/warriorpowerindia/" className="text-black">
                 <i className="fab fa-pinterest"></i>
               </a>
-              <a href="https://www.instagram.com/warriorpowerindia/">
+              <a href="https://www.instagram.com/warriorpowerindia/" className="text-black">
                 <i className="fab fa-instagram"></i>
               </a>
             </div>

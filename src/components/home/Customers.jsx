@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Customers.css"; 
+import "./Customers.css";
 
 const Customers = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +19,7 @@ const Customers = () => {
         });
       },
       { threshold: 0.5 }
-    ); 
+    );
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
@@ -40,16 +40,16 @@ const Customers = () => {
 
       const customerInterval = setInterval(() => {
         if (customerCount < 2) {
-          customerCount += 1; 
+          customerCount += 1;
           setHappyCustomers(customerCount);
         } else {
           clearInterval(customerInterval);
         }
-      }, 300); 
+      }, 300);
 
       const dealerInterval = setInterval(() => {
         if (dealerCount < 4) {
-          dealerCount += 1; 
+          dealerCount += 1;
           setDealerNetwork(dealerCount);
         } else {
           clearInterval(dealerInterval);
@@ -95,21 +95,6 @@ const Customers = () => {
           <h2 className="overlay-text2  ">Service Points</h2>
         </div>
       </div>
-
-      {/* <div className="chairman-message">
-        <p>
-          "I am so proud of our dedicated and very responsive team in
-          manufacturing and installing premium inverters, batteries, solar
-          systems, and water purifiers. Our journey has been driven by a
-          commitment to innovation, quality, and sustainability. We have
-          consistently delivered reliable energy solutions tailored to meet the
-          diverse needs of our residential, commercial, and industrial clients.
-          Our success is a testament to our dedicated team and loyal customers.
-          As we look to the future, we remain steadfast in our mission to lead
-          the renewable energy sector, providing advanced technologies that
-          promote environmental stewardship and energy independence."
-        </p>
-      </div> */}
 
       <img
         className="background-image2"

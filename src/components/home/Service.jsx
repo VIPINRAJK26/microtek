@@ -8,10 +8,10 @@ const Service = () => {
       <div className="row">
         {/* Left Section (Paperless Warranty) */}
 
-        <div className="service-middle col-lg-4 col-md-6 mb-0 d-flex  flex-column justify-content-between">
-          <div>
+        <div className="col-lg-4 col-md-6 mb-0 d-flex align-items-center justify-content-center">
+          <div className="text-center">
             <img
-              src="https://img.freepik.com/free-psd/portrait-woman-listening-music-headphones_23-2150116924.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid&w=740"
+              src="https://img.freepik.com/free-photo/man-pointing-front-white-background_1368-4260.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid&w=740"
               alt=""
               className="img-fluid"
             />
@@ -52,7 +52,7 @@ const Service = () => {
           <div className="service-right bg-white p-4 h-100 d-flex flex-column justify-content-between">
             <div className=" bg-light ">
               <img
-                src="https://img.freepik.com/premium-photo/professional-call-center-woman-assisting-customers-with-crm_901408-9429.jpg"
+                src="/unmatched customer support 540  360px.jpg"
                 alt="Customer Support Agent"
                 className="img-fluid rounded-5"
               />

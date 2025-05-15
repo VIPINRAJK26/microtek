@@ -16,7 +16,7 @@ const CardSlider = () => {
   ];
 
   const groupedProducts = {
-    "Newly Launched": products.slice(-4), // last 4 items
+    "Newly Launched": products.filter((p) => p.new_arrival).slice(0, 4),
     "Home UPS": products.filter((p) => p.category === "home_ups").slice(0, 4),
     "Inverter Batteries": products
       .filter((p) => p.category === "batteries")
@@ -62,13 +62,13 @@ const CardSlider = () => {
                   <Link to={`/single/${card.id}`} className="text-decoration-none">
                     <Card className="h-100 rounded-5 mt-3">
                       <Card.Img
-                        className="rounded-top-5"
+                        className="rounded-top-5 p-4"
                         variant="top"
                         src={card.image}
                         alt={card.title}
                       />
                       <Card.Body>
-                        <Card.Title>{card.title}</Card.Title>
+                        <Card.Title className="text-center fw-medium">{card.title}</Card.Title>
                       </Card.Body>
                     </Card>
                   </Link>

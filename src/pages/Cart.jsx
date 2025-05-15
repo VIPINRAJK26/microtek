@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -21,14 +21,7 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  // // ⚠️ Set this with auth token if needed
-  // const axiosInstance = axios.create({
-  //   baseURL: "http://localhost:8000/api", // your backend base
-  //   headers: {
-  //     Authorization: `Bearer ${localStorage.getItem("token")}`, // if you're using token auth
-  //   },
-  // });
-
+  console.log(cart, "cart");  
   const fetchCart = async () => {
     try {
       const res = await axiosInstance.get("/cart/");
@@ -68,12 +61,16 @@ const Cart = () => {
   };
 
   const clearCart = async () => {
-    const removeAll = cart.items.map((item) =>
-      axiosInstance.delete(`/cart-items/${item.id}/`)
-    );
-    await Promise.all(removeAll);
-    fetchCart();
+    try {
+      await axiosInstance.post("/cart/clear/");
+      fetchCart();
+    } catch (error) {
+      console.error("Error clearing cart:", error);
+      toast.error("Something went wrong");
+    }
   };
+
+
 
   useEffect(() => {
     fetchCart();

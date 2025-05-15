@@ -26,8 +26,33 @@
   height: 100%;
   width: 100%;
   object-fit: cover;
-
 }
+
+/* Move prev/next buttons to the far left and right */
+/* .carousel-control-prev,
+.carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  background: none;
+  padding: 0 1rem;
+  z-index: 10;
+} */
+
+/* .carousel-control-prev {
+  left: -30px; 
+}
+
+.carousel-control-next {
+  right: -30px; 
+} */
+
+/* Optional: adjust icon size */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 2rem 2rem;
+}
+
 
 @media (max-width: 768px) {
   .col-md-6 {
