@@ -37,19 +37,24 @@ const ProductDetails = ({
 
   // Check cart on page load
   const fetchCart = async () => {
+    console.log("Fetching cart...");
     setLoading(true);
     try {
-      let url = "/cart/";
+      let url = "cart/";
 
       if (token) {
         const res = await axiosInstance.get(url);
-        setCartItems(Array.isArray(res.data) ? res.data : []); // Ensure cartItems is an array
+        console.log("Response:", res);
+        setCartItems(Array.isArray(res.data.items) ? res.data.items : []);
+        console.log("Cart items:", res.data.items);
       } else {
         const sessionKey = sessionStorage.getItem("session_key");
         const res = await axiosInstance.get(url, {
           params: { session_key: sessionKey },
         });
-        setCartItems(Array.isArray(res.data) ? res.data : []); // Ensure cartItems is an array
+        console.log("Response:", res);
+        setCartItems(Array.isArray(res.data.items) ? res.data.items : []);
+        console.log("Cart items:", res.data.items);
       }
     } catch (error) {
       console.error("Error fetching cart:", error);
@@ -63,6 +68,7 @@ const ProductDetails = ({
   }, [token]); // Fetch cart when the token changes or when the page loads
 
   const handleAddToCart = async () => {
+    console.log("Adding product to cart...");
     setLoading(true);
 
     // Ensure cartItems is an array before calling .some()
@@ -71,36 +77,40 @@ const ProductDetails = ({
     }
 
     // Check if the product is already in the cart
-    const alreadyInCart = cartItems.some((item) => item.product.id === id);
+    const alreadyInCart = cartItems.some(
+      (item) => item.product && item.product.id === id
+    );
 
     if (alreadyInCart) {
+      console.log("Product is already in cart.");
       toast.info("Product is already in cart!");
       setLoading(false);
       return;
     }
 
     try {
+      console.log("Adding product to cart...");
       const token = localStorage.getItem("access_token");
 
       if (token) {
         // Add to authenticated user's cart
-        await axiosInstance.post("/cart_item/", {
+        await axiosInstance.post("cart_item/", {
           product_id: id,
           quantity: 1,
         });
       } else {
         // Add to anonymous cart (based on session)
-        await axiosInstance.post("/cart_item/", {
+        await axiosInstance.post("cart_item/", {
           product_id: id,
           quantity: 1,
           session_key: sessionStorage.getItem("session_key"), // use session key for anonymous user
         });
       }
 
+      console.log("Product added to cart.");
       toast.success("Added to cart!");
       navigate("/cart");
     } catch (error) {
-      toast.error(error.response?.data?.detail || "Failed to add to cart");
       console.error("Add to cart error:", error);
     } finally {
       setLoading(false);

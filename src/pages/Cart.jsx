@@ -17,15 +17,19 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 const Cart = () => {
-  const [cart, setCart] = useState(null);
+  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  console.log(cart, "cart");  
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
   const fetchCart = async () => {
     try {
-      const res = await axiosInstance.get("/cart/");
-      setCart(res.data);
+      const res = await axiosInstance.get("cart/");
+      console.log("Cart data:", res.data);
+      setCart(res.data.cart);
     } catch (error) {
       console.error("Error fetching cart:", error);
     } finally {
@@ -72,9 +76,7 @@ const Cart = () => {
 
 
 
-  useEffect(() => {
-    fetchCart();
-  }, []);
+  
 
   if (loading) return <p className="text-center py-5">Loading cart...</p>;
 

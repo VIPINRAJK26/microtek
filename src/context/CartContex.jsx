@@ -1,6 +1,6 @@
 // src/contexts/CartContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import * as api from '../api';
+import axiosInstance from '../api/axios';
 
 const CartContext = createContext();
 
@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setIsLoading(true);
-      const data = await api.getCart();
+      const data = await axiosInstance.getCart();
       setCartItems(data.items);
     } catch (error) {
       console.error('Error fetching cart:', error);
@@ -24,9 +24,9 @@ export const CartProvider = ({ children }) => {
     fetchCart();
   }, []);
 
-  const addToCart = async (productId, quantity = 1) => {
+  const addToCart = async (id, quantity = 1) => {
     try {
-      await api.addToCart(productId, quantity);
+      await axiosInstance.addToCart(id, quantity);
       await fetchCart();
     } catch (error) {
       console.error('Error adding to cart:', error);
@@ -40,7 +40,7 @@ export const CartProvider = ({ children }) => {
         await removeFromCart(itemId);
         return;
       }
-      await api.updateCartItem(itemId, quantity);
+      await axiosInstance.updateCartItem(itemId, quantity);
       await fetchCart();
     } catch (error) {
       console.error('Error updating quantity:', error);
@@ -50,7 +50,7 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = async (itemId) => {
     try {
-      await api.removeFromCart(itemId);
+      await axiosInstance.removeFromCart(itemId);
       await fetchCart();
     } catch (error) {
       console.error('Error removing from cart:', error);
