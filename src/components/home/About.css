@@ -26,7 +26,7 @@
 
 .about-right p {
   position: absolute;
-  top: 80%;
+  top: 78%;
   opacity: 0;
   font-size: 1.2rem;
   transition: opacity 0.5s ease;

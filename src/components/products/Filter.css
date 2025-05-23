@@ -1,11 +1,33 @@
-.filter-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 250px;
-  background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  border-radius: 8px;
-  z-index: 1000;
+.filter-box {
+  border: 1px solid #dee2e6;
+  max-width: 300px;
+}
+
+.filter-heading {
+  background-color: #0d6efd;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.accordion-button {
+  background-color: #f8f9fa;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #e9ecef;
+}
+
+.accordion-body {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.custom-checkbox .form-check-input {
+  margin-right: 0.5rem;
+}
+
+.custom-checkbox .form-check-label {
+  cursor: pointer;
 }

@@ -21,7 +21,7 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchCart();
+    fetchCart(); 
   }, []);
 
   const addToCart = async (id, quantity = 1) => {

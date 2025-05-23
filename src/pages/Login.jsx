@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axiosInstance from "../api/axios";
+import { mergeCart } from "../utils/mergeCart";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -31,23 +32,29 @@ function Login() {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
+    // if (token) {
+    //   localStorage.removeItem("session_key");
+    // }
+    
 
     if (Object.keys(validationErrors).length === 0) {
       setLoading(true);
       try {
         const response = await axiosInstance.post("/login/", formData);
 
-        // Store tokens and user data (adjust based on your backend response)
         localStorage.setItem("access_token", response.data.access);
         localStorage.setItem("refresh_token", response.data.refresh);
         localStorage.setItem("user", JSON.stringify(response.data.user));
+        console.log("Login response:", response.data);
 
-        // Set token in axios headers for future requests
         axiosInstance.defaults.headers[
           "Authorization"
         ] = `Bearer ${response.data.access}`;
 
-        // Redirect to home page
+        // 🔁 Merge anonymous cart with user cart
+        await mergeCart();
+
+        // ✅ Redirect to home
         navigate("/");
       } catch (error) {
         if (error.response) {

@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [showSearchInput, setShowSearchInput] = useState(false);
@@ -10,6 +11,8 @@ function Navbar() {
 
   const dropdownRef = useRef(null);
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -33,7 +36,7 @@ function Navbar() {
     ],
     "Solar Power": [
       { name: "Solar Ups", img: "/4. SOLAR UPS.png" },
-      { name: "Solar Panels", img: "/5. SOLAR PANEL.png" },
+      { name: "Solar Panel", img: "/5. SOLAR PANEL.png" },
       { name: "Lithium Solar Inverter", img: "/5. LITHIUM SOLAR INVERTER.png" },
       { name: "Mppts", img: "/6. MPPT.png" },
     ],
@@ -45,6 +48,7 @@ function Navbar() {
     "Ev Charger": [],
     "Auto Stabilizer": [],
     "Li-Ion Batteries": [],
+    "Li-Ion Battery Inverter": [],
   };
 
   const categorySlugMap = {
@@ -54,6 +58,7 @@ function Navbar() {
     "Ev Charger": "ev_charger",
     "Auto Stabilizer": "auto_stabilizer",
     "Li-Ion Batteries": "li_ion_batteries",
+    "Li-Ion Battery Inverter": "li_ion_battery_inverter",
   };
 
   const subcategorySlugMap = {
@@ -62,7 +67,7 @@ function Navbar() {
     "HKVA UPS": "hkva_ups",
     "Li-ion Battery Inverter": "li_ion_battery_inverter",
     "Solar Ups": "solar_ups",
-    "Solar Panels": "solar_panels",
+    "Solar Panel": "solar_panel",
     "Lithium Solar Inverter": "lithium_solar_inverter",
     Mppts: "mppts",
     "Tubular Batteries": "tubular_batteries",
@@ -129,14 +134,20 @@ function Navbar() {
                             className={`category-item ${
                               selectedCategory === category ? "active" : ""
                             }`}
-                            onMouseEnter={() => setSelectedCategory(category)}
+                            onMouseEnter={() => {
+                              if (category !== "Li-Ion Battery Inverter") {
+                                setSelectedCategory(category);
+                              }
+                            }}
+                            onClick={() => {
+                              if (category) {
+                                const encodedCategory =
+                                  encodeURIComponent(category);
+                                navigate(`/preview/${encodedCategory}`);
+                              }
+                            }}
                           >
-                            {/* <Link
-                              to={`/preview/${categorySlugMap[category]}`}
-                              className="text-decoration-none text-black"
-                            > */}
-                              {category}
-                            {/* </Link> */}
+                            {category}
                           </li>
                         ))}
                       </ul>

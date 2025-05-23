@@ -10,6 +10,7 @@ import BuyNow from "./pages/BuyNow";
 import Cart from "./pages/Cart";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import { ToastContainer } from "react-bootstrap";
 
 const Landing = lazy(() => import("./pages/HomePage"));
 const Header = lazy(() => import("./components/header/Navbar"));
@@ -42,7 +43,10 @@ function App() {
               />
               <Route path="/single/:id" element={<Single />} />
               <Route path="/store" element={<Store />} />
-              <Route path="/preview/:category/:subcategory" element={<Preview />} />
+              <Route
+                path="/preview/:category/:subcategory"
+                element={<Preview />}
+              />
               <Route
                 path="/terms-and-conditions"
                 element={<TermsAndConditions />}
@@ -54,9 +58,10 @@ function App() {
               <Route path="/buy/:id" element={<BuyNow />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/bat-inv" element={<BatteryInverter />} />
+              <Route path="/preview/:category" element={<BatteryInverter />} />
             </Routes>
           </Suspense>
+          <ToastContainer position="top-right" />
         </main>
 
         <Suspense>

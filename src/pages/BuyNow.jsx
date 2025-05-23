@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Container,
   Row,
@@ -11,12 +10,13 @@ import {
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useProducts from "../hooks/useProducts";
+import axiosInstance from "../api/axios";
 
 const BuyNowPage = () => {
   const { id } = useParams();
   const { products } = useProducts();
   const [product, setProduct] = useState(null);
-
+  const token = localStorage.getItem("access_token");
   const [formData, setFormData] = useState({
     customer_name: "",
     customer_email: "",
@@ -27,6 +27,8 @@ const BuyNowPage = () => {
     zip_code: "",
   });
 
+  console.log(token, "token");
+  console.log("print")
 
   useEffect(() => {
     const selectedProduct = products?.find(
@@ -37,44 +39,103 @@ const BuyNowPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  if (!token) {
+    window.location.href = "/login";
+    return null;
+  }
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
-    const orderData = {
-      ...formData,
-      items: [
-        {
-          product_id: product.id,
-          quantity: 1,
-        },
-      ],
-    };
+    if (!product) {
+      alert("Product not found");
+      return;
+    }
+
+    if (!window.Razorpay) {
+      alert("Razorpay SDK not loaded");
+      return;
+    }
+
+    const amountInPaise = product.price * 100;
 
     try {
-      const response = await fetch("/api/buy_now/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
+      // Step 1: Create Razorpay Order from backend
+      const razorpayRes = await axiosInstance.post("/create-razorpay-order/", {
+        amount: amountInPaise,
       });
 
-      if (response.ok) {
-        alert("Order placed successfully!");
-      } else {
-        alert("Error placing order.");
-      }
+      const { id: razorpayOrderId, amount, currency } = razorpayRes.data;
+
+      // Step 2: Configure Razorpay Checkout options
+      const options = {
+        key: "rzp_live_Z6jI1bIiHzukH6",
+        amount: amount,
+        currency: currency,
+        name: "Your Company",
+        description: product.title,
+        image: "/logo.png",
+        order_id: razorpayOrderId,
+        handler: async function (response) {
+          // Ideally verify payment here with backend
+          const orderData = {
+            ...formData,
+            total_amount: product.price,
+            items: [
+              {
+                product_id: product.id,
+                quantity: 1,
+              },
+            ],
+            payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            signature: response.razorpay_signature,
+          };
+
+          try {
+            const placeOrderRes = await axiosInstance.post(
+              "/buy_now/place-order/",
+              orderData
+            );
+            alert("Payment & Order Successful!");
+          } catch (error) {
+            console.error("Order save error:", error.response || error.message);
+            alert("Payment success, but order save failed!");
+          }
+        },
+        prefill: {
+          name: formData.customer_name,
+          email: formData.customer_email,
+          contact: formData.customer_phone,
+        },
+        notes: {
+          address: formData.shipping_address,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+        modal: {
+          ondismiss: function () {
+            alert("Payment cancelled");
+          },
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
     } catch (error) {
-      console.error("Error placing order:", error);
-      alert("Error placing order.");
+      console.error(
+        "Error initiating Razorpay:",
+        error.response || error.message
+      );
+      alert("Failed to initiate payment.");
     }
   };
-
-
+  
+  
 
   // If the product hasn't loaded yet, render a loading message or spinner
   if (!product) {
@@ -218,7 +279,12 @@ const BuyNowPage = () => {
                   <span>Total</span>
                   <span>{product.price}</span>
                 </div>
-                <Button type="submit" variant="success" className="w-100">
+                <Button
+                  type="submit"
+                  variant="success"
+                  onClick={handlePlaceOrder}
+                  className="w-100"
+                >
                   Place Order
                 </Button>
               </Card.Body>

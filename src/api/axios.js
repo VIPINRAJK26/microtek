@@ -5,10 +5,10 @@ const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
+  withCredentials: false, // Set to false if you're using JWT and no sessions
 });
 
-// Request interceptor
+// Add token
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");
   if (token) {
@@ -17,17 +17,16 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-// Response interceptor
+// Handle 401s
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const { config, response } = error;
 
-    const safeEndpoints = ["/cart_item/", "/cart/"];
-    const isSafe = safeEndpoints.some((url) => config.url?.startsWith(url));
+    const safeEndpoints = ["/cart_item", "/cart"];
+    const isSafe = safeEndpoints.some((url) => config.url?.includes(url));
 
     if (response?.status === 401 && !isSafe) {
-      // Redirect only if it's a protected endpoint
       localStorage.removeItem("access_token");
       window.location.href = "/login";
     }

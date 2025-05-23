@@ -45,11 +45,11 @@ function About() {
           data-aos="zoom-in"
         >
           <img
-            src="https://avaada.com/wp-content/uploads/types-ofsolar-panels-min-1-scaled-1.jpg"
+            src="/about warrior-1200  630.jpg"
             alt=""
             className="img-fluid rounded-4"
           />
-          <p className=" text-white text-center">
+          <p className="text-white text-center">
             Powering a Sustainable Future. With pioneering inverters, UPS
             systems, batteries, solar solutions, and water purifiers, Warrior
             leads in innovation and reliability. Trust Warrior for eco-friendly

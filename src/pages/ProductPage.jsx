@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ProductFilter from "../components/products/ProductFilter";
 import ProductCard from "../components/products/ProductCard";
 import { Row, Col } from "react-bootstrap";
-import { useMemo } from "react";
 import "./ProductPage.css";
 import { useParams } from "react-router-dom";
 import useProducts from "../hooks/useProducts";
@@ -11,7 +10,11 @@ const Products = () => {
   const { products } = useProducts();
   const { category, variant, } = useParams();
   const [baseProducts, setBaseProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState(baseProducts);
+  console.log(products,"products")
+  console.log(category, variant, "cat,var")
+  console.log(baseProducts, "base filter")
+  console.log(filteredProducts, "filtered filter");
 
 
   useEffect(() => {
@@ -29,8 +32,9 @@ const Products = () => {
     }
   }, [category, variant, products]);
 
-  const handleDataChange = (filteredData) => {
-    setFilteredProducts(filteredData);
+  const handleDataChange = (filteredList) => {
+    console.log(filteredList, "filtered list");
+    setFilteredProducts(filteredList);
   };
 
   return (
@@ -40,6 +44,8 @@ const Products = () => {
           <ProductFilter
             onDataChange={handleDataChange}
             initialProducts={baseProducts}
+            selectedVariant={variant}
+            selectedCategory={category}
           />
         </Col>
         <Col md={9}>
@@ -67,6 +73,5 @@ const Products = () => {
     </div>
   );
 };
-
 
 export default Products;

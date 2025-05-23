@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axios";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
+import { getOrCreateSessionKey } from "../../utils/session";
 
 const ProductDetails = ({
   id,
@@ -18,8 +19,10 @@ const ProductDetails = ({
 }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [cartItems, setCartItems] = useState([]); // Correctly defined as an array
-  const token = localStorage.getItem("access_token"); // Get token from localStorage
+  const [cartItems, setCartItems] = useState([]);
+  const sessionKey = getOrCreateSessionKey();
+
+  const token = localStorage.getItem("access_token");
 
   const featureList = Array.isArray(features)
     ? features
@@ -27,7 +30,6 @@ const ProductDetails = ({
     ? features.split(",").map((f) => f.trim())
     : [];
 
-  // Check if the token is expired or invalid (for actions like adding to cart)
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
@@ -35,87 +37,82 @@ const ProductDetails = ({
     }
   }, [token]);
 
-  // Check cart on page load
+  console.log("Session key used in ProductDetails.jsx:", sessionKey);
+  console.log(token, "token in ProductDetails.jsx");
   const fetchCart = async () => {
-    console.log("Fetching cart...");
     setLoading(true);
     try {
-      let url = "cart/";
+      const config = token
+        ? { headers: { Authorization: `Bearer ${token}` } }
+        : { params: { session_key: sessionKey } };
 
-      if (token) {
-        const res = await axiosInstance.get(url);
-        console.log("Response:", res);
-        setCartItems(Array.isArray(res.data.items) ? res.data.items : []);
-        console.log("Cart items:", res.data.items);
-      } else {
-        const sessionKey = sessionStorage.getItem("session_key");
-        const res = await axiosInstance.get(url, {
-          params: { session_key: sessionKey },
-        });
-        console.log("Response:", res);
-        setCartItems(Array.isArray(res.data.items) ? res.data.items : []);
-        console.log("Cart items:", res.data.items);
-      }
+      const res = await axiosInstance.get("/cart/", config);
+      setCartItems(
+        Array.isArray(res.data.cart_items) ? res.data.cart_items : []
+      );
     } catch (error) {
       console.error("Error fetching cart:", error);
     } finally {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchCart();
-  }, [token]); // Fetch cart when the token changes or when the page loads
+  }, [token]); // refetch on login/logout
 
   const handleAddToCart = async () => {
-    console.log("Adding product to cart...");
     setLoading(true);
 
-    // Ensure cartItems is an array before calling .some()
-    if (!Array.isArray(cartItems)) {
-      setCartItems([]);
-    }
+    const config = token
+      ? { headers: { Authorization: `Bearer ${token}` } }
+      : {};
 
-    // Check if the product is already in the cart
+    console.log("Auth Token:", token);
+    console.log("Axios Config:", config);
+
     const alreadyInCart = cartItems.some(
       (item) => item.product && item.product.id === id
     );
 
+    console.log("Before toast check", alreadyInCart);
     if (alreadyInCart) {
-      console.log("Product is already in cart.");
-      toast.info("Product is already in cart!");
+      toast.info("Product is already in cart!", { autoClose: 3000 });
       setLoading(false);
       return;
     }
 
+    console.log("Not in cart, continue");
+
     try {
-      console.log("Adding product to cart...");
-      const token = localStorage.getItem("access_token");
+      const payload = {
+        product_id: id,
+        quantity: 1,
+        ...(!token && { session_key: sessionKey }),
+      };
 
-      if (token) {
-        // Add to authenticated user's cart
-        await axiosInstance.post("cart_item/", {
-          product_id: id,
-          quantity: 1,
-        });
-      } else {
-        // Add to anonymous cart (based on session)
-        await axiosInstance.post("cart_item/", {
-          product_id: id,
-          quantity: 1,
-          session_key: sessionStorage.getItem("session_key"), // use session key for anonymous user
-        });
-      }
+      console.log("Payload to be sent:", payload);
 
-      console.log("Product added to cart.");
+      await axiosInstance.post("/cart_item/", payload, config);
+
       toast.success("Added to cart!");
-      navigate("/cart");
+      fetchCart();
+      navigate("/cart", { state: { message: "Product added to cart!" } });
     } catch (error) {
       console.error("Add to cart error:", error);
+      if (error.response) {
+        console.error("Status:", error.response.status);
+        console.error("Data:", error.response.data);
+      }
+      toast.error(
+        error.response?.data?.message || "Failed to add product to cart."
+      );
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <Card className="p-0 p-md-3 border-0 shadow-none">
@@ -183,13 +180,15 @@ const ProductDetails = ({
 
         {/* Add to Cart Button */}
         <button
-          variant="primary"
           className="btn btn-secondary rounded-3"
           onClick={handleAddToCart}
           disabled={loading}
         >
           {loading ? "Adding..." : "Add to Cart"}
         </button>
+        <a href="" target="_blank">
+          <button className="btn btn-success rounded-3">Enquire Now</button>
+        </a>
       </div>
     </Card>
   );

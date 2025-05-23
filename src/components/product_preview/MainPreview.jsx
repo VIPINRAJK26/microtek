@@ -6,6 +6,7 @@ const MainPreview = () => {
   const { category } = useParams();
   const categoryToShow = category;
   console.log(categoryToShow, "main category");
+  console.log(category,"category from url")
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -16,7 +17,7 @@ const MainPreview = () => {
 
   console.log(selectedPreview,"main selectedPreview");
   return (
-    <div className="header-section mb-5 ">
+    <div className="header-section  ">
       {selectedPreview ? (
         <img
           src={selectedPreview.image}
@@ -30,10 +31,10 @@ const MainPreview = () => {
         />
       ) : (
         <img
-          src="https://t4.ftcdn.net/jpg/03/24/96/81/360_F_324968111_sArrasbZoPu3xeKMedtQAWGk2ZqDeivM.jpg"
+          src="/Main_preview.jpeg"
           alt="no image"
           className="img-fluid"
-          style={{ width: "100%", height: "100vh" }}
+          style={{ width: "100%", height: "50vh" }}
         />
       )}
     </div>

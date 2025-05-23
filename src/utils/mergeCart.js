@@ -1,17 +1,14 @@
 import axiosInstance from "../api/axios";
-import { getAnonCart, clearAnonCart } from "./cart";
 
 export const mergeCart = async () => {
-  const anonCart = getAnonCart();
-
-  if (anonCart.length === 0) return;
+  const sessionKey = localStorage.getItem("session_key");
+  if (!sessionKey) return;
 
   try {
-    await axiosInstance.post("cart/merge/", {
-      items: anonCart,
-    });
-    clearAnonCart();
+    await axiosInstance.post("/cart/merge/", { session_key: sessionKey });
+    localStorage.removeItem("session_key");
+    console.log("Cart merged and session_key removed");
   } catch (error) {
-    console.error("Cart merge failed:", error);
+    console.error("Error merging cart:", error);
   }
 };

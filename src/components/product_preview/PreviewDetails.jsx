@@ -7,9 +7,18 @@ const PreviewDetails = () => {
   const { previewDetails, loading, error } = usePreviewDetails();
   const { category, subcategory } = useParams();
 
-  console.log(previewDetails, "PreviewDetails");
+  const groupedByVariant = previewDetails.reduce((acc, product) => {
+    const key = product.variant_name;
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(product);
+    return acc;
+  }, {});
+
   console.log(subcategory, "subcategory from URL");
   console.log(category, "category from URL");
+  console.log(groupedByVariant, "groupedByVariant");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -21,8 +30,8 @@ const PreviewDetails = () => {
       (!subcategory || item.subcategory === subcategory)
   );
 
-
   console.log(selectedPreview, "selectedPreview");
+  console.log(previewDetails, "previewDetails");
 
   return (
     <div className="preview container mx-0 px-0 mt-5">
@@ -31,12 +40,11 @@ const PreviewDetails = () => {
           selectedPreview.map((product, index) => (
             <div className="col-md-8 col-lg-6 col-12 p-1 mb-4" key={index}>
               <div
-                className="preview-main-card rounded-0 card bg-info"
+                className="preview-main-card card bg-info rounded-0 d-flex"
                 style={{
                   backgroundImage: `url(${product.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
-                  height: "550px",
                 }}
               >
                 <div className="preview-body  d-flex flex-column ps-4 justify-content-between card-body mt-5">
@@ -62,8 +70,10 @@ const PreviewDetails = () => {
                   </div>
 
                   <div>
-                    <div className="text-start pt-5">
-                      <Link to={`/products/${category}/${product.slug}`}>
+                    <div className="text-start pt-5 d-flex ">
+                      <Link
+                        to={`/products/${category}/${product.variant_name}`}
+                      >
                         <button className="btn btn-danger rounded-5 me-3">
                           View All Variants
                         </button>

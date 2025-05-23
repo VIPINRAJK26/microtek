@@ -1,8 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 
-const ProductCard = ({id, image, title, sku, price, old_price }) => {
+const ProductCard = ({id, image, title, price, old_price }) => {
   return (
     <Card className="mb-4">
       <Link to={`/single/${id}`}>
@@ -10,7 +9,7 @@ const ProductCard = ({id, image, title, sku, price, old_price }) => {
       </Link>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <Card.Text>SKU: {sku}</Card.Text>
+        {/* <Card.Text>SKU: {sku}</Card.Text> */}
         <Card.Text>
           <span className="text-primary fw-bold">{price}</span>
           {old_price && (

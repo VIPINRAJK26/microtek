@@ -1,134 +1,160 @@
-import React, { useEffect, useState } from "react";
-import { Accordion, Form } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Accordion,Form } from "react-bootstrap";
+import axiosInstance from "../../api/axios";
 
-const ProductFilter = ({ onDataChange, initialProducts = [] }) => {
-  const [filters, setFilters] = useState({
-    variant: [],
-    sku: [],
-    price: 0,
-    old_price: 0,
-    weight: [],
-    voltage: [],
-    dimensions: [],
-    max_price: 25000,
-  });
+const ProductFilter = ({ initialProducts = [], onDataChange, selectedVariant,selectedCategory }) => {
+  const [options, setOptions] = useState({});
+  const [allowedFilters, setAllowedFilters] = useState([]);
+  const [filters, setFilters] = useState({});
+  const [subcategory, setSubcategory] = useState("");
 
-  const [options, setOptions] = useState({
-    sku: [],
-    voltage: [],
-    weight: [],
-    dimensions: [],
-  });
-
-  
+  console.log(initialProducts, "products initial");
+  console.log(allowedFilters, 'allowed filters');
+  console.log(options, "options");
+  console.log(selectedVariant, "selected variant");
+  console.log(selectedCategory, "selected category");
 
 
-  console.log(initialProducts, "initialProducts");
-  const getUnit = (key) => {
-    switch (key) {
-      case "voltage": return "V";
-      case "weight": return "kg";
-      case "price":
-      case "old_price":
-      case "max_price": return "₹";
-      case "dimensions": return "L x W x H";
-      default: return "";
-    }
-  };
-
-  // Build filter options from initial products
+  // 🟡 Extract subcategory from first product
   useEffect(() => {
-    if (initialProducts.length > 0) {
-      const getUnique = (arr, key) => [
-        ...new Set(arr.flatMap(item => 
-          Array.isArray(item[key]) ? item[key] : [item[key]]
-        ).filter(Boolean))
-      ];
-      
-      setOptions({
-        sku: getUnique(initialProducts, "sku"),
-        voltage: getUnique(initialProducts, "voltage"),
-        weight: getUnique(initialProducts, "weight"),
-        dimensions: getUnique(initialProducts, "dimensions"),
-      });
+    if (initialProducts.length > 0 && initialProducts[0].subcategory) {
+      setSubcategory(initialProducts[0].subcategory.toLowerCase());
     }
   }, [initialProducts]);
 
-  // Apply filters locally when they change
+  // 🟢 Fetch allowed filters based on subcategory
   useEffect(() => {
-    if (!initialProducts.length) return;
+    const fetchFilters = async () => {
+      if (!subcategory) return;
 
-    const filtered = initialProducts.filter(product => {
-      // Check price filter
-      if (product.price > filters.max_price) return false;
-      
-      // Check other filters
-      for (const [key, filterValues] of Object.entries(filters)) {
-        if (key === 'max_price') continue;
-        
-        if (filterValues.length > 0) {
-          const productValue = product[key];
-          if (Array.isArray(productValue)) {
-            if (!productValue.some(v => filterValues.includes(v))) return false;
-          } else {
-            if (!filterValues.includes(productValue)) return false;
-          }
-        }
+      try {
+        const response = await axiosInstance.get(`filters/${subcategory}/`);
+        setAllowedFilters(response.data.filters || []);
+      } catch (error) {
+        console.error("Failed to fetch filters:", error);
       }
-      
-      return true;
+    };
+
+    fetchFilters();
+  }, [subcategory]);
+
+  // 🟠 Build filter options based on allowed filters
+  // 🔵 Extract available options from products based on allowed filters
+  useEffect(() => {
+    if (!initialProducts.length || !allowedFilters.length) return;
+
+    const newOptions = {};
+
+    allowedFilters.forEach((key) => {
+      let filteredProducts = initialProducts;
+
+      // Filter by category for 'variant' specifically
+      if (key === "variant" && selectedCategory) {
+        filteredProducts = initialProducts.filter(
+          (product) => product.category === selectedCategory
+        );
+        console.log(
+          `🔍 Filtering products for category "${selectedCategory}":`,
+          filteredProducts
+        );
+      }
+
+      // Collect unique values
+      const uniqueValues = [
+        ...new Set(
+          filteredProducts
+            .map((product) => product[key])
+            .filter(Boolean)
+            .map((val) => val.toString())
+        ),
+      ];
+
+      console.log(`✅ Filter key: ${key}, Values:`, uniqueValues);
+
+      if (uniqueValues.length) {
+        newOptions[key] = uniqueValues;
+      }
     });
 
-    onDataChange(filtered);
-  }, [filters, initialProducts]);
+    console.log("🧪 Final options:", newOptions);
+    setOptions(newOptions);
+  }, [initialProducts, allowedFilters, selectedCategory]);
+  
+  
+  
+  
+  
 
-  const handleCheckboxChange = (key, value) => {
-    setFilters(prev => {
-      const current = new Set(prev[key]);
-      current.has(value) ? current.delete(value) : current.add(value);
-      return { ...prev, [key]: [...current] };
+  // 🟣 Handle filter change
+  const handleFilterChange = (event, key) => {
+    const value = event.target.value.toString();
+    const checked = event.target.checked;
+
+    setFilters((prev) => {
+      const prevValues = prev[key] || [];
+      const updatedValues = checked
+        ? [...prevValues, value]
+        : prevValues.filter((v) => v !== value);
+
+      const updatedFilters = {
+        ...prev,
+        [key]: updatedValues,
+      };
+
+      // 🔵 Apply filters to products
+      const filtered = initialProducts.filter((product) => {
+        return Object.entries(updatedFilters).every(
+          ([filterKey, filterValues]) => {
+            const productValue = product[filterKey];
+            if (Array.isArray(productValue)) {
+              return productValue.some((val) =>
+                filterValues.includes(val.toString())
+              );
+            }
+            return filterValues.includes(productValue?.toString());
+          }
+        );
+      });
+
+      onDataChange(filtered); // Send filtered list back to parent
+
+      return updatedFilters;
     });
   };
-
-  const handlePriceChange = (e) => {
-    const price = parseInt(e.target.value, 10);
-    setFilters(prev => ({ ...prev, max_price: price }));
-  };
+  
 
   return (
-    <div className="filter-container">
-      <h5>Filters</h5>
-      <Accordion alwaysOpen={true} defaultActiveKey={"0"}>
+    <div className="filter-box shadow-sm p-3 rounded bg-white">
+      <h5 className="filter-heading text-black px-3 py-2 rounded-top">
+        🔍 Filter By
+      </h5>
+
+      <Accordion defaultActiveKey="0" alwaysOpen>
         {Object.entries(options).map(([key, values], idx) => (
-          <Accordion.Item key={key} eventKey={String(idx)}>
-            <Accordion.Header>
-              {key.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())}
+          <Accordion.Item
+            eventKey={idx.toString()}
+            key={key}
+            className="border-0"
+          >
+            <Accordion.Header className="text-capitalize">
+              {key.replace(/_/g, " ")}
             </Accordion.Header>
             <Accordion.Body>
-              {values.map((item, i) => (
+              {values.map((val) => (
                 <Form.Check
-                  key={i}
+                  key={val}
                   type="checkbox"
-                  label={`${item} ${getUnit(key)}`}
-                  onChange={() => handleCheckboxChange(key, item)}
+                  id={`${key}-${val}`}
+                  label={val}
+                  value={val}
+                  className="custom-checkbox mb-2"
+                  onChange={(e) => handleFilterChange(e, key)}
+                  checked={filters[key]?.includes(val.toString()) || false}
                 />
               ))}
             </Accordion.Body>
           </Accordion.Item>
         ))}
-
-        <Accordion.Item eventKey="price">
-          <Accordion.Header>Max Price</Accordion.Header>
-          <Accordion.Body>
-            <Form.Label>Up to ₹{filters.max_price}</Form.Label>
-            <Form.Range
-              min={1000}
-              max={25000}
-              value={filters.max_price}
-              onChange={handlePriceChange}
-            />
-          </Accordion.Body>
-        </Accordion.Item>
       </Accordion>
     </div>
   );
