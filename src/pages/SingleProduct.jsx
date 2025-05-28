@@ -78,7 +78,11 @@ const SingleProduct = () => {
                 <p>{additional_info}</p>
               </Tab.Pane>
               <Tab.Pane eventKey="technicalSpecs">
-                <p>{technical_spec}</p>
+                <ul>
+                  {technical_spec?.split(",").map((spec, index) => (
+                    <li key={index}>{spec.trim()}</li>
+                  ))}
+                </ul>
               </Tab.Pane>
             </Tab.Content>
           </Tab.Container>

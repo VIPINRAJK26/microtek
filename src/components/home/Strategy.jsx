@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import {useEffect} from "react";
 import { FaCogs, FaTools, FaIndustry, FaCheckCircle } from "react-icons/fa"; 
 import "./Strategy.css"
 import AOS from "aos";

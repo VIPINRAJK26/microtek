@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import ReturnRefundPolicy from "./pages/Refund";
@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { ToastContainer } from "react-bootstrap";
 import { CartProvider } from "./context/CartContex";
+import WhatsAppIcon from "./components/whatsapp/WhatsApp";
 
 const Landing = lazy(() => import("./pages/HomePage"));
 const Header = lazy(() => import("./components/header/Navbar"));
@@ -69,6 +70,7 @@ function App() {
                 />
               </Routes>
             </Suspense>
+            <WhatsAppIcon />
           </main>
 
           <Suspense>

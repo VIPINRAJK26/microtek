@@ -7,6 +7,9 @@ const ProductFilter = ({ initialProducts = [], onDataChange, selectedVariant,sel
   const [allowedFilters, setAllowedFilters] = useState([]);
   const [filters, setFilters] = useState({});
   const [subcategory, setSubcategory] = useState("");
+  const [priceRange, setPriceRange] = useState([0, 0]);
+  const [selectedPrice, setSelectedPrice] = useState([0, 0]);
+
 
   console.log(initialProducts, "products initial");
   console.log(allowedFilters, 'allowed filters');
@@ -15,7 +18,16 @@ const ProductFilter = ({ initialProducts = [], onDataChange, selectedVariant,sel
   console.log(selectedCategory, "selected category");
 
 
-  // 🟡 Extract subcategory from first product
+  const UNITS = {
+    va_rating: "VA",
+    voltage: "V",
+    wattage: "W",
+    price: "₹",
+    Ah_rating: "Ah",
+    panel_capacity: "W",
+    warranty: "Years",
+  };
+
   useEffect(() => {
     if (initialProducts.length > 0 && initialProducts[0].subcategory) {
       setSubcategory(initialProducts[0].subcategory.toLowerCase());
@@ -59,6 +71,8 @@ const ProductFilter = ({ initialProducts = [], onDataChange, selectedVariant,sel
         );
       }
 
+      
+
       // Collect unique values
       const uniqueValues = [
         ...new Set(
@@ -101,7 +115,6 @@ const ProductFilter = ({ initialProducts = [], onDataChange, selectedVariant,sel
         [key]: updatedValues,
       };
 
-      // 🔵 Apply filters to products
       const filtered = initialProducts.filter((product) => {
         return Object.entries(updatedFilters).every(
           ([filterKey, filterValues]) => {
@@ -145,7 +158,7 @@ const ProductFilter = ({ initialProducts = [], onDataChange, selectedVariant,sel
                   key={val}
                   type="checkbox"
                   id={`${key}-${val}`}
-                  label={val}
+                  label={UNITS[key] ? `${val} ${UNITS[key]}` : val}
                   value={val}
                   className="custom-checkbox mb-2"
                   onChange={(e) => handleFilterChange(e, key)}

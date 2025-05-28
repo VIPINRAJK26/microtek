@@ -46,9 +46,12 @@ function Navbar() {
       { name: "Online Inverter/Ups", img: "/1. ONLINE UPS.png" },
       { name: "Offline Inverter/Ups", img: "/2. OFF LINE UPS.png" },
       { name: "HKVA UPS", img: "/3. HKVA UPS.png" },
-      { name: "Li-ion Battery Inverter", img: "/3. HKVA UPS.png" },
     ],
-    "Lithium Inverter/Ups": [],
+    "Lithium Inverter/Ups": [
+      { name: "Online Inverter/Ups", img: "/Lion 1.png" },
+      { name: "Offline Inverter/Ups", img: "/Lion 2.png" },
+      { name: "HKVA UPS", img: "/lion hkva.png" },
+    ],
 
     "Solar Power": [
       { name: "Solar Ups", img: "/4. SOLAR UPS.png" },
@@ -81,7 +84,7 @@ function Navbar() {
     "Online Inverter/Ups": "online_inverter_and_ups",
     "Offline Inverter/Ups": "offline_inverter_and_ups",
     "HKVA UPS": "hkva_ups",
-    "Li-ion Battery Inverter": "li_ion_battery_inverter",
+    // "Li-ion Battery Inverter": "li_ion_battery_inverter",
     "Solar Ups": "solar_ups",
     "Solar Panel": "solar_panel",
     "Lithium Solar Inverter": "lithium_solar_inverter",
@@ -151,12 +154,12 @@ function Navbar() {
                               selectedCategory === category ? "active" : ""
                             }`}
                             onMouseEnter={() => {
-                              if (category !== "Lithium Inverter/Ups") {
+                              if (category !== "Lithium Inverter/Up") {
                                 setSelectedCategory(category);
                               }
                             }}
                             onClick={() => {
-                              if (category === "Lithium Inverter/Ups") {
+                              if (category === "Lithium Inverter/Up") {
                                 const encodedCategory =
                                   encodeURIComponent(category);
                                 navigate(`/preview/${encodedCategory}`);

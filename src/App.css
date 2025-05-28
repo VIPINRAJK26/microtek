@@ -7,7 +7,6 @@
     
 }
 
-
 .product-page {
   min-height: 100vh;
 }
@@ -58,12 +57,21 @@
   }
 }
 
-
+.whatsapp-icon {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 999;
+  background-color: green;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
 ::-webkit-scrollbar{
   display: none;
 }
-
 
 .Toastify__toast-container {
   z-index: 99999 !important;

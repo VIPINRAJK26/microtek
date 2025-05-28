@@ -81,8 +81,8 @@ const LiBatInverter = () => {
                     </button>
                   </div>
                 </div>
-                <div className="ps-3 border-top pt-3 highlights">
-                  <span className="badge bg-primary">Highlights</span>
+                <div className=" d-flex gap-2 ps-3 py-2 border-top  highlights">
+                  <p className="badge bg-primary  my-auto ">Highlights</p>
                   <p className="mb-1 small mt-2">
                     <strong>Technology:</strong> Pure
                     Sinewave&nbsp;&nbsp;|&nbsp;&nbsp;

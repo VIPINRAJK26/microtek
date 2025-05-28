@@ -159,7 +159,7 @@ const ProductDetails = ({
           )}
           {voltage && (
             <div className="flex-fill border-end p-3">
-              <strong>Input Voltage:</strong>
+              <strong>Input/Output Voltage:</strong>
               <div>{voltage} v</div>
             </div>
           )}
@@ -198,7 +198,7 @@ const ProductDetails = ({
           {loading ? "Adding..." : "Add to Cart"}
         </button>
         <a
-          href="https://wa.me/919847341800" // Replace with your WhatsApp number
+          href="https://wa.me/919847341800?text=Welcome%20to%20Warrior%20"
           target="_blank"
           rel="noopener noreferrer"
         >

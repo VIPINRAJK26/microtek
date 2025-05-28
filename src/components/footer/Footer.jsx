@@ -1,13 +1,11 @@
 import CopyRight from "./CopyRight";
 import "./Footer.css";
-import { Link,useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const { category } = useParams();
-  console.log(category, "category");
-
+  // Map of category names to their corresponding slugs used in URLs
   const categorySlugMap = {
-    "Home Ups": "home_ups",
+    "Home Inverter/Ups": "home_inverter_and_ups",
     "Solar Power": "solar_power",
     Batteries: "batteries",
     "Ev Charger": "ev_charger",
@@ -16,20 +14,20 @@ const Footer = () => {
   };
 
   return (
-    <footer className="footer  pt-5 ">
+    <footer className="footer pt-5">
       <div className="container">
         <div className="row">
           {/* Products Section */}
           <div className="col-md-3">
             <h5 className="mb-3">Products</h5>
             <ul className="list-unstyled">
-              {Object.entries(categorySlugMap).map(([category, slug]) => (
+              {Object.entries(categorySlugMap).map(([name, slug]) => (
                 <li key={slug}>
                   <Link
                     to={`/preview/${slug}`}
-                    className="text-black text-decoration-none"
+                    className=" footer-products text-decoration-none"
                   >
-                    {category}
+                    {name}
                   </Link>
                 </li>
               ))}
@@ -40,7 +38,7 @@ const Footer = () => {
           <div className="col-md-3 mb-3">
             <h5>Services</h5>
             <ul className="list-unstyled small pt-md-3">
-              <Link to={"/contact"} className="text-decoration-none text-black">
+              <Link to="/contact" className="text-decoration-none text-black">
                 <li className="pb-md-2">Product Installation</li>
                 <li className="pb-md-2">AMC Request</li>
                 <li className="pb-md-2">General Service Request</li>
@@ -54,16 +52,16 @@ const Footer = () => {
           <div className="col-md-3 mb-3">
             <h5>Quick Links</h5>
             <ul className="list-unstyled small pt-md-3">
-              <Link to={"/"} className="text-decoration-none text-black">
+              <Link to="/" className="text-decoration-none text-black">
                 <li className="pb-md-2">Home</li>
               </Link>
               <Link
-                to={"/products/:category"}
+                to="/contact" // Default or general category
                 className="text-decoration-none text-black"
               >
-                <li className="pb-md-2">Products</li>
+                <li className="pb-md-2">support & contact</li>
               </Link>
-              <Link to={"/store"} className="text-decoration-none text-black">
+              <Link to="/store" className="text-decoration-none text-black">
                 <li className="pb-md-2">Store Locator</li>
               </Link>
             </ul>
@@ -74,21 +72,22 @@ const Footer = () => {
             <h5 className="pb-md-3">Address</h5>
             <p>
               <i className="fas fa-phone "></i>
-              <i class="fa-brands fa-whatsapp ps-2"></i> +91 9846151900
+              <i className="fa-brands fa-whatsapp ps-2"></i> +91 9846151900
             </p>
             <p>
               <i className="fas fa-envelope"></i> info@warriorind.com
             </p>
             <h5 className="pb-md-3 pt-md-3">Corporate Office</h5>
             <p>
-              <i className="fas fa-map-marker-alt"></i> Warrior Power
-              India,Manjeri,Malappuram,Kerala, 676517 <br />
+              <i className="fas fa-map-marker-alt"></i> Warrior Power India,
+              Manjeri, Malappuram, Kerala, 676517
             </p>
             <h5 className="pt-md-3">Follow Us</h5>
             <div className="d-flex gap-2 pt-md-3 text-black">
               <a
                 href="https://www.facebook.com/warriorpowerindia/"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-black"
               >
                 <i className="fab fa-facebook"></i>
@@ -96,13 +95,15 @@ const Footer = () => {
               <a
                 href="https://x.com/warriorpowerind"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-black"
               >
-                <i class="fa-brands fa-x-twitter"></i>
+                <i className="fa-brands fa-x-twitter"></i>
               </a>
               <a
                 href="https://www.linkedin.com/company/102684799/admin/dashboard/"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-black"
               >
                 <i className="fab fa-linkedin"></i>
@@ -110,6 +111,7 @@ const Footer = () => {
               <a
                 href="https://in.pinterest.com/warriorpowerindia/"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-black"
               >
                 <i className="fab fa-pinterest"></i>
@@ -117,6 +119,7 @@ const Footer = () => {
               <a
                 href="https://www.instagram.com/warriorpowerindia/"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-black"
               >
                 <i className="fab fa-instagram"></i>
@@ -124,6 +127,7 @@ const Footer = () => {
               <a
                 href="https://www.youtube.com/channel/UCBXwXd4tBux6AYYdeSfSAGw/community?pvf=CAI%253D"
                 target="_blank"
+                rel="noopener noreferrer"
                 className="text-black"
               >
                 <i className="fab fa-youtube"></i>

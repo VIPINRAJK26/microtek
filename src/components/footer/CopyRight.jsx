@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./Copyright.css";
 
@@ -16,19 +15,19 @@ const CopyrightSection = () => {
           </p>
         </div>
         <div className="footer-links">
-          <Link to="/terms-and-conditions " className="text-black">
+          <Link to="/terms-and-conditions " className="">
             Terms & Conditions
           </Link>
           <span className="divider">|</span>
-          <Link to="/privacy-policy" className="text-black">
+          <Link to="/privacy-policy" className="">
             Privacy Policy
           </Link>
           <span className="divider">|</span>
-          <Link to="/refund-policy" className="text-black">
+          <Link to="/refund-policy" className="">
             Refund Policy
           </Link>
           <span className="divider">|</span>
-          <Link to="/shipping-policy" className="text-black">
+          <Link to="/shipping-policy" className="">
             Shipment Policy
           </Link>
         </div>

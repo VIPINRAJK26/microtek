@@ -1,12 +1,39 @@
-import React from "react";
 import "./PreviewDetails.css";
 import { Link, useParams } from "react-router-dom";
 import usePreviewDetails from "../../hooks/usePreviewDetails";
+import { Modal, Button } from "react-bootstrap";
+import { useState } from "react";
+import axiosInstance from "../../api/axios";
 
 const PreviewDetails = () => {
   const { previewDetails, loading, error } = usePreviewDetails();
   const { category, subcategory } = useParams();
+  const [show, setShow] = useState(false);
+  const [brochureUrl, setBrochureUrl] = useState("");
+  const [loadingBrochure, setLoadingBrochure] = useState(false);
+  const [errorBrochure, setErrorBrochure] = useState(null);
 
+  const handleClose = () => setShow(false);
+
+  const handleShow = async (fullUrl) => {
+    try {
+      setLoadingBrochure(true);
+      setErrorBrochure(null);
+
+      const filename = fullUrl.split("/").pop();
+      const url = `http://127.0.0.1:8000/brochures/${filename}`;
+
+      // Optional: Make a HEAD request or GET request to check file availability
+      await axiosInstance.head(url);
+
+      setBrochureUrl(url);
+      setShow(true);
+    } catch (error) {
+      setErrorBrochure("Brochure not available.");
+    } finally {
+      setLoadingBrochure(false);
+    }
+  };
   const groupedByVariant = previewDetails.reduce((acc, product) => {
     const key = product.variant_name;
     if (!acc[key]) {
@@ -77,10 +104,60 @@ const PreviewDetails = () => {
                           View All Variants
                         </button>
                       </Link>
-                      <button className="btn btn-outline-light rounded-5">
+                      <button
+                        className="btn btn-outline-light rounded-5"
+                        onClick={() => handleShow(product.brochure)}
+                        disabled={loadingBrochure}
+                      >
                         <i className="fa-solid fa-download me-2" />
                         Download Brochure
                       </button>
+
+                      <Modal
+                        show={show}
+                        onHide={handleClose}
+                        size="xl"
+                        centered
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title>Brochure Preview</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          {loadingBrochure && (
+                            <p>Loading brochure preview...</p>
+                          )}
+                          {errorBrochure && (
+                            <p className="text-danger">{errorBrochure}</p>
+                          )}
+                          {!loadingBrochure && !errorBrochure && (
+                            <iframe
+                              src={brochureUrl}
+                              title="Brochure PDF"
+                              width="100%"
+                              height="600px"
+                              style={{ border: "none" }}
+                            />
+                          )}
+                        </Modal.Body>
+                        <Modal.Footer>
+                          <a
+                            href={brochureUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn btn-success rounded-5"
+                            download
+                          >
+                            <i className="fa-solid fa-file-arrow-down me-2" />
+                            Download PDF
+                          </a>
+                          <button
+                            className="btn btn-secondary rounded-5"
+                            onClick={handleClose}
+                          >
+                            Close
+                          </button>
+                        </Modal.Footer>
+                      </Modal>
                     </div>
                   </div>
                 </div>
