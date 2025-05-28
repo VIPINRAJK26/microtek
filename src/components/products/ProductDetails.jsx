@@ -56,7 +56,6 @@ const ProductDetails = ({
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     fetchCart();
@@ -72,16 +71,24 @@ const ProductDetails = ({
     console.log("Auth Token:", token);
     console.log("Axios Config:", config);
 
-    const alreadyInCart = cartItems.some(
-      (item) => item.product && item.product.id === id
-    );
+    if (!cartItems || !id) return;
+
+    const alreadyInCart = cartItems.some((item) => item?.product?.id === id);
+
+    console.log("Already in cart?", alreadyInCart);
 
     console.log("Before toast check", alreadyInCart);
+
     if (alreadyInCart) {
-      toast.info("Product is already in cart!", { autoClose: 3000 });
-      setLoading(false);
+      toast.info("Product is already in cart!", {
+        autoClose: 3000,
+        toastId: "already-in-cart-toast",
+      });
+      setTimeout(() => setLoading(false), 100);
       return;
     }
+
+    
 
     console.log("Not in cart, continue");
 
@@ -96,7 +103,7 @@ const ProductDetails = ({
 
       await axiosInstance.post("/cart_item/", payload, config);
 
-      toast.success("Added to cart!");
+      // toast.success("Added to cart!");
       fetchCart();
       navigate("/cart", { state: { message: "Product added to cart!" } });
     } catch (error) {
@@ -112,7 +119,6 @@ const ProductDetails = ({
       setLoading(false);
     }
   };
-  
 
   return (
     <Card className="p-0 p-md-3 border-0 shadow-none">
@@ -129,9 +135,14 @@ const ProductDetails = ({
           )}
           {category && (
             <ListGroup.Item className="ps-0 border-0">
-              <strong>Category:</strong> {category}
+              <strong>Category:</strong>{" "}
+              {category
+                .split("_")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
             </ListGroup.Item>
           )}
+
           {price && (
             <ListGroup.Item className="ps-0 border-0">
               <strong className="fs-3">₹{price}</strong>
@@ -148,7 +159,7 @@ const ProductDetails = ({
           )}
           {voltage && (
             <div className="flex-fill border-end p-3">
-              <strong>Output Voltage:</strong>
+              <strong>Input Voltage:</strong>
               <div>{voltage} v</div>
             </div>
           )}
@@ -186,7 +197,11 @@ const ProductDetails = ({
         >
           {loading ? "Adding..." : "Add to Cart"}
         </button>
-        <a href="" target="_blank">
+        <a
+          href="https://wa.me/919847341800" // Replace with your WhatsApp number
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <button className="btn btn-success rounded-3">Enquire Now</button>
         </a>
       </div>

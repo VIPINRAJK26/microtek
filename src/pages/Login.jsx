@@ -32,10 +32,6 @@ function Login() {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
-    // if (token) {
-    //   localStorage.removeItem("session_key");
-    // }
-    
 
     if (Object.keys(validationErrors).length === 0) {
       setLoading(true);
@@ -45,30 +41,27 @@ function Login() {
         localStorage.setItem("access_token", response.data.access);
         localStorage.setItem("refresh_token", response.data.refresh);
         localStorage.setItem("user", JSON.stringify(response.data.user));
-        console.log("Login response:", response.data);
 
+        // Set axios default Authorization header immediately
         axiosInstance.defaults.headers[
           "Authorization"
         ] = `Bearer ${response.data.access}`;
 
-        // 🔁 Merge anonymous cart with user cart
+        // Now merge the anonymous cart with user cart
         await mergeCart();
 
-        // ✅ Redirect to home
+        // Redirect to home page
         navigate("/");
       } catch (error) {
         if (error.response) {
-          // Handle backend validation errors
           if (error.response.status === 401) {
             setErrors({ general: "Invalid credentials" });
           } else {
             setErrors(error.response.data);
           }
         } else if (error.message) {
-          console.error("Network error:", error);
           setErrors({ general: "Network error. Please try again." });
         } else {
-          console.error("Unexpected error:", error);
           setErrors({ general: "An unexpected error occurred." });
         }
       } finally {

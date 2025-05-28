@@ -34,26 +34,25 @@ const PreviewDetails = () => {
   console.log(previewDetails, "previewDetails");
 
   return (
-    <div className="preview container mx-0 px-0 mt-5">
+    <div className="preview container-fluid mx-0 px-0 mt-5 px-md-5 px-3 ">
       <div className="preview-main row">
         {selectedPreview && selectedPreview.length > 0 ? (
           selectedPreview.map((product, index) => (
-            <div className="col-md-8 col-lg-6 col-12 p-1 mb-4" key={index}>
+            <div
+              className="col-12 col-sm-12 col-md-8 col-lg-6 p-2 mb-4"
+              key={index}
+            >
               <div
-                className="preview-main-card card bg-info rounded-0 d-flex"
+                className="preview-main-card card bg-info rounded-0 d-flex flex-column justify-content-between"
                 style={{
                   backgroundImage: `url(${product.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
               >
-                <div className="preview-body  d-flex flex-column ps-4 justify-content-between card-body mt-5">
-                  {/* <h2 className="fw-bold card-title text-white">
-                    {product.variant_name}
-                  </h2> */}
-
+                <div className="preview-body d-flex flex-column justify-content-between card-body mt-5 p-3">
                   <div>
-                    <h5 className="card-subtitle pt-5 text-white w-50">
+                    <h5 className="card-subtitle pt-3 text-white w-50">
                       {product.slogan}
                     </h5>
                   </div>
@@ -61,7 +60,7 @@ const PreviewDetails = () => {
                   <div className="detail-section">
                     <ul
                       className="list-unstyled text-white fw-bold"
-                      style={{ lineHeight: "30px" }}
+                      style={{ lineHeight: "28px" }}
                     >
                       {product.feature1.split(",").map((feature, idx) => (
                         <li key={idx}>{feature.trim()}</li>
@@ -70,16 +69,16 @@ const PreviewDetails = () => {
                   </div>
 
                   <div>
-                    <div className="text-start pt-5 d-flex ">
+                    <div className="pt-4 d-flex flex-wrap gap-2">
                       <Link
                         to={`/products/${category}/${product.variant_name}`}
                       >
-                        <button className="btn btn-danger rounded-5 me-3">
+                        <button className="btn btn-danger rounded-5">
                           View All Variants
                         </button>
                       </Link>
-                      <button className="btn btn-transparent rounded-5 text-white btn-outline-danger">
-                        <i className="fa-solid fa-download me-2 text-white" />
+                      <button className="btn btn-outline-light rounded-5">
+                        <i className="fa-solid fa-download me-2" />
                         Download Brochure
                       </button>
                     </div>
@@ -88,9 +87,9 @@ const PreviewDetails = () => {
               </div>
 
               <div className="d-flex justify-content-center text-center fw-bold small gap-2 mt-2 flex-wrap">
-                {product.feature2.split(",").map((feature, idx, arr) => (
+                {product.feature2.split("|").map((feature, idx, arr) => (
                   <span key={idx} className="d-flex align-items-center">
-                    {feature.trim()}
+                    {feature.replace(/\r?\n|\r/g, "").trim()}
                     {idx !== arr.length - 1 && <span className="mx-2">|</span>}
                   </span>
                 ))}
@@ -98,7 +97,7 @@ const PreviewDetails = () => {
             </div>
           ))
         ) : (
-          <div>
+          <div className="col-12 text-center">
             <p>Nothing to show</p>
           </div>
         )}

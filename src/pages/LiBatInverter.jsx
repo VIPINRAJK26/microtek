@@ -44,11 +44,11 @@ const LiBatInverter = () => {
                     src="https://png.pngtree.com/thumb_back/fh260/background/20240929/pngtree-yellow-background-gradient-vector-image_16289907.jpg"
                     alt="Luxe UPS"
                     className="img-fluid rounded-start luxe-image"
-                    style={{ width: "100%", height: "50vh" }}
+                    style={{ width: "100%", height: "68vh" }}
                   />
                 </div>
                 <div className="position-absolute col-12 col-lg-5 d-flex flex-column justify-content-center p-4">
-                  <h3 className="fw-bold">Luxe</h3>
+                  <h3 className="fw-bold">Lithium UPS/Inverter</h3>
                   <p className="mb-1">Most Intelligent & Smart LCD</p>
                   <p className="mb-3">Home UPS with in-built Microcomputer</p>
 

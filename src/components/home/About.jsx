@@ -35,9 +35,9 @@ function About() {
             independence.
           </p>
 
-          <a href="#" className="view-more">
+          {/* <a href="#" className="view-more">
             View More
-          </a>
+          </a> */}
         </div>
 
         <div

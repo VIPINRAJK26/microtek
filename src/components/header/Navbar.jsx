@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import useCart from "../../hooks/useCart";
 
 function Navbar() {
   const [showSearchInput, setShowSearchInput] = useState(false);
@@ -12,7 +13,20 @@ function Navbar() {
   const dropdownRef = useRef(null);
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
+  const hideDropdownTimeout = useRef(null);
 
+  const { cartCount } = useCart();
+
+  const showDropdown = () => {
+    clearTimeout(hideDropdownTimeout.current);
+    setIsUserDropdownVisible(true);
+  };
+
+  const hideDropdown = () => {
+    hideDropdownTimeout.current = setTimeout(() => {
+      setIsUserDropdownVisible(false);
+    }, 2000); 
+  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -28,12 +42,14 @@ function Navbar() {
   }, []);
 
   const categories = {
-    "Home Ups": [
-      { name: "Online Ups", img: "/1. ONLINE UPS.png" },
-      { name: "Offline Ups", img: "/2. OFF LINE UPS.png" },
+    "Home Inverter/Ups": [
+      { name: "Online Inverter/Ups", img: "/1. ONLINE UPS.png" },
+      { name: "Offline Inverter/Ups", img: "/2. OFF LINE UPS.png" },
       { name: "HKVA UPS", img: "/3. HKVA UPS.png" },
       { name: "Li-ion Battery Inverter", img: "/3. HKVA UPS.png" },
     ],
+    "Lithium Inverter/Ups": [],
+
     "Solar Power": [
       { name: "Solar Ups", img: "/4. SOLAR UPS.png" },
       { name: "Solar Panel", img: "/5. SOLAR PANEL.png" },
@@ -45,25 +61,25 @@ function Navbar() {
       { name: "Solar Batteries", img: "/8. SOLAR BATTERY.png" },
       { name: "Lithium Ion Battery", img: "/9.LITHIUM ION BATTERY.png" },
     ],
+    "Li-Ion Batteries": [],
     "Ev Charger": [],
     "Auto Stabilizer": [],
-    "Li-Ion Batteries": [],
-    "Li-Ion Battery Inverter": [],
+    // "Li-Ion Battery Inverter": [],
   };
 
   const categorySlugMap = {
-    "Home Ups": "home_ups",
+    "Home Inverter/Ups": "home_inverter_and_ups",
+    "Lithium Inverter/Ups": "lithium_inverter_and_ups",
     "Solar Power": "solar_power",
     Batteries: "batteries",
+    "Li-Ion Batteries": "li_ion_batteries",
     "Ev Charger": "ev_charger",
     "Auto Stabilizer": "auto_stabilizer",
-    "Li-Ion Batteries": "li_ion_batteries",
-    "Li-Ion Battery Inverter": "li_ion_battery_inverter",
   };
 
   const subcategorySlugMap = {
-    "Online Ups": "online_ups",
-    "Offline Ups": "offline_ups",
+    "Online Inverter/Ups": "online_inverter_and_ups",
+    "Offline Inverter/Ups": "offline_inverter_and_ups",
     "HKVA UPS": "hkva_ups",
     "Li-ion Battery Inverter": "li_ion_battery_inverter",
     "Solar Ups": "solar_ups",
@@ -135,12 +151,12 @@ function Navbar() {
                               selectedCategory === category ? "active" : ""
                             }`}
                             onMouseEnter={() => {
-                              if (category !== "Li-Ion Battery Inverter") {
+                              if (category !== "Lithium Inverter/Ups") {
                                 setSelectedCategory(category);
                               }
                             }}
                             onClick={() => {
-                              if (category) {
+                              if (category === "Lithium Inverter/Ups") {
                                 const encodedCategory =
                                   encodeURIComponent(category);
                                 navigate(`/preview/${encodedCategory}`);
@@ -199,8 +215,8 @@ function Navbar() {
 
         <div
           className="position-relative me-3 cursor-pointer"
-          onMouseEnter={() => setIsUserDropdownVisible(true)}
-          onMouseLeave={() => setIsUserDropdownVisible(false)}
+          onMouseEnter={showDropdown}
+          onMouseLeave={hideDropdown}
           ref={dropdownRef}
         >
           <div className="nav-link nav-text cursor-pointer">
@@ -213,7 +229,7 @@ function Navbar() {
             >
               {user ? (
                 <button
-                  className="dropdown-item text-danger"
+                  className="dropdown-item text-danger cursor-pointer"
                   onClick={(e) => {
                     e.stopPropagation();
                     localStorage.clear();
@@ -226,14 +242,14 @@ function Navbar() {
                 <>
                   <Link
                     to="/login"
-                    className="dropdown-item"
+                    className="dropdown-item cursor-pointer"
                     onClick={(e) => e.stopPropagation()}
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
-                    className="dropdown-item"
+                    className="dropdown-item cursor-pointer"
                     onClick={(e) => e.stopPropagation()}
                   >
                     Sign Up
@@ -247,9 +263,11 @@ function Navbar() {
         <div className="position-relative me-3">
           <Link to="/cart" className="nav-link nav-text">
             <i className="fas fa-shopping-cart p-1"></i>
-            <span className="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              3
-            </span>
+            {cartCount > 0 && (
+              <span className="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {cartCount}
+              </span>
+            )}
           </Link>
         </div>
 

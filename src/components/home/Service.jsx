@@ -11,9 +11,9 @@ const Service = () => {
         <div className="col-lg-4 col-md-6 mb-0 d-flex align-items-center justify-content-center">
           <div className="text-center">
             <img
-              src="https://img.freepik.com/free-photo/man-pointing-front-white-background_1368-4260.jpg?ga=GA1.1.1208105082.1712396076&semt=ais_hybrid&w=740"
+              src="/wrrior_md (1) (1).jpg"
               alt=""
-              className="img-fluid"
+              className="img-fluid rounded-3 "
             />
           </div>
         </div>
@@ -57,7 +57,7 @@ const Service = () => {
                 className="img-fluid rounded-5"
               />
             </div>
-            <div>
+            <div className="pt-3">
               <h4 className="fw-bold">Unmatched Customer Support</h4>
               <p className="text-muted">
                 Warrior prioritizes customer satisfaction to ensure the best pre

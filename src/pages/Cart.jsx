@@ -15,16 +15,16 @@ import { useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getOrCreateSessionKey } from "../utils/session";
+import { Link } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
-const Cart = () => {
+const Cart = (id) => {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  const [token, setToken] = useState(localStorage.getItem("access_token")); 
+  const [token, setToken] = useState(localStorage.getItem("access_token"));
   const sessionKey = getOrCreateSessionKey();
-
-  
 
   console.log(cart, "cart");
 
@@ -63,10 +63,11 @@ const Cart = () => {
       setLoading(false);
     }
   };
-  
 
   const updateQuantity = async (itemId, quantity) => {
     if (quantity < 1) return removeItem(itemId);
+    // const { updateQuantity, removeItem } = useCart(token);
+
     try {
       if (token) {
         await axiosInstance.patch(`/cart_item/${itemId}/`, { quantity });
@@ -124,7 +125,7 @@ const Cart = () => {
   cart.cart_items.forEach((item, index) => {
     console.log(`Item ${index + 1} image:`, item.product?.image);
   });
-  
+
   return (
     <Container className="py-5">
       <ToastContainer position="top-center" autoClose={3000} />
@@ -173,7 +174,7 @@ const Cart = () => {
                       style={{ height: "80px", overflow: "hidden" }}
                     >
                       <img
-                        src={`http://localhost:8000${item.product.image}`} // or the correct path to your image field
+                        src={`https://server.warriorind.in/${item.product.image}`} // or the correct path to your image field
                         alt={item.product.category}
                         fluid
                         style={{ maxHeight: "80px", objectFit: "contain" }}
@@ -245,9 +246,14 @@ const Cart = () => {
               </Row>
 
               <div className="mt-4">
-                <Button variant="warning" className="w-100 text-white fw-bold">
-                  Proceed to Checkout
-                </Button>
+                <Link to={`/buy/${id}`}>
+                  <Button
+                    variant="warning"
+                    className="w-100 text-white fw-bold"
+                  >
+                    Proceed to Checkout
+                  </Button>
+                </Link>
               </div>
             </>
           )}

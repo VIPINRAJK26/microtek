@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/api/",
+  baseURL: "https://server.warriorind.in/api/",
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: false, // Set to false if you're using JWT and no sessions
+  withCredentials: false,
 });
 
 // Add token
@@ -16,8 +16,28 @@ axiosInstance.interceptors.request.use((config) => {
   }
   return config;
 });
-
+  
 // Handle 401s
+// axiosInstance.interceptors.response.use(
+//   (response) => response,
+//   (error) => {
+//     const { config, response } = error;
+
+//     const safeEndpoints = ["/cart_item", "/cart"];
+//     const isSafe = safeEndpoints.some((url) => config.url?.includes(url));
+
+//     if (response?.status === 401 && !isSafe) {
+//       localStorage.removeItem("access_token");
+//       window.location.href = "/login";
+//     }
+
+//     return Promise.reject(error);
+//   }
+// );
+
+
+let isRedirecting = false; 
+
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -26,13 +46,18 @@ axiosInstance.interceptors.response.use(
     const safeEndpoints = ["/cart_item", "/cart"];
     const isSafe = safeEndpoints.some((url) => config.url?.includes(url));
 
-    if (response?.status === 401 && !isSafe) {
+    if (response?.status === 401 && !isSafe && !isRedirecting) {
+      isRedirecting = true; 
       localStorage.removeItem("access_token");
-      window.location.href = "/login";
+
+      setTimeout(() => {
+        window.location.href = "/"; 
+      }, 100);
     }
 
     return Promise.reject(error);
   }
 );
+
 
 export default axiosInstance;

@@ -1,8 +1,6 @@
-import React from "react";
 import CopyRight from "./CopyRight";
 import "./Footer.css";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 
 const Footer = () => {
   const { category } = useParams();
@@ -75,7 +73,8 @@ const Footer = () => {
           <div className="col-md-3 mb-1 small">
             <h5 className="pb-md-3">Address</h5>
             <p>
-              <i className="fas fa-phone"></i> +91 9846151900
+              <i className="fas fa-phone "></i>
+              <i class="fa-brands fa-whatsapp ps-2"></i> +91 9846151900
             </p>
             <p>
               <i className="fas fa-envelope"></i> info@warriorind.com
@@ -87,20 +86,47 @@ const Footer = () => {
             </p>
             <h5 className="pt-md-3">Follow Us</h5>
             <div className="d-flex gap-2 pt-md-3 text-black">
-              <a href="https://www.facebook.com/warriorpowerindia/"  className="text-black">
+              <a
+                href="https://www.facebook.com/warriorpowerindia/"
+                target="_blank"
+                className="text-black"
+              >
                 <i className="fab fa-facebook"></i>
               </a>
-              <a href="https://x.com/warriorpowerind" className="text-black">
+              <a
+                href="https://x.com/warriorpowerind"
+                target="_blank"
+                className="text-black"
+              >
                 <i class="fa-brands fa-x-twitter"></i>
               </a>
-              <a href="https://www.linkedin.com/company/102684799/admin/dashboard/" className="text-black">
+              <a
+                href="https://www.linkedin.com/company/102684799/admin/dashboard/"
+                target="_blank"
+                className="text-black"
+              >
                 <i className="fab fa-linkedin"></i>
               </a>
-              <a href="https://in.pinterest.com/warriorpowerindia/" className="text-black">
+              <a
+                href="https://in.pinterest.com/warriorpowerindia/"
+                target="_blank"
+                className="text-black"
+              >
                 <i className="fab fa-pinterest"></i>
               </a>
-              <a href="https://www.instagram.com/warriorpowerindia/" className="text-black">
+              <a
+                href="https://www.instagram.com/warriorpowerindia/"
+                target="_blank"
+                className="text-black"
+              >
                 <i className="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://www.youtube.com/channel/UCBXwXd4tBux6AYYdeSfSAGw/community?pvf=CAI%253D"
+                target="_blank"
+                className="text-black"
+              >
+                <i className="fab fa-youtube"></i>
               </a>
             </div>
           </div>

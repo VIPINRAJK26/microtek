@@ -16,11 +16,21 @@ const CopyrightSection = () => {
           </p>
         </div>
         <div className="footer-links">
-          <Link to="/terms-and-conditions " className="text-black">Terms & Conditions</Link>
+          <Link to="/terms-and-conditions " className="text-black">
+            Terms & Conditions
+          </Link>
           <span className="divider">|</span>
-          <Link to="/privacy-policy" className="text-black">Privacy Policy</Link>
+          <Link to="/privacy-policy" className="text-black">
+            Privacy Policy
+          </Link>
           <span className="divider">|</span>
-          <Link to="/refund-policy" className="text-black">Refund Policy</Link>
+          <Link to="/refund-policy" className="text-black">
+            Refund Policy
+          </Link>
+          <span className="divider">|</span>
+          <Link to="/shipping-policy" className="text-black">
+            Shipment Policy
+          </Link>
         </div>
       </div>
     </div>

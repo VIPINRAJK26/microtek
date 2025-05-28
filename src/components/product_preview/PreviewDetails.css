@@ -1,23 +1,36 @@
- 
-/* .preview-body {
-  position: relative;
-  top: 70px;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
 
-.detail-section{
-  padding-top: 12%;
+
+.card-subtitle {
+  font-family: "Barlow", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
- 
 
 .preview-main-card {
   background-size: cover;
   background-position: center;
   height: 550px;
+  transition: height 0.3s ease;
+}
+
+.detail-section {
+  padding-top: 12%;
+}
+
+@media (max-width: 992px) {
+  .preview-main-card {
+    height: 450px;
+  }
 }
 
 @media (max-width: 768px) {
   .preview-main-card {
     height: 350px;
+  }
+
+  .detail-section {
+    padding-top: 8%;
   }
 }
 
@@ -25,9 +38,12 @@
   .preview-main-card {
     height: 250px;
   }
+
+  .detail-section {
+    padding-top: 5%;
+  }
+
+  .preview-body h5 {
+    font-size: 0.95rem;
+  }
 }
-
- 
- 
-
-

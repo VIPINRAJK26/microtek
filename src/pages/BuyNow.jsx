@@ -50,6 +50,14 @@ const BuyNowPage = () => {
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
+    // Validate form manually
+    for (const key in formData) {
+      if (!formData[key]) {
+        alert("Please fill out all fields before placing an order.");
+        return;
+      }
+    }
+
     if (!product) {
       alert("Product not found");
       return;
@@ -60,46 +68,35 @@ const BuyNowPage = () => {
       return;
     }
 
-    const amountInPaise = product.price * 100;
+    const amountInRupees = parseFloat(product.price);
 
     try {
-      // Step 1: Create Razorpay Order from backend
       const razorpayRes = await axiosInstance.post("/create-razorpay-order/", {
-        amount: amountInPaise,
+        amount: amountInRupees,
       });
 
       const { id: razorpayOrderId, amount, currency } = razorpayRes.data;
 
-      // Step 2: Configure Razorpay Checkout options
       const options = {
-        key: "rzp_live_Z6jI1bIiHzukH6",
-        amount: amount,
-        currency: currency,
+        key: "rzp_test_vZgJpbqphSEyOk",
+        amount,
+        currency,
         name: "Your Company",
         description: product.title,
         image: "/logo.png",
         order_id: razorpayOrderId,
         handler: async function (response) {
-          // Ideally verify payment here with backend
           const orderData = {
             ...formData,
             total_amount: product.price,
-            items: [
-              {
-                product_id: product.id,
-                quantity: 1,
-              },
-            ],
+            items: [{ product_id: product.id, quantity: 1 }],
             payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
             signature: response.razorpay_signature,
           };
 
           try {
-            const placeOrderRes = await axiosInstance.post(
-              "/buy_now/place-order/",
-              orderData
-            );
+            await axiosInstance.post("/buy_now/place-order/", orderData);
             alert("Payment & Order Successful!");
           } catch (error) {
             console.error("Order save error:", error.response || error.message);
@@ -118,9 +115,7 @@ const BuyNowPage = () => {
           color: "#3399cc",
         },
         modal: {
-          ondismiss: function () {
-            alert("Payment cancelled");
-          },
+          ondismiss: () => alert("Payment cancelled"),
         },
       };
 
@@ -134,6 +129,7 @@ const BuyNowPage = () => {
       alert("Failed to initiate payment.");
     }
   };
+  
   
   
 

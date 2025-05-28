@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setIsLoading(true);
-      const data = await axiosInstance.getCart();
+      const data = await axiosInstance.get("cart/");
       setCartItems(data.items);
     } catch (error) {
       console.error('Error fetching cart:', error);
