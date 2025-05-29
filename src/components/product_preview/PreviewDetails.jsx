@@ -4,6 +4,7 @@ import usePreviewDetails from "../../hooks/usePreviewDetails";
 import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import axiosInstance from "../../api/axios";
+import LiBatInverter from "../../pages/LiBatInverter";
 
 const PreviewDetails = () => {
   const { previewDetails, loading, error } = usePreviewDetails();
@@ -16,12 +17,14 @@ const PreviewDetails = () => {
   const handleClose = () => setShow(false);
 
   const handleShow = async (fullUrl) => {
+
+    
     try {
       setLoadingBrochure(true);
       setErrorBrochure(null);
 
       const filename = fullUrl.split("/").pop();
-      const url = `http://127.0.0.1:8000/brochures/${filename}`;
+      const url = `https://server.warriorind.in/brochures/${filename}`;
 
       // Optional: Make a HEAD request or GET request to check file availability
       await axiosInstance.head(url);
@@ -34,6 +37,7 @@ const PreviewDetails = () => {
       setLoadingBrochure(false);
     }
   };
+  
   const groupedByVariant = previewDetails.reduce((acc, product) => {
     const key = product.variant_name;
     if (!acc[key]) {
@@ -43,9 +47,19 @@ const PreviewDetails = () => {
     return acc;
   }, {});
 
+  const filteredByCategory = previewDetails.filter(
+    (product) => product.category.toLowerCase() === category.toLowerCase()
+  );
+
+  const uniqueVariants = [
+    ...new Set(filteredByCategory.map((p) => p.variant_name)),
+  ];
+
   console.log(subcategory, "subcategory from URL");
   console.log(category, "category from URL");
   console.log(groupedByVariant, "groupedByVariant");
+  console.log(filteredByCategory, "filteredByCategory");
+  console.log(uniqueVariants, "uniqueVariants");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -57,13 +71,31 @@ const PreviewDetails = () => {
       (!subcategory || item.subcategory === subcategory)
   );
 
+  const lithiumSubcategories = [
+    "online_inverter_and_ups",
+    "offline_inverter_and_ups",
+    "hkva_ups",
+  ];
+
+  // if (
+  //   category === "Lithium Inverter/Ups" &&
+  //   lithiumSubcategories.includes(subcategory)
+  // ) {
+  //   return <LiBatInverter data={selectedPreview} />;
+  // }
+  
+  
+
   console.log(selectedPreview, "selectedPreview");
   console.log(previewDetails, "previewDetails");
 
   return (
     <div className="preview container-fluid mx-0 px-0 mt-5 px-md-5 px-3 ">
       <div className="preview-main row">
-        {selectedPreview && selectedPreview.length > 0 ? (
+        {category === "lithium_inverter_and_ups" &&
+        lithiumSubcategories.includes(subcategory) ? (
+          <LiBatInverter data={selectedPreview} />
+        ) : selectedPreview && selectedPreview.length > 0 ? (
           selectedPreview.map((product, index) => (
             <div
               className="col-12 col-sm-12 col-md-8 col-lg-6 p-2 mb-4"
@@ -77,7 +109,7 @@ const PreviewDetails = () => {
                   backgroundPosition: "center",
                 }}
               >
-                <div className="preview-body d-flex flex-column justify-content-between card-body mt-5 p-3">
+                <div className="preview-body d-flex flex-column justify-content-between card-body p-3">
                   <div>
                     <h5 className="card-subtitle pt-3 text-white w-50">
                       {product.slogan}
@@ -99,11 +131,17 @@ const PreviewDetails = () => {
                     <div className="pt-4 d-flex flex-wrap gap-2">
                       <Link
                         to={`/products/${category}/${product.variant_name}`}
+                        state={{
+                          variantData: groupedByVariant[product.variant_name],
+                          uniqueVariants: uniqueVariants,
+                          previewDetails: previewDetails,
+                        }}
                       >
                         <button className="btn btn-danger rounded-5">
                           View All Variants
                         </button>
                       </Link>
+
                       <button
                         className="btn btn-outline-light rounded-5"
                         onClick={() => handleShow(product.brochure)}

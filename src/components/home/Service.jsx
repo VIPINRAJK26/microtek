@@ -9,12 +9,24 @@ const Service = () => {
         {/* Left Section (Paperless Warranty) */}
 
         <div className="col-lg-4 col-md-6 mb-0 d-flex align-items-center justify-content-center">
-          <div className="text-center">
+          <div
+            className="position-relative text-center"
+          >
             <img
               src="/wrrior_md (1) (1).jpg"
               alt=""
-              className="img-fluid rounded-3 "
+              className="img-fluid rounded-3"
             />
+            <div
+              className="position-absolute bottom-0 start-0 w-100 text-white p-2"
+              style={{
+                background: "rgba(0, 0, 0, 0.6)",
+                borderBottomLeftRadius: "0.75rem",
+                borderBottomRightRadius: "0.75rem",
+              }}
+            >
+              <h3 className="warrior-md mb-0">Yasar Arafath - MD</h3>
+            </div>
           </div>
         </div>
 

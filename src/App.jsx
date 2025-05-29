@@ -64,10 +64,6 @@ function App() {
                 <Route path="/buy/:id" element={<BuyNow />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />
-                <Route
-                  path="/preview/:category"
-                  element={<BatteryInverter />}
-                />
               </Routes>
             </Suspense>
             <WhatsAppIcon />

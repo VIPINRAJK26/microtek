@@ -11,14 +11,20 @@ export const CartProvider = ({ children }) => {
   const fetchCart = async () => {
     try {
       setIsLoading(true);
-      const data = await axiosInstance.get("cart/");
-      setCartItems(data.items);
+      const session_key = localStorage.getItem("session_key");
+      const response = await axiosInstance.get("cart/", {
+        params: { session_key }, // pass session_key if available
+      });
+      setCartItems(response.data.items || []); // <-- important
     } catch (error) {
-      console.error('Error fetching cart:', error);
+      console.error("Error fetching cart:", error);
+      setCartItems([]); // reset to empty array on error to avoid undefined
     } finally {
       setIsLoading(false);
     }
   };
+  
+  
 
   useEffect(() => {
     fetchCart(); 

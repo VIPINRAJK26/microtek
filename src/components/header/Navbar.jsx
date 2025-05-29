@@ -62,7 +62,7 @@ function Navbar() {
     Batteries: [
       { name: "Tubular Batteries", img: "/7. TUBULAR BATTERY.png" },
       { name: "Solar Batteries", img: "/8. SOLAR BATTERY.png" },
-      { name: "Lithium Ion Battery", img: "/9.LITHIUM ION BATTERY.png" },
+      // { name: "Lithium Ion Battery", img: "/9.LITHIUM ION BATTERY.png" },
     ],
     "Li-Ion Batteries": [],
     "Ev Charger": [],

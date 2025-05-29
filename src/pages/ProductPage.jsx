@@ -3,14 +3,23 @@ import ProductFilter from "../components/products/ProductFilter";
 import ProductCard from "../components/products/ProductCard";
 import { Row, Col } from "react-bootstrap";
 import "./ProductPage.css";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import useProducts from "../hooks/useProducts";
+
 
 const Products = () => {
   const { products } = useProducts();
   const { category, variant, } = useParams();
   const [baseProducts, setBaseProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState(baseProducts);
+  const location = useLocation();
+  const { variantData, uniqueVariants,previewDetails } = location.state || {};
+  // const { variantData, uniqueVariants } = location.state || {};
+
+  console.log("All unique variants:", uniqueVariants);
+  console.log("Current variant data:", variantData);
+  console.log("Preview details--------------:", previewDetails);
+
   console.log(products,"products")
   console.log(category, variant, "cat,var")
   console.log(baseProducts, "base filter")
@@ -46,6 +55,9 @@ const Products = () => {
             initialProducts={baseProducts}
             selectedVariant={variant}
             selectedCategory={category}
+            variantData={variantData}
+            uniqueVariants={uniqueVariants}
+            previewDetails={previewDetails}
           />
         </Col>
         <Col md={9}>

@@ -68,7 +68,7 @@ const CardSlider = () => {
                         alt={card.title}
                       />
                       <Card.Body>
-                        <Card.Title className="text-center fw-medium">{card.title}</Card.Title>
+                        <Card.Title className="text-center fw-medium text-capitalize">{card.title}</Card.Title>
                       </Card.Body>
                     </Card>
                   </Link>

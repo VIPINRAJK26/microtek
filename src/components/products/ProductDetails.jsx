@@ -16,6 +16,7 @@ const ProductDetails = ({
   voltage,
   dimensions,
   features,
+  model_number
 }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -128,11 +129,11 @@ const ProductDetails = ({
         </Card.Title>
 
         <ListGroup variant="flush" className="mb-3">
-          {sku && (
+          {/* {sku && (
             <ListGroup.Item className="ps-0 border-0">
               <strong>SKU:</strong> {sku}
             </ListGroup.Item>
-          )}
+          )} */}
           {category && (
             <ListGroup.Item className="ps-0 border-0">
               <strong>Category:</strong>{" "}
@@ -140,6 +141,12 @@ const ProductDetails = ({
                 .split("_")
                 .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
                 .join(" ")}
+            </ListGroup.Item>
+          )}
+
+          {model_number && (
+            <ListGroup.Item className="ps-0 border-0">
+              <strong>Model Number:</strong> {model_number}
             </ListGroup.Item>
           )}
 

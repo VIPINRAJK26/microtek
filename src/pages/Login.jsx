@@ -38,19 +38,30 @@ function Login() {
       try {
         const response = await axiosInstance.post("/login/", formData);
 
+        // Store tokens and user info in localStorage
         localStorage.setItem("access_token", response.data.access);
         localStorage.setItem("refresh_token", response.data.refresh);
         localStorage.setItem("user", JSON.stringify(response.data.user));
 
-        // Set axios default Authorization header immediately
-        axiosInstance.defaults.headers[
-          "Authorization"
-        ] = `Bearer ${response.data.access}`;
+        // Dynamically set Authorization header for all requests
+        axiosInstance.interceptors.request.use((config) => {
+          const token = localStorage.getItem("access_token");
+          if (token) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+          }
+          return config;
+        });
 
-        // Now merge the anonymous cart with user cart
+        // Debug token persistence
+        console.log(
+          "Stored Access Token:",
+          localStorage.getItem("access_token")
+        );
+
+        // Merge anonymous cart with user cart
         await mergeCart();
 
-        // Redirect to home page
+        // Navigate after ensuring tokens are set
         navigate("/");
       } catch (error) {
         if (error.response) {

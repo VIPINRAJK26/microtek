@@ -8,6 +8,7 @@ const axiosInstance = axios.create({
   withCredentials: false,
 });
 
+// Add token
 axiosInstance.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");
   if (token) {
@@ -42,7 +43,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     const { config, response } = error;
 
-    const safeEndpoints = ["/cart_item", "/cart"];
+    const safeEndpoints = ["/cart_item", "/cart", "/login"];
     const isSafe = safeEndpoints.some((url) => config.url?.includes(url));
 
     if (response?.status === 401 && !isSafe && !isRedirecting) {
