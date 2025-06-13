@@ -79,7 +79,7 @@ const SingleProduct = () => {
               </Tab.Pane>
               <Tab.Pane eventKey="technicalSpecs">
                 <ul>
-                  {technical_spec?.split(",").map((spec, index) => (
+                  {technical_spec?.split("#").map((spec, index) => (
                     <li key={index}>{spec.trim()}</li>
                   ))}
                 </ul>

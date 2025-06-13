@@ -1,63 +1,97 @@
 import axios from "axios";
 
+// Create instance
 const axiosInstance = axios.create({
-  baseURL: "https://server.warriorind.in/api/",
+  baseURL: "http://127.0.0.1:8000/api/",
   headers: {
     "Content-Type": "application/json",
   },
   withCredentials: false,
 });
 
-// Add token
-axiosInstance.interceptors.request.use((config) => {
-  const token = localStorage.getItem("access_token");
-  if (token) {
-    config.headers["Authorization"] = `Bearer ${token}`;
-  }
-  return config;
-});
-  
-// Handle 401s
-// axiosInstance.interceptors.response.use(
-//   (response) => response,
-//   (error) => {
-//     const { config, response } = error;
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
-//     const safeEndpoints = ["/cart_item", "/cart"];
-//     const isSafe = safeEndpoints.some((url) => config.url?.includes(url));
+// Flag to prevent infinite loops
+let isRefreshing = false;
+let failedQueue = [];
 
-//     if (response?.status === 401 && !isSafe) {
-//       localStorage.removeItem("access_token");
-//       window.location.href = "/login";
-//     }
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
 
-//     return Promise.reject(error);
-//   }
-// );
-
-
-let isRedirecting = false; 
-
+// Response interceptor
 axiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => {
-    const { config, response } = error;
+  async (error) => {
+    const originalRequest = error.config;
+    const refreshToken = localStorage.getItem("refresh_token");
 
-    const safeEndpoints = ["/cart_item", "/cart", "/login"];
-    const isSafe = safeEndpoints.some((url) => config.url?.includes(url));
+    // If token expired
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      refreshToken
+    ) {
+      originalRequest._retry = true;
 
-    if (response?.status === 401 && !isSafe && !isRedirecting) {
-      isRedirecting = true; 
-      localStorage.removeItem("access_token");
+      if (isRefreshing) {
+        return new Promise(function (resolve, reject) {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers["Authorization"] = "Bearer " + token;
+            return axiosInstance(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
+      }
 
-      setTimeout(() => {
-        window.location.href = "/"; 
-      }, 100);
+      isRefreshing = true;
+
+      try {
+        const res = await axios.post(
+          "https://server.warriorind.in/api/token/refresh/",
+          {
+            refresh: refreshToken,
+          }
+        );
+
+        const newAccessToken = res.data.access;
+        localStorage.setItem("access_token", newAccessToken);
+
+        axiosInstance.defaults.headers["Authorization"] =
+          "Bearer " + newAccessToken;
+        processQueue(null, newAccessToken);
+        return axiosInstance(originalRequest);
+      } catch (err) {
+        processQueue(err, null);
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        localStorage.removeItem("user");
+        window.location.href = "/";
+        return Promise.reject(err);
+      } finally {
+        isRefreshing = false;
+      }
     }
 
     return Promise.reject(error);
   }
 );
-
 
 export default axiosInstance;

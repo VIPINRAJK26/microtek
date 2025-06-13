@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axiosInstance from "../api/axios";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -69,7 +70,7 @@ function Register() {
 
         {success ? (
           <div className="alert alert-success">
-            Registration successful! Please login.
+            Registration successful! Please <Link to="/login">login</Link>.
           </div>
         ) : (
           <form

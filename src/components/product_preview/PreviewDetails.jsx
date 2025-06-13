@@ -17,29 +17,23 @@ const PreviewDetails = () => {
   const handleClose = () => setShow(false);
 
   const handleShow = async (fullUrl) => {
-
-    
     try {
       setLoadingBrochure(true);
       setErrorBrochure(null);
 
-      const filename = fullUrl.split("/").pop();
-      const url = `https://server.warriorind.in/brochures/${filename}`;
-
-      // Optional: Make a HEAD request or GET request to check file availability
-      await axiosInstance.head(url);
-
-      setBrochureUrl(url);
+      // Directly use the URL without a HEAD check
+      setBrochureUrl(fullUrl);
       setShow(true);
     } catch (error) {
+      console.error(error);
       setErrorBrochure("Brochure not available.");
     } finally {
       setLoadingBrochure(false);
     }
   };
-  
+
   const groupedByVariant = previewDetails.reduce((acc, product) => {
-    const key = product.variant_name;
+    const key = product.slug;
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -51,15 +45,14 @@ const PreviewDetails = () => {
     (product) => product.category.toLowerCase() === category.toLowerCase()
   );
 
-  const uniqueVariants = [
-    ...new Set(filteredByCategory.map((p) => p.variant_name)),
-  ];
+  const uniqueVariants = [...new Set(filteredByCategory.map((p) => p.slug))];
 
   console.log(subcategory, "subcategory from URL");
   console.log(category, "category from URL");
   console.log(groupedByVariant, "groupedByVariant");
   console.log(filteredByCategory, "filteredByCategory");
   console.log(uniqueVariants, "uniqueVariants");
+  console.log(brochureUrl, "brochureUrl");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -83,58 +76,61 @@ const PreviewDetails = () => {
   // ) {
   //   return <LiBatInverter data={selectedPreview} />;
   // }
-  
-  
 
   console.log(selectedPreview, "selectedPreview");
   console.log(previewDetails, "previewDetails");
 
   return (
-    <div className="preview container-fluid mx-0 px-0 mt-5 px-md-5 px-3 ">
+    <div className="preview container-fluid mx-0 px-0 mt-md-4 px-md-5  ">
       <div className="preview-main row">
         {category === "lithium_inverter_and_ups" &&
         lithiumSubcategories.includes(subcategory) ? (
-          <LiBatInverter data={selectedPreview} />
+          <LiBatInverter
+            data={selectedPreview}
+            category={category}
+            subcategory={subcategory}
+          />
         ) : selectedPreview && selectedPreview.length > 0 ? (
           selectedPreview.map((product, index) => (
             <div
-              className="col-12 col-sm-12 col-md-8 col-lg-6 p-2 mb-4"
+              className="col-12 col-sm-12 col-md-8 col-lg-6 p-1 mb-md-3"
               key={index}
             >
               <div
-                className="preview-main-card card bg-info rounded-0 d-flex flex-column justify-content-between"
+                className="preview-main-card card  rounded-0 d-flex flex-column justify-content-between"
                 style={{
                   backgroundImage: `url(${product.image})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  // backgroundSize: "cover",
+                  // backgroundPosition: "center",
                 }}
               >
                 <div className="preview-body d-flex flex-column justify-content-between card-body p-3">
-                  <div>
-                    <h5 className="card-subtitle pt-3 text-white w-50">
-                      {product.slogan}
-                    </h5>
-                  </div>
+                  <h5 className="card-subtitle text-white w-50">
+                    {product.slogan}
+                  </h5>
 
-                  <div className="detail-section">
+                  <div className="detail-section ps-md-2">
                     <ul
-                      className="list-unstyled text-white fw-bold"
+                      className="list-unstyled text-white fs-5 fw-bold"
                       style={{ lineHeight: "28px" }}
                     >
-                      {product.feature1.split(",").map((feature, idx) => (
-                        <li key={idx}>{feature.trim()}</li>
+                      {product.feature1.split("#").map((feature, idx) => (
+                        <li key={idx} className="mb-2 feature1">
+                          {feature.trim()}{" "}
+                        </li>
                       ))}
                     </ul>
                   </div>
 
                   <div>
-                    <div className="pt-4 d-flex flex-wrap gap-2">
+                    <div className="pt-4 d-flex flex-md-wrap preview-buttons gap-md-2">
                       <Link
-                        to={`/products/${category}/${product.variant_name}`}
+                        to={`/products/${category}/${product.slug}`}
                         state={{
-                          variantData: groupedByVariant[product.variant_name],
+                          variantData: groupedByVariant[product.slug],
                           uniqueVariants: uniqueVariants,
                           previewDetails: previewDetails,
+                          subcategory: subcategory,
                         }}
                       >
                         <button className="btn btn-danger rounded-5">
@@ -143,7 +139,7 @@ const PreviewDetails = () => {
                       </Link>
 
                       <button
-                        className="btn btn-outline-light rounded-5"
+                        className="btn btn-outline-md-light text-white rounded-5"
                         onClick={() => handleShow(product.brochure)}
                         disabled={loadingBrochure}
                       >
@@ -202,7 +198,7 @@ const PreviewDetails = () => {
               </div>
 
               <div className="d-flex justify-content-center text-center fw-bold small gap-2 mt-2 flex-wrap">
-                {product.feature2.split("|").map((feature, idx, arr) => (
+                {product.feature2.split("#").map((feature, idx, arr) => (
                   <span key={idx} className="d-flex align-items-center">
                     {feature.replace(/\r?\n|\r/g, "").trim()}
                     {idx !== arr.length - 1 && <span className="mx-2">|</span>}
@@ -212,8 +208,8 @@ const PreviewDetails = () => {
             </div>
           ))
         ) : (
-          <div className="col-12 text-center">
-            <p>Nothing to show</p>
+          <div className="col-12 text-center py-5">
+            <img src="/coming_soon.jpg" className="img-fluid w-25 mx-auto pb-5"  alt="" />
           </div>
         )}
       </div>

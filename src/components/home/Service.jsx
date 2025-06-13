@@ -1,4 +1,3 @@
-import React from "react";
 import "./Service.css";
 import { Link } from "react-router-dom";
 
@@ -18,11 +17,11 @@ const Service = () => {
               className="img-fluid rounded-3"
             />
             <div
-              className="position-absolute bottom-0 start-0 w-100 text-white p-2"
+              className="position-absolute bottom-0 start-0 w-100 text-dark p-2"
               style={{
-                background: "rgba(0, 0, 0, 0.6)",
-                borderBottomLeftRadius: "0.75rem",
-                borderBottomRightRadius: "0.75rem",
+                background: "rgba(255, 255, 255, 1)",
+                borderBottomLeftRadius: "0.60rem",
+                borderBottomRightRadius: "0.50rem",
               }}
             >
               <h3 className="warrior-md mb-0">Yasar Arafath - MD</h3>

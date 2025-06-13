@@ -11,12 +11,17 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useProducts from "../hooks/useProducts";
 import axiosInstance from "../api/axios";
+import { useNavigate, useLocation } from "react-router-dom";
+
 
 const BuyNowPage = () => {
   const { id } = useParams();
   const { products } = useProducts();
   const [product, setProduct] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
   const token = localStorage.getItem("access_token");
+  const [quantity, setQuantity] = useState(1);
   const [formData, setFormData] = useState({
     customer_name: "",
     customer_email: "",
@@ -42,10 +47,17 @@ const BuyNowPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  if (!token) {
-    window.location.href = "/login";
-    return null;
-  }
+  const handleQuantityChange = (newQuantity) => {
+    if (newQuantity >= 1) {
+      setQuantity(newQuantity);
+    }
+  };
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login", { state: { from: location }, replace: true });
+    }
+  }, [token, navigate, location]);
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
@@ -68,8 +80,8 @@ const BuyNowPage = () => {
       return;
     }
 
-    const amountInRupees = parseFloat(product.price);
-
+    const amountInRupees = parseFloat(product.price) * quantity;
+    
     try {
       const razorpayRes = await axiosInstance.post("/create-razorpay-order/", {
         amount: amountInRupees,
@@ -78,26 +90,52 @@ const BuyNowPage = () => {
       const { id: razorpayOrderId, amount, currency } = razorpayRes.data;
 
       const options = {
-        key: "rzp_test_vZgJpbqphSEyOk",
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
         amount,
         currency,
-        name: "Your Company",
+        name: "warrior",
         description: product.title,
-        image: "/logo.png",
+        image: "/Warrior logo Png-01.png",
         order_id: razorpayOrderId,
         handler: async function (response) {
           const orderData = {
             ...formData,
             total_amount: product.price,
-            items: [{ product_id: product.id, quantity: 1 }],
+            items: [{ product_id: product.id, quantity: quantity }],
             payment_id: response.razorpay_payment_id,
             razorpay_order_id: response.razorpay_order_id,
             signature: response.razorpay_signature,
           };
 
           try {
-            await axiosInstance.post("/buy_now/place-order/", orderData);
-            alert("Payment & Order Successful!");
+            const res = await axiosInstance.post(
+              "/buy_now/place-order/",
+              orderData
+            );
+            console.log(res.data, "res--------------------------------");
+
+            const cartResponse = await axiosInstance.get("/cart/");
+            console.log("Cart items:", cartResponse.data.cart_items); // Check structure
+
+            const cartItemToDelete = cartResponse.data.cart_items.find(
+              (item) => item?.product?.id === Number(id) // Safely access nested fields
+            );
+
+            if (cartItemToDelete?.id) {
+              // Only delete if ID exists
+              await axiosInstance.delete(`/cart_item/${cartItemToDelete.id}/`);
+            } else {
+              console.log("Item not in cart or missing ID");
+            }
+
+            console.log("Full API Response:", res.data);
+            if (res.data.id) {
+              // Ensure this is `true`
+              console.log("Redirecting...");
+              navigate("/success");
+            } else {
+              console.warn("No success flag in response:", res.data);
+            }
           } catch (error) {
             console.error("Order save error:", error.response || error.message);
             alert("Payment success, but order save failed!");
@@ -112,7 +150,7 @@ const BuyNowPage = () => {
           address: formData.shipping_address,
         },
         theme: {
-          color: "#3399cc",
+          color: "#cc0000",
         },
         modal: {
           ondismiss: () => alert("Payment cancelled"),
@@ -131,9 +169,6 @@ const BuyNowPage = () => {
   };
   
   
-  
-
-  // If the product hasn't loaded yet, render a loading message or spinner
   if (!product) {
     return (
       <Container className="py-5">
@@ -177,11 +212,13 @@ const BuyNowPage = () => {
                 <Form.Group className="mb-3">
                   <Form.Label>Phone Number</Form.Label>
                   <Form.Control
-                    type="number"
+                    type="tel"
                     name="customer_phone"
                     value={formData.customer_phone}
                     onChange={handleChange}
                     placeholder="9876543210"
+                    pattern="^\d{10}$"
+                    maxLength={10}
                     required
                   />
                 </Form.Group>
@@ -231,11 +268,13 @@ const BuyNowPage = () => {
                     <Form.Group className="mb-3">
                       <Form.Label>ZIP Code</Form.Label>
                       <Form.Control
-                        type="number"
+                        type="tel"
                         name="zip_code"
                         value={formData.zip_code}
                         onChange={handleChange}
                         placeholder="123456"
+                        pattern="^\d{6}$"
+                        maxLength={6}
                         required
                       />
                     </Form.Group>
@@ -268,12 +307,33 @@ const BuyNowPage = () => {
               <Card.Body>
                 <div className="d-flex justify-content-between mb-2">
                   <span>{product.title}</span>
-                  <span>{product.price}</span>
+                  <span>₹{product.price}</span>
+                </div>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <span>Quantity</span>
+                  <div className="d-flex align-items-center">
+                    <Button
+                      variant="outline-secondary"
+                      size="sm"
+                      onClick={() => handleQuantityChange(quantity - 1)}
+                      disabled={quantity <= 1}
+                    >
+                      -
+                    </Button>
+                    <span className="mx-2">{quantity}</span>
+                    <Button
+                      variant="outline-secondary"
+                      size="sm"
+                      onClick={() => handleQuantityChange(quantity + 1)}
+                    >
+                      +
+                    </Button>
+                  </div>
                 </div>
                 <hr />
                 <div className="d-flex justify-content-between fw-bold mb-3">
                   <span>Total</span>
-                  <span>{product.price}</span>
+                  <span>₹{(product.price * quantity).toFixed(2)}</span>
                 </div>
                 <Button
                   type="submit"

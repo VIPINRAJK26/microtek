@@ -1,14 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Afacad:ital,wght@0,400..700;1,400..700&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
 
 .card-subtitle {
-  font-family: "Barlow", sans-serif;
-  font-weight: 500;
+  position: relative;
+  font-family: "Afacad", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
   font-style: normal;
+  font-size: 1.25rem;
+  top: 80px;
 }
 
+/* .preview {
+  background-color: white !important;
+} */
+
 .preview-main-card {
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   aspect-ratio: 4 / 3; /* Or 16/9 or 3/2 depending on your image dimensions */
@@ -17,6 +26,8 @@
   justify-content: space-between;
   transition: aspect-ratio 0.3s ease;
   border: none;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 /* Optional: Adjust aspect ratio on smaller screens */
@@ -27,8 +38,8 @@
 
 .preview-body {
   height: 100%;
+  
 }
-
 
 .detail-section {
   padding-top: 12%;
@@ -43,12 +54,30 @@
   border-radius: 1rem;
 }
 
+@media (min-width: 2100px) and (max-width: 2560px) {
+  .card-subtitle {
+    top: 150px;
+    font-size: 1.7rem;
+  }
+}
+
+@media (min-width: 1600px) and (max-width: 2100px) {
+  .card-subtitle {
+    top: 100px;
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 1600px) {
+  .card-subtitle {
+    top: 80px;
+    font-size: 1.25rem;
+  }
+}
 
 @media (max-width: 768px) {
   .preview-main-card {
     aspect-ratio: 4 / 5;
   }
-
 
   .detail-section {
     padding-top: 8%;
@@ -57,11 +86,32 @@
 
 @media (max-width: 576px) {
   .preview-main-card {
-    height: 250px;
+    aspect-ratio: 4 / 5;
+    background-size: contain;
+  }
+
+  .preview-body{
+    box-shadow: none;
   }
 
   .detail-section {
     padding-top: 5%;
+  }
+
+  .feature1 {
+    font-size: .6rem;
+    position: relative;
+    top: 90px;
+
+  }
+
+  .preview-buttons {
+    position: relative;
+    top: 20px
+  }
+
+  .card-subtitle {
+    font-size: 1rem;
   }
 
   .preview-body h5 {

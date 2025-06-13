@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axiosInstance from "../api/axios";
 import { mergeCart } from "../utils/mergeCart";
+
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,15 @@ function Login() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  console.log(from, "from path");
+  console.log("Full location object:", location);
+  console.log("Location state:", location.state);
+  console.log("From path:", location.state?.from?.pathname);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +72,8 @@ function Login() {
         await mergeCart();
 
         // Navigate after ensuring tokens are set
-        navigate("/");
+        navigate(from, { replace: true });
+
       } catch (error) {
         if (error.response) {
           if (error.response.status === 401) {

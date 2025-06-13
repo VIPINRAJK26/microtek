@@ -22,8 +22,8 @@ const MainPreview = () => {
         <img
           src={selectedPreview.image}
           alt="no image"
-          className="img-fluid"
-          style={{ width: "100%", height: "50vh" }}
+          className="img-fluid main_preview_image"
+          // style={{ width: "100%", height: "50vh" }}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = "/No_image.jpg";

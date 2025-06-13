@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Accordion,Form } from "react-bootstrap";
+import { Accordion, Form } from "react-bootstrap";
 import axiosInstance from "../../api/axios";
+import { useMemo } from "react";
 
 const ProductFilter = ({
   initialProducts = [],
@@ -9,20 +10,24 @@ const ProductFilter = ({
   selectedCategory,
   uniqueVariants,
   previewDetails,
+  products,
+  subCategory,
 }) => {
   const [options, setOptions] = useState({});
   const [allowedFilters, setAllowedFilters] = useState([]);
   const [filters, setFilters] = useState({});
-  const [subcategory, setSubcategory] = useState("");
+  // const [subcategory, setSubcategory] = useState("");
   const [priceRange, setPriceRange] = useState([0, 0]);
   const [selectedPrice, setSelectedPrice] = useState([0, 0]);
 
-  console.log(initialProducts, "products initial");
-  console.log(allowedFilters, "allowed filters");
-  console.log(options, "options");
-  console.log(selectedVariant, "selected variant");
-  console.log(selectedCategory, "selected category");
-  console.log(previewDetails, "preview details------------------");
+  console.log("Initial products:", initialProducts);
+  console.log(products, "products in filter component");
+  console.log(subCategory, "subCategory in filter component");
+  console.log(allowedFilters, "allowedFilters in filter component");
+  console.log(selectedCategory, "selectedCategory in filter component");
+  
+
+ 
 
   const UNITS = {
     va_rating: "VA",
@@ -34,48 +39,35 @@ const ProductFilter = ({
     warranty: "Years",
   };
 
+  const filteredBaseProducts = useMemo(() => {
+    return products.filter(
+      (product) =>
+        product.subcategory?.toLowerCase() === subCategory?.toLowerCase() &&
+        product.category?.toLowerCase() === selectedCategory?.toLowerCase()
+    );
+  }, [products, subCategory, selectedCategory]);
+  
+
+  console.log("Filtered base products:", filteredBaseProducts);
   
 
   useEffect(() => {
-    if (initialProducts.length > 0) {
-      const prices = initialProducts.map((p) => p.price).filter(Boolean);
+    if (filteredBaseProducts.length > 0) {
+      const prices = filteredBaseProducts.map((p) => p.price).filter(Boolean);
       const min = Math.min(...prices);
       const max = Math.max(...prices);
       setPriceRange([min, max]);
       setSelectedPrice([min, max]);
     }
-  }, [initialProducts]);
+  }, [filteredBaseProducts]);
   
 
-  useEffect(() => {
-    // Try to set subcategory from previewDetails (more stable)
-    if (selectedCategory && selectedVariant && previewDetails?.length) {
-      const match = previewDetails.find(
-        (item) =>
-          item.category === selectedCategory &&
-          item.variant_name === selectedVariant
-      );
-      if (match?.subcategory) {
-        setSubcategory(match.subcategory.toLowerCase());
-      }
-    }
-
-    // OR fallback to first product's subcategory
-    if (initialProducts.length && initialProducts[0].subcategory) {
-      setSubcategory(initialProducts[0].subcategory.toLowerCase());
-    }
-  }, [selectedCategory, selectedVariant, previewDetails, initialProducts]);
-  
-  
-  
-
-  // 🟢 Fetch allowed filters based on subcategory
   useEffect(() => {
     const fetchFilters = async () => {
-      if (!subcategory) return;
+      if (!subCategory) return;
 
       try {
-        const response = await axiosInstance.get(`filters/${subcategory}/`);
+        const response = await axiosInstance.get(`filters/${subCategory}/`);
         setAllowedFilters(response.data.filters || []);
       } catch (error) {
         console.error("Failed to fetch filters:", error);
@@ -83,55 +75,86 @@ const ProductFilter = ({
     };
 
     fetchFilters();
-  }, [subcategory]);
+  }, [subCategory]);
 
-  // 🟠 Build filter options based on allowed filters
-  // 🔵 Extract available options from products based on allowed filters
   useEffect(() => {
-    if (!initialProducts.length || !allowedFilters.length) return;
+    if (!filteredBaseProducts.length || !allowedFilters.length) return;
 
     const newOptions = {};
 
     allowedFilters.forEach((key) => {
-      // For variant, inject uniqueVariants passed from parent instead of building from products
-      if (key === "variant" && uniqueVariants && uniqueVariants.length) {
-        newOptions[key] = uniqueVariants;
-      } else {
-        let filteredProducts = initialProducts;
+      if (key === "variant") {
+        const variantValues = [
+          ...new Set(
+            filteredBaseProducts
+              .map((product) => product.variant)
+              .filter(Boolean)
+              .map((val) => val.toString())
+          ),
+        ];
 
-        // Optionally filter products by category for other keys if needed
-        if (key === "variant" && selectedCategory) {
-          filteredProducts = initialProducts.filter(
-            (product) => product.category === selectedCategory
-          );
-          console.log(
-            `🔍 Filtering products for category "${selectedCategory}":`,
-            filteredProducts
-          );
+        if (variantValues.length) {
+          newOptions[key] = variantValues;
         }
-
-        // Collect unique values
+      } else {
         const uniqueValues = [
           ...new Set(
-            filteredProducts
+            filteredBaseProducts
               .map((product) => product[key])
               .filter(Boolean)
               .map((val) => val.toString())
           ),
         ];
 
-        console.log(`✅ Filter key: ${key}, Values:`, uniqueValues);
-
         if (uniqueValues.length) {
           newOptions[key] = uniqueValues;
         }
       }
     });
-    
 
-    console.log("🧪 Final options:", newOptions);
     setOptions(newOptions);
-  }, [initialProducts, allowedFilters, selectedCategory]);
+  }, [filteredBaseProducts, allowedFilters, selectedCategory]);
+  
+
+  // 🟢 Preselect the current variant if available
+  useEffect(() => {
+    if (options.variant && selectedVariant) {
+      setFilters((prevFilters) => {
+        if (
+          !prevFilters.variant ||
+          !prevFilters.variant.includes(selectedVariant.toString())
+        ) {
+          return {
+            ...prevFilters,
+            variant: [selectedVariant.toString()],
+          };
+        }
+        return prevFilters;
+      });
+    }
+  }, [options.variant, selectedVariant]);
+
+  // 🟢 Apply filters whenever filters state changes
+  useEffect(() => {
+    const filtered = filteredBaseProducts.filter((product) => {
+      return Object.entries(filters).every(([filterKey, filterValues]) => {
+        const productValue = product[filterKey];
+        if (!filterValues.length) return true;
+
+        if (Array.isArray(productValue)) {
+          return productValue.some((val) =>
+            filterValues.includes(val.toString())
+          );
+        }
+
+        return filterValues.includes(productValue?.toString());
+      });
+    });
+
+    onDataChange(filtered);
+  }, [filters, filteredBaseProducts]);
+  
+  
 
   const handleFilterChange = (event, key) => {
     const value = event.target.value.toString();
@@ -143,32 +166,19 @@ const ProductFilter = ({
         ? [...prevValues, value]
         : prevValues.filter((v) => v !== value);
 
-      const updatedFilters = {
+      const newFilters = {
         ...prev,
         [key]: updatedValues,
       };
 
-      const filtered = initialProducts
-        .filter((product) => product.category === selectedCategory)
-        .filter((product) => {
-          return Object.entries(updatedFilters).every(
-            ([filterKey, filterValues]) => {
-              const productValue = product[filterKey];
-              if (Array.isArray(productValue)) {
-                return productValue.some((val) =>
-                  filterValues.includes(val.toString())
-                );
-              }
-              return filterValues.includes(productValue?.toString());
-            }
-          );
-        });
+      // Remove key entirely if no values selected
+      if (updatedValues.length === 0) {
+        delete newFilters[key];
+      }
 
-
-      onDataChange(filtered); // Send filtered list back to parent
-
-      return updatedFilters;
+      return newFilters;
     });
+    
   };
 
   return (
@@ -194,14 +204,13 @@ const ProductFilter = ({
                   <Form.Range
                     min={priceRange[0]}
                     max={priceRange[1]}
-                    step={100} // or any step value
+                    step={100}
                     value={selectedPrice[1]}
                     onChange={(e) => {
                       const newMax = parseInt(e.target.value);
                       setSelectedPrice([priceRange[0], newMax]);
 
-                      // Apply filter
-                      const filtered = initialProducts
+                      const filtered = filteredBaseProducts
                         .filter(
                           (product) => product.category === selectedCategory
                         )
@@ -242,3 +251,8 @@ const ProductFilter = ({
 };
 
 export default ProductFilter;
+
+
+
+
+

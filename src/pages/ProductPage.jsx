@@ -6,32 +6,45 @@ import "./ProductPage.css";
 import { useParams, useLocation } from "react-router-dom";
 import useProducts from "../hooks/useProducts";
 
-
 const Products = () => {
   const { products } = useProducts();
-  const { category, variant, } = useParams();
+  const { category, variant } = useParams();
   const [baseProducts, setBaseProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState(baseProducts);
   const location = useLocation();
-  const { variantData, uniqueVariants,previewDetails } = location.state || {};
-  // const { variantData, uniqueVariants } = location.state || {};
+  const { variantData, uniqueVariants, previewDetails, subcategory } =
+    location.state || {};
 
+  console.log("Subcategory:------------------", subcategory);
   console.log("All unique variants:", uniqueVariants);
   console.log("Current variant data:", variantData);
   console.log("Preview details--------------:", previewDetails);
-
-  console.log(products,"products")
-  console.log(category, variant, "cat,var")
-  console.log(baseProducts, "base filter")
+  console.log(products, "products");
+  console.log(
+    "New product present?",
+    products.find((p) => p?.slug === variant)?.title
+  );
+  console.log(category, variant, "cat,var");
+  console.log(baseProducts, "base-products filter");
   console.log(filteredProducts, "filtered filter");
 
-
   useEffect(() => {
-    if (category && variant) {
+    if (!products || products.length === 0) return;
+
+    // Find the subcategory for the selected variant
+    // const subCategory = products.find(
+    //   (p) => p?.variant_slug === variant
+    // )?.subcategory;
+
+    if (category && variant && subcategory) {
       const filtered = products.filter(
         (p) =>
-          p.category?.toLowerCase() === category.toLowerCase() &&
-          p.variant_slug?.toLowerCase() === variant.toLowerCase()
+          p?.category?.trim()?.toLowerCase() ===
+            category.trim().toLowerCase() &&
+          p?.subcategory?.trim()?.toLowerCase() ===
+            subcategory.trim().toLowerCase() &&
+          p?.variant_slug?.trim()?.toLowerCase() ===
+            variant.trim().toLowerCase()
       );
       setBaseProducts(filtered);
       setFilteredProducts(filtered);
@@ -58,6 +71,8 @@ const Products = () => {
             variantData={variantData}
             uniqueVariants={uniqueVariants}
             previewDetails={previewDetails}
+            products={products}
+            subCategory={subcategory}
           />
         </Col>
         <Col md={9}>

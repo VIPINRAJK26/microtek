@@ -1,87 +1,39 @@
-// src/contexts/CartContext.js
-import { createContext, useContext, useState, useEffect } from 'react';
-import axiosInstance from '../api/axios';
+import { createContext, useContext, useState, useEffect } from "react";
+import axiosInstance from "../api/axios";
+import { getOrCreateSessionKey } from "../utils/session";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const sessionKey = getOrCreateSessionKey();
+  const token = localStorage.getItem("access_token");
 
-  const fetchCart = async () => {
+  const fetchCartQuantity = async () => {
     try {
-      setIsLoading(true);
-      const session_key = localStorage.getItem("session_key");
-      const response = await axiosInstance.get("cart/", {
-        params: { session_key }, // pass session_key if available
-      });
-      setCartItems(response.data.items || []); // <-- important
-    } catch (error) {
-      console.error("Error fetching cart:", error);
-      setCartItems([]); // reset to empty array on error to avoid undefined
-    } finally {
-      setIsLoading(false);
+      const res = token
+        ? await axiosInstance.get("cart/")
+        : await axiosInstance.get("cart/", {
+            params: { session_key: sessionKey },
+          });
+
+      const items = res.data?.cart_items || [];
+      setCartQuantity(items.length); 
+    } catch (err) {
+      console.error("Cart fetch error:", err);
     }
   };
-  
   
 
   useEffect(() => {
-    fetchCart(); 
+    fetchCartQuantity();
   }, []);
 
-  const addToCart = async (id, quantity = 1) => {
-    try {
-      await axiosInstance.addToCart(id, quantity);
-      await fetchCart();
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-      throw error;
-    }
-  };
-
-  const updateQuantity = async (itemId, quantity) => {
-    try {
-      if (quantity <= 0) {
-        await removeFromCart(itemId);
-        return;
-      }
-      await axiosInstance.updateCartItem(itemId, quantity);
-      await fetchCart();
-    } catch (error) {
-      console.error('Error updating quantity:', error);
-      throw error;
-    }
-  };
-
-  const removeFromCart = async (itemId) => {
-    try {
-      await axiosInstance.removeFromCart(itemId);
-      await fetchCart();
-    } catch (error) {
-      console.error('Error removing from cart:', error);
-      throw error;
-    }
-  };
-
-  const cartTotal = cartItems.reduce(
-    (total, item) => total + (item.price * item.quantity),
-    0
-  );
-
   return (
-    <CartContext.Provider
-      value={{
-        cartItems,
-        isLoading,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        cartTotal,
-        fetchCart // Add this if you need to manually refresh the cart
-      }}
-    >
+    <CartContext.Provider value={{ cartQuantity, fetchCartQuantity }}>
       {children}
     </CartContext.Provider>
   );
 };
+
+export const useCartContext = () => useContext(CartContext);

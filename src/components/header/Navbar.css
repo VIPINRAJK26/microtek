@@ -13,33 +13,26 @@
 
 .navbar-toggler-icon {
     background-image: url("https://cdn-icons-png.flaticon.com/512/1828/1828859.png");
-    /* Hamburger icon */
 }
 
 .navbar-brand img {
     height: 40px;
 }
 
-
-/* Initial styles for search input */
+/* Search input styles */
 .search-container {
     position: relative;
     display: inline-block;
     width: 0;
     opacity: 0;
     transition: width 0.5s ease, opacity 0.5s ease;
-    /* Smooth transition */
 }
 
-/* Show the search input on click */
 .search-container.show {
     width: 200px;
-    /* Adjust width as per your design */
     opacity: 1;
-    /* Fade in effect */
 }
 
-/* Style for the search input */
 .search-input {
     width: 100%;
     border: 1px solid #ccc;
@@ -47,24 +40,17 @@
     padding: 5px 15px;
     outline: none;
     transition: all 0.3s ease;
-
 }
 
-/* Add focus styles */
 .search-input:focus {
     border-color: #007bff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
 }
 
-
-
-
-.nav-text{
+.nav-text {
     font-weight: 400;
     font-size: 14px;
 }
-
-
 
 /* Mega Dropdown Styling */
 .mega-dropdown {
@@ -76,20 +62,19 @@
     padding: 2.5rem;
     border-top: none;
     z-index: 1000;
-    opacity: 0; /* Start hidden */
-    transform: translateY(-10px); /* Start slightly above */
-    animation: fadeDown 0.3s forwards; /* Apply the fade-down animation */
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeDown 0.3s forwards;
 }
 
-/* Define the fade-down animation */
 @keyframes fadeDown {
     from {
         opacity: 0;
-        transform: translateY(-10px); /* Start from above */
+        transform: translateY(-10px);
     }
     to {
         opacity: 1;
-        transform: translateY(0); /* End at normal position */
+        transform: translateY(0);
     }
 }
 
@@ -124,51 +109,68 @@
     display: block;
 }
 
-.care{
-
+.care {
     font-weight: 800;
     color: #1d4694;
 }
 
-
-/* User Dropdown Styles */
-.user-dropdown {
-  min-width: 120px;
-  z-index: 1000;
-  padding: 0.5rem 0;
-  display: none;
+/* Cart badge styles */
+.cart-badge {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
 }
 
-.user-dropdown.show {
-  display: block;
+/* Fix hover-based user dropdown */
+.position-relative {
+    position: relative;
+}
+
+.user-dropdown {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    top: 100%;
+    right: 0;
+    position: absolute;
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 150px;
+    padding: 0.5rem;
+}
+
+/* Show on hover */
+.position-relative:hover .user-dropdown,
+.user-dropdown:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .user-dropdown .dropdown-item {
-  padding: 0.5rem 1rem;
-  color: #333;
-  text-decoration: none;
-  display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    display: block;
+}
+
+.user-button:hover {
+    background-color: #f8f9fa;
+    color: #0d6efd;
 }
 
 .user-dropdown .dropdown-item:hover {
-  background-color: #f8f9fa;
-  color: #0d6efd;
+    background-color: #f8f9fa;
+    color: #0d6efd;
 }
 
-/* Make the parent container show dropdown on hover */
-.position-relative:hover .user-dropdown {
-  display: block;
-}
-
-/* Cart badge styles */
-.cart-badge {
-  font-size: 0.6rem;
-  padding: 0.2rem 0.4rem;
-}
-
-
-@media (max-width:768px){
-    .collapse{
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .collapse {
         padding-left: 20px;
     }
 }

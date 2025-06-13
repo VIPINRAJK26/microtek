@@ -77,3 +77,20 @@
   z-index: 99999 !important;
   overflow: visible !important;
 }
+
+
+.success-container {
+  background: #f8f9fa; /* Light gray background */
+}
+
+.success-image {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)); /* Soft shadow */
+}
+
+.btn-primary {
+  transition: transform 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px); /* Lift effect on hover */
+}

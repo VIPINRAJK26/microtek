@@ -12,16 +12,16 @@ const CardSlider = () => {
     "Newly Launched",
     "Home UPS",
     "Inverter Batteries",
-    "Commercial UPS",
+    "Solar Power",
   ];
 
   const groupedProducts = {
     "Newly Launched": products.filter((p) => p.new_arrival).slice(0, 4),
-    "Home UPS": products.filter((p) => p.category === "home_ups").slice(0, 4),
+    "Home UPS": products.filter((p) => p.category === "home_inverter_and_ups").slice(0, 4),
     "Inverter Batteries": products
       .filter((p) => p.category === "batteries")
       .slice(0, 4),
-    "Commercial UPS": products
+    "Solar Power": products
       .filter((p) => p.category === "solar_power")
       .slice(0, 4),
   };

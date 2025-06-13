@@ -16,7 +16,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getOrCreateSessionKey } from "../utils/session";
 import { Link } from "react-router-dom";
-import useCart from "../hooks/useCart";
+// import useCart from "../hooks/useCart";
 
 const Cart = (id) => {
   const [cart, setCart] = useState(null);
@@ -159,7 +159,7 @@ const Cart = (id) => {
               <p className="text-muted mb-4">
                 Looks like you haven't added anything to your cart yet
               </p>
-              <Button variant="primary">Browse Products</Button>
+              {/* <Button variant="primary">Browse Products</Button> */}
             </div>
           ) : (
             <>
@@ -215,8 +215,17 @@ const Cart = (id) => {
                   </Col>
                   <Col xs={12} md={2} className="text-md-end">
                     <Button
+                      as={Link}
+                      to={`/buy/${item.product.id}`}
+                      variant="warning"
+                      size="sm"
+                      className="text-white fw-bold"
+                    >
+                      Buy Now
+                    </Button>
+                    <Button
                       variant="link"
-                      className="text-danger p-0"
+                      className="text-danger p-0 ms-2"
                       onClick={() => removeItem(item.id)}
                     >
                       <FaTrashAlt className="me-1" />
@@ -245,16 +254,18 @@ const Cart = (id) => {
                 <Col className="text-end text-primary">₹{cart.total_price}</Col>
               </Row>
 
-              <div className="mt-4">
-                <Link to={`/buy/${id}`}>
-                  <Button
-                    variant="warning"
-                    className="w-100 text-white fw-bold"
-                  >
-                    Proceed to Checkout
-                  </Button>
-                </Link>
-              </div>
+              {/* <div className="mt-4">
+                {cart?.cart_items.map((item) => (
+                  <Link to={`/buy/${item.product.id}`}>
+                    <Button
+                      variant="warning"
+                      className="w-100 text-white fw-bold"
+                    >
+                      Proceed to Checkout
+                    </Button>
+                  </Link>
+                ))}
+              </div> */}
             </>
           )}
         </Card.Body>

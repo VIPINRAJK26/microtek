@@ -7,7 +7,7 @@ const ProductCard = ({id, image, title, price, old_price }) => {
       <Link to={`/single/${id}`}>
         <Card.Img variant="top" src={image} alt={title} />
       </Link>
-      <Card.Body className="d-flex justify-content-center flex-column align-items-center">
+      <Card.Body className="d-flex text-center justify-content-center flex-column align-items-center">
         <Card.Title>{title}</Card.Title>
         {/* <Card.Text>SKU: {sku}</Card.Text> */}
         <Card.Text className="text-center">

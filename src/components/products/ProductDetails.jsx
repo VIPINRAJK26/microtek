@@ -28,7 +28,7 @@ const ProductDetails = ({
   const featureList = Array.isArray(features)
     ? features
     : typeof features === "string"
-    ? features.split(",").map((f) => f.trim())
+    ? features.split("#").map((f) => f.trim())
     : [];
 
   useEffect(() => {
@@ -81,6 +81,8 @@ const ProductDetails = ({
     console.log("Before toast check", alreadyInCart);
 
     if (alreadyInCart) {
+      alert("Product is already in cart!");
+
       toast.info("Product is already in cart!", {
         autoClose: 3000,
         toastId: "already-in-cart-toast",

@@ -32,6 +32,58 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+            <div className="d-flex gap-2 pt-md-5 pb-2 text-black">
+              <a
+                href="https://www.facebook.com/warriorpowerindia/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black"
+              >
+                <i className="fab fa-facebook"></i>
+              </a>
+              <a
+                href="https://www.instagram.com/warriorpowerindia/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black"
+              >
+                <i className="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://in.pinterest.com/warriorpowerindia/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black"
+              >
+                <i className="fab fa-pinterest"></i>
+              </a>
+
+              <a
+                href="https://x.com/warriorpowerind"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black"
+              >
+                <i className="fa-brands fa-x-twitter"></i>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/102684799/admin/dashboard/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black"
+              >
+                <i className="fab fa-linkedin"></i>
+              </a>
+
+              <a
+                href="https://www.youtube.com/channel/UCBXwXd4tBux6AYYdeSfSAGw/community?pvf=CAI%253D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black"
+              >
+                <i className="fab fa-youtube"></i>
+              </a>
+            </div>
           </div>
 
           {/* Services Section */}
@@ -75,64 +127,21 @@ const Footer = () => {
               <i className="fa-brands fa-whatsapp ps-2"></i> +91 9846151900
             </p>
             <p>
+              <i className="fas fa-phone "></i>
+              <i className="fa-brands fa-whatsapp ps-2"></i> +91 9846081800
+            </p>
+            <p>
+              <i className="fas fa-phone "></i>
+              <i className="fa-brands fa-whatsapp ps-2"></i> +91 9847341800
+            </p>
+            <p>
               <i className="fas fa-envelope"></i> info@warriorind.com
             </p>
-            <h5 className="pb-md-3 pt-md-3">Corporate Office</h5>
+            <h5 className="pb-md-1 pt-md-1">Corporate Office</h5>
             <p>
               <i className="fas fa-map-marker-alt"></i> Warrior Power India,
               Manjeri, Malappuram, Kerala, 676517
             </p>
-            <h5 className="pt-md-3">Follow Us</h5>
-            <div className="d-flex gap-2 pt-md-3 text-black">
-              <a
-                href="https://www.facebook.com/warriorpowerindia/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-black"
-              >
-                <i className="fab fa-facebook"></i>
-              </a>
-              <a
-                href="https://x.com/warriorpowerind"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-black"
-              >
-                <i className="fa-brands fa-x-twitter"></i>
-              </a>
-              <a
-                href="https://www.linkedin.com/company/102684799/admin/dashboard/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-black"
-              >
-                <i className="fab fa-linkedin"></i>
-              </a>
-              <a
-                href="https://in.pinterest.com/warriorpowerindia/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-black"
-              >
-                <i className="fab fa-pinterest"></i>
-              </a>
-              <a
-                href="https://www.instagram.com/warriorpowerindia/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-black"
-              >
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a
-                href="https://www.youtube.com/channel/UCBXwXd4tBux6AYYdeSfSAGw/community?pvf=CAI%253D"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-black"
-              >
-                <i className="fab fa-youtube"></i>
-              </a>
-            </div>
           </div>
         </div>
       </div>
