@@ -26,7 +26,7 @@ const Cart = (id) => {
   const [token, setToken] = useState(localStorage.getItem("access_token"));
   const sessionKey = getOrCreateSessionKey();
 
-  console.log(cart, "cart");
+  // console.log(cart, "cart");
 
   useEffect(() => {
     const checkToken = () => {
@@ -76,7 +76,7 @@ const Cart = (id) => {
           quantity,
           session_key: sessionKey,
         });
-        console.log("🚀 Sending session key to backend:", sessionKey);
+        // console.log("🚀 Sending session key to backend:", sessionKey);
       }
       fetchCart();
     } catch (error) {
@@ -93,7 +93,7 @@ const Cart = (id) => {
         await axiosInstance.delete(`/cart_item/${itemId}/`, {
           data: { session_key: sessionKey },
         });
-        console.log("🚀 Sending session key to backend:", sessionKey);
+        // console.log("🚀 Sending session key to backend:", sessionKey);
       }
       fetchCart();
     } catch (error) {
@@ -110,7 +110,7 @@ const Cart = (id) => {
         await axiosInstance.post("/cart/clear/", {
           session_key: sessionKey,
         });
-        console.log("🚀 Sending session key to backend:", sessionKey);
+        // console.log("🚀 Sending session key to backend:", sessionKey);
       }
       fetchCart();
     } catch (error) {

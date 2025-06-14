@@ -15,18 +15,18 @@ const Products = () => {
   const { variantData, uniqueVariants, previewDetails, subcategory } =
     location.state || {};
 
-  console.log("Subcategory:------------------", subcategory);
-  console.log("All unique variants:", uniqueVariants);
-  console.log("Current variant data:", variantData);
-  console.log("Preview details--------------:", previewDetails);
-  console.log(products, "products");
-  console.log(
-    "New product present?",
-    products.find((p) => p?.slug === variant)?.title
-  );
-  console.log(category, variant, "cat,var");
-  console.log(baseProducts, "base-products filter");
-  console.log(filteredProducts, "filtered filter");
+  // console.log("Subcategory:------------------", subcategory);
+  // console.log("All unique variants:", uniqueVariants);
+  // console.log("Current variant data:", variantData);
+  // console.log("Preview details--------------:", previewDetails);
+  // console.log(products, "products");
+  // console.log(
+  //   "New product present?",
+  //   products.find((p) => p?.slug === variant)?.title
+  // );
+  // console.log(category, variant, "cat,var");
+  // console.log(baseProducts, "base-products filter");
+  // console.log(filteredProducts, "filtered filter");
 
   useEffect(() => {
     if (!products || products.length === 0) return;
@@ -55,7 +55,7 @@ const Products = () => {
   }, [category, variant, products]);
 
   const handleDataChange = (filteredList) => {
-    console.log(filteredList, "filtered list");
+    // console.log(filteredList, "filtered list");
     setFilteredProducts(filteredList);
   };
 

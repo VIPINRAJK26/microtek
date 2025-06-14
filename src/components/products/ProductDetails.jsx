@@ -34,12 +34,12 @@ const ProductDetails = ({
   useEffect(() => {
     if (token) {
       const decodedToken = jwtDecode(token);
-      console.log("Token expiration time:", decodedToken.exp);
+      // console.log("Token expiration time:", decodedToken.exp);
     }
   }, [token]);
 
-  console.log("Session key used in ProductDetails.jsx:", sessionKey);
-  console.log(token, "token in ProductDetails.jsx");
+  // console.log("Session key used in ProductDetails.jsx:", sessionKey);
+  // console.log(token, "token in ProductDetails.jsx");
   const fetchCart = async () => {
     setLoading(true);
     try {
@@ -69,16 +69,13 @@ const ProductDetails = ({
       ? { headers: { Authorization: `Bearer ${token}` } }
       : {};
 
-    console.log("Auth Token:", token);
-    console.log("Axios Config:", config);
+    // console.log("Auth Token:", token);
+    // console.log("Axios Config:", config);
 
     if (!cartItems || !id) return;
 
     const alreadyInCart = cartItems.some((item) => item?.product?.id === id);
 
-    console.log("Already in cart?", alreadyInCart);
-
-    console.log("Before toast check", alreadyInCart);
 
     if (alreadyInCart) {
       alert("Product is already in cart!");
@@ -93,7 +90,7 @@ const ProductDetails = ({
 
     
 
-    console.log("Not in cart, continue");
+    // console.log("Not in cart, continue");
 
     try {
       const payload = {
@@ -102,7 +99,7 @@ const ProductDetails = ({
         ...(!token && { session_key: sessionKey }),
       };
 
-      console.log("Payload to be sent:", payload);
+      // console.log("Payload to be sent:", payload);
 
       await axiosInstance.post("/cart_item/", payload, config);
 

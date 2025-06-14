@@ -6,11 +6,12 @@ const Footer = () => {
   // Map of category names to their corresponding slugs used in URLs
   const categorySlugMap = {
     "Home Inverter/Ups": "home_inverter_and_ups",
+    "Lithium Inverter/Ups": "lithium_inverter_and_ups",
     "Solar Power": "solar_power",
     Batteries: "batteries",
+    "Li-Ion Batteries": "li_ion_batteries",
     "Ev Charger": "ev_charger",
     "Auto Stabilizer": "auto_stabilizer",
-    "Li-Ion Batteries": "li_ion_batteries",
   };
 
   return (

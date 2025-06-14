@@ -5,8 +5,8 @@ const MainPreview = () => {
   const { mainPreview, loading, error } = useMainPreview();
   const { category } = useParams();
   const categoryToShow = category;
-  console.log(categoryToShow, "main category");
-  console.log(category,"category from url")
+  // console.log(categoryToShow, "main category");
+  // console.log(category,"category from url")
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -15,7 +15,7 @@ const MainPreview = () => {
     (item) => item.category === categoryToShow
   );
 
-  console.log(selectedPreview,"main selectedPreview");
+  // console.log(selectedPreview,"main selectedPreview");
   return (
     <div className="header-section  ">
       {selectedPreview ? (

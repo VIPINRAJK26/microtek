@@ -10,13 +10,13 @@ const SingleProduct = () => {
   const { products } = useProducts();
   const [activeKey, setActiveKey] = useState("description");
 
-  console.log(products, "products");
-  console.log(id, "id");
+  // console.log(products, "products");
+  // console.log(id, "id");
 
   const product = products.find((product) => product.id === Number(id));
  // Match on SKU or use id
   
-  console.log(product, "product");
+  // console.log(product, "product");
 
   if (!product) {
     return <div className="pt-5 text-center">Product not found.</div>;
@@ -31,7 +31,7 @@ const SingleProduct = () => {
     ...productDetails
   } = product;
 
-  console.log(product , "product");
+  // console.log(product , "product");
 
   return (
     <Container fluid className="mt-5">

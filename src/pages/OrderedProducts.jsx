@@ -4,7 +4,6 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 const OrderPage = () => {
   const { orders, loading, error } = useOrders();
 
-  console.log("Orders:", orders);
 
   if (loading) return <p className="text-center">Loading orders...</p>;
   if (error)

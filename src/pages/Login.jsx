@@ -18,10 +18,10 @@ function Login() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  console.log(from, "from path");
-  console.log("Full location object:", location);
-  console.log("Location state:", location.state);
-  console.log("From path:", location.state?.from?.pathname);
+  // console.log(from, "from path");
+  // console.log("Full location object:", location);
+  // console.log("Location state:", location.state);
+  // console.log("From path:", location.state?.from?.pathname);
 
 
   const handleChange = (e) => {
@@ -63,10 +63,10 @@ function Login() {
         });
 
         // Debug token persistence
-        console.log(
-          "Stored Access Token:",
-          localStorage.getItem("access_token")
-        );
+        // console.log(
+        //   "Stored Access Token:",
+        //   localStorage.getItem("access_token")
+        // );
 
         // Merge anonymous cart with user cart
         await mergeCart();

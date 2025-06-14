@@ -8,7 +8,7 @@ const HomeSlider = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  console.log(hero, "hero");
+  // console.log(hero, "hero");
 
   return (
     <div id="mainCarousel" className="carousel slide" data-bs-ride="carousel">

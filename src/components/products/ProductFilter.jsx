@@ -20,11 +20,11 @@ const ProductFilter = ({
   const [priceRange, setPriceRange] = useState([0, 0]);
   const [selectedPrice, setSelectedPrice] = useState([0, 0]);
 
-  console.log("Initial products:", initialProducts);
-  console.log(products, "products in filter component");
-  console.log(subCategory, "subCategory in filter component");
-  console.log(allowedFilters, "allowedFilters in filter component");
-  console.log(selectedCategory, "selectedCategory in filter component");
+  // console.log("Initial products:", initialProducts);
+  // console.log(products, "products in filter component");
+  // console.log(subCategory, "subCategory in filter component");
+  // console.log(allowedFilters, "allowedFilters in filter component");
+  // console.log(selectedCategory, "selectedCategory in filter component");
   
 
  
@@ -48,7 +48,7 @@ const ProductFilter = ({
   }, [products, subCategory, selectedCategory]);
   
 
-  console.log("Filtered base products:", filteredBaseProducts);
+  // console.log("Filtered base products:", filteredBaseProducts);
   
 
   useEffect(() => {

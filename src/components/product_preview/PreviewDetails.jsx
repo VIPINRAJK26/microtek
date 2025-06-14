@@ -47,12 +47,12 @@ const PreviewDetails = () => {
 
   const uniqueVariants = [...new Set(filteredByCategory.map((p) => p.slug))];
 
-  console.log(subcategory, "subcategory from URL");
-  console.log(category, "category from URL");
-  console.log(groupedByVariant, "groupedByVariant");
-  console.log(filteredByCategory, "filteredByCategory");
-  console.log(uniqueVariants, "uniqueVariants");
-  console.log(brochureUrl, "brochureUrl");
+  // console.log(subcategory, "subcategory from URL");
+  // console.log(category, "category from URL");
+  // console.log(groupedByVariant, "groupedByVariant");
+  // console.log(filteredByCategory, "filteredByCategory");
+  // console.log(uniqueVariants, "uniqueVariants");
+  // console.log(brochureUrl, "brochureUrl");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -77,8 +77,6 @@ const PreviewDetails = () => {
   //   return <LiBatInverter data={selectedPreview} />;
   // }
 
-  console.log(selectedPreview, "selectedPreview");
-  console.log(previewDetails, "previewDetails");
 
   return (
     <div className="preview container-fluid mx-0 px-0 mt-md-4 px-md-5  ">

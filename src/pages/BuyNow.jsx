@@ -32,8 +32,8 @@ const BuyNowPage = () => {
     zip_code: "",
   });
 
-  console.log(token, "token");
-  console.log("print")
+  // console.log(token, "token");
+  // console.log("print")
 
   useEffect(() => {
     const selectedProduct = products?.find(
@@ -112,10 +112,9 @@ const BuyNowPage = () => {
               "/buy_now/place-order/",
               orderData
             );
-            console.log(res.data, "res--------------------------------");
 
             const cartResponse = await axiosInstance.get("/cart/");
-            console.log("Cart items:", cartResponse.data.cart_items); // Check structure
+            // console.log("Cart items:", cartResponse.data.cart_items); 
 
             const cartItemToDelete = cartResponse.data.cart_items.find(
               (item) => item?.product?.id === Number(id) // Safely access nested fields
@@ -125,16 +124,14 @@ const BuyNowPage = () => {
               // Only delete if ID exists
               await axiosInstance.delete(`/cart_item/${cartItemToDelete.id}/`);
             } else {
-              console.log("Item not in cart or missing ID");
+              // console.log("Item not in cart or missing ID");
             }
 
-            console.log("Full API Response:", res.data);
             if (res.data.id) {
               // Ensure this is `true`
-              console.log("Redirecting...");
+              // console.log("Redirecting...");
               navigate("/success");
             } else {
-              console.warn("No success flag in response:", res.data);
             }
           } catch (error) {
             console.error("Order save error:", error.response || error.message);
