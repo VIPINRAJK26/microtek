@@ -187,64 +187,77 @@ function Navbar() {
           </div>
         )}
 
-        {/* Mobile Menu */}
         {showMobileMenu && (
-          <div className="mobile-nav">
-            {!activeMobileCategory ? (
-              // Main Categories View
-              <>
-                <h4>Categories</h4>
-                <ul>
-                  {Object.keys(categories).map((category) => (
-                    <li key={category}>
-                      <button
-                        onClick={() => setActiveMobileCategory(category)}
-                        className="category-item"
-                      >
-                        {category}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ) : (
-              // Sub Categories View
-              <>
-                <button
-                  onClick={() => setActiveMobileCategory(null)}
-                  className="back-button"
-                >
-                  ← Back
-                </button>
-                <h4>{activeMobileCategory}</h4>
-                <ul>
-                  {categories[activeMobileCategory]?.map((subcat) => (
-                    <li key={subcat.name}>
-                      <Link
-                        to={`/preview/${
-                          categorySlugMap[activeMobileCategory]
-                        }/${subcategorySlugMap[subcat.name]}`}
-                        onClick={() => {
-                          setShowMobileMenu(false);
-                          setActiveMobileCategory(null);
-                        }}
-                      >
-                        <img src={subcat.img} alt={subcat.name} className="img-fluid" />
-                        {subcat.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
+          <div
+            className="mobile-nav-backdrop"
+            onClick={(e) => {
+              if (e.target.classList.contains("mobile-nav-backdrop")) {
+                setShowMobileMenu(false);
+                setActiveMobileCategory(null);
+              }
+            }}
+          >
+            <div className="mobile-nav">
+              {!activeMobileCategory ? (
+                // Main Categories View
+                <>
+                  <h4>Categories</h4>
+                  <ul className="main-categories">
+                    {Object.keys(categories).map((category) => (
+                      <li key={category}>
+                        <button
+                          onClick={() => setActiveMobileCategory(category)}
+                          className="category-item"
+                        >
+                          {category}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
 
-            {/* Support or Contact links at bottom if you wish */}
-            <Link to="/contact" onClick={() => setShowMobileMenu(false)}>
-              Support & Contact
-            </Link>
-            <Link to="/store" onClick={() => setShowMobileMenu(false)}>
-              Store Locator
-            </Link>
+                  <div className="contact-links">
+                    <Link
+                      to="/contact"
+                      onClick={() => setShowMobileMenu(false)}
+                    >
+                      Support & Contact
+                    </Link>
+                    <Link to="/store" onClick={() => setShowMobileMenu(false)}>
+                      Store Locator
+                    </Link>
+                  </div>
+                </>
+              ) : (
+                // Sub Categories View
+                <>
+                  <button
+                    onClick={() => setActiveMobileCategory(null)}
+                    className="back-button"
+                  >
+                    ← Back
+                  </button>
+                  <h4>{activeMobileCategory}</h4>
+                  <ul className="sub-categories">
+                    {categories[activeMobileCategory]?.map((subcat) => (
+                      <li key={subcat.name}>
+                        <Link
+                          to={`/preview/${
+                            categorySlugMap[activeMobileCategory]
+                          }/${subcategorySlugMap[subcat.name]}`}
+                          onClick={() => {
+                            setShowMobileMenu(false);
+                            setActiveMobileCategory(null);
+                          }}
+                        >
+                          <img src={subcat.img} alt={subcat.name} />
+                          <span>{subcat.name}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
           </div>
         )}
 
@@ -262,7 +275,7 @@ function Navbar() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="position-absolute end-0 mt-2 bg-white border rounded shadow py-3 px-2 z-50"
+                className="position-absolute end-0 mt-2 bg-white border rounded shadow py-3 px-md-2 z-50"
                 style={{ width: "140px" }}
               >
                 {user ? (
