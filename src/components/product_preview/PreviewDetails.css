@@ -12,15 +12,11 @@
   top: 80px;
 }
 
-/* .preview {
-  background-color: white !important;
-} */
-
 .preview-main-card {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  aspect-ratio: 4 / 3; /* Or 16/9 or 3/2 depending on your image dimensions */
+  aspect-ratio: 4 / 3;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,15 +26,12 @@
   box-shadow: none;
 }
 
-/* Optional: Adjust aspect ratio on smaller screens */
-
 .detail-section {
   padding-top: 12%;
 }
 
 .preview-body {
   height: 100%;
-  
 }
 
 .detail-section {
@@ -90,7 +83,7 @@
     background-size: contain;
   }
 
-  .preview-body{
+  .preview-body {
     box-shadow: none;
   }
 
@@ -99,22 +92,58 @@
   }
 
   .feature1 {
-    font-size: .6rem;
+    font-size: 0.6rem;
     position: relative;
     top: 90px;
-
   }
 
   .preview-buttons {
     position: relative;
-    top: 20px
+    /* top: 20px */
   }
 
   .card-subtitle {
     font-size: 1rem;
+    top: 130px;
   }
 
   .preview-body h5 {
     font-size: 0.95rem;
+  }
+}
+
+/* ----------------------lithium battery inverter-------------------- */
+
+.lithium-main {
+  position: absolute;
+  color: white;
+}
+
+.lithium-main-button {
+  outline: white;
+  color: white;
+  background: transparent;
+  border: 1px solid;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .lithium-main {
+    position: relative;
+    color: black;
+  }
+
+  .lithium-main-button {
+    outline: black;
+    color: black;
+    background: transparent;
+    border: 1px solid;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    cursor: pointer;
   }
 }

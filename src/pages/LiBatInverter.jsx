@@ -18,8 +18,6 @@ const LiBatInverter = ({ data, category, subcategory }) => {
     setErrorBrochure(null);
     setLoadingBrochure(false);
   };
-  
-  
 
   const groupedByVariant = previewDetails.reduce((acc, product) => {
     const key = product.slug;
@@ -34,12 +32,6 @@ const LiBatInverter = ({ data, category, subcategory }) => {
     (product) => product.category.toLowerCase() === category.toLowerCase()
   );
 
-  console.log(subcategory, "subcategory from URL");
-  console.log(category, "category from URL");
-  console.log(groupedByVariant, "groupedByVariant");
-  console.log(filteredByCategory, "filteredByCategory");
-  // console.log(uniqueVariants, "uniqueVariants");
-  console.log(brochureUrl, "brochureUrl");
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -51,15 +43,12 @@ const LiBatInverter = ({ data, category, subcategory }) => {
       (!subcategory || item.subcategory === subcategory)
   );
 
-  console.log(selectedPreview, "selectedPreview");
-  console.log(previewDetails, "previewDetails");
-
   return (
-    <div>
-      <div className="container-md-fluid pb-md-4 py-5">
-        <div className="row align-items-center justify-content-center">
+    <div className=" pb-md-4 py-5">
+      <div className="container-fluid">
+        <div className="row align-items-center  justify-content-center">
           <div className="">
-            <div className="card border-0">
+            <div className="card border-0 shadow">
               {selectedPreview && selectedPreview.length > 0 ? (
                 selectedPreview.map((product, index) => (
                   <div className="row g-0" key={product.id}>
@@ -71,13 +60,13 @@ const LiBatInverter = ({ data, category, subcategory }) => {
                         style={{ width: "100%", height: "100%" }}
                       />
                     </div>
-                    <div className="position-absolute col-12 text-white col-lg-5 d-flex flex-column justify-content-between p-4">
+                    <div className="lithium-main col-12  col-lg-5 d-flex flex-column justify-content-between p-4">
                       <h3 className="fw-bold">{product.variant_name}</h3>
                       <p className="mb-1">{product.slogan}</p>
 
                       <div className="detail-section">
                         <ul
-                          className="list-unstyled text-white fw-bold"
+                          className="list-unstyled  fw-bold"
                           style={{ lineHeight: "28px" }}
                         >
                           {product.feature1?.split("#").map((feature, idx) => (
@@ -101,7 +90,7 @@ const LiBatInverter = ({ data, category, subcategory }) => {
                         </Link>
 
                         <button
-                          className="btn btn-md-outline-light text-white rounded-5"
+                          className="btn lithium-main-button  rounded-5"
                           onClick={() => handleShow(product.brochure)}
                           disabled={loadingBrochure}
                         >
@@ -156,7 +145,7 @@ const LiBatInverter = ({ data, category, subcategory }) => {
                         </Modal>
                       </div>
                     </div>
-                    <div className=" d-flex gap-2 ps-3 py-2 border-top  highlights">
+                    <div className=" d-flex gap-2 ps-3 py-3 border-top  highlights">
                       <p className="badge bg-primary p-2 rounded-0  my-auto ">
                         Highlights
                       </p>

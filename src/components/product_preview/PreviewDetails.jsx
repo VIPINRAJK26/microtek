@@ -102,7 +102,7 @@ const PreviewDetails = () => {
                   // backgroundPosition: "center",
                 }}
               >
-                <div className="preview-body d-flex flex-column justify-content-between card-body p-3">
+                <div className="preview-body d-flex flex-column justify-content-between card-body p-md-3">
                   <h5 className="card-subtitle text-white w-50">
                     {product.slogan}
                   </h5>
@@ -121,7 +121,7 @@ const PreviewDetails = () => {
                   </div>
 
                   <div>
-                    <div className="pt-4 d-flex flex-md-wrap preview-buttons gap-md-2">
+                    <div className="pt-md-4 d-flex flex-md-wrap preview-buttons  gap-2">
                       <Link
                         to={`/products/${category}/${product.slug}`}
                         state={{
@@ -137,7 +137,7 @@ const PreviewDetails = () => {
                       </Link>
 
                       <button
-                        className="btn btn-outline-md-light text-white rounded-5"
+                        className="btn btn-outline-md-light btn-outline-dark text-md-white text-dark rounded-5"
                         onClick={() => handleShow(product.brochure)}
                         disabled={loadingBrochure}
                       >
