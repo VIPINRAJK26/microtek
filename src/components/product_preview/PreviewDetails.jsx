@@ -79,8 +79,8 @@ const PreviewDetails = () => {
 
 
   return (
-    <div className="preview container-fluid mx-0 px-0 mt-md-4 px-md-5  ">
-      <div className="preview-main row">
+    <div className=" container-fluid  px-0 mt-md-4 px-md-5  ">
+      <div className=" row">
         {category === "lithium_inverter_and_ups" &&
         lithiumSubcategories.includes(subcategory) ? (
           <LiBatInverter
