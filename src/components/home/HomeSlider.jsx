@@ -1,11 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import useHeroCarousel from "../../hooks/useHeroCarousel";
+import Loader from "../common/Loader";
 
 const HomeSlider = () => {
 
   const { hero, loading, error } = useHeroCarousel();
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   if (error) return <div>Error: {error.message}</div>;
 
   // console.log(hero, "hero");

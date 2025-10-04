@@ -14,6 +14,7 @@ import { ToastContainer } from "react-bootstrap";
 import { CartProvider } from "./context/CartContex";
 import { OrderProvider } from "./context/OrderContext";
 import WhatsAppIcon from "./components/whatsapp/WhatsApp";
+import Loader from "./components/common/Loader";
 
 const Landing = lazy(() => import("./pages/HomePage"));
 const Header = lazy(() => import("./components/header/Navbar"));
@@ -43,7 +44,7 @@ function App() {
             <ScrollToTop />
 
             <main>
-              <Suspense>
+              <Suspense fallback={<Loader/>}>
                 <Routes>
                   <Route path="/" element={<Landing />} />
                   <Route

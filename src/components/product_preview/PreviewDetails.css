@@ -30,6 +30,18 @@
   padding-top: 12%;
 }
 
+.preview-button {
+  color: white;
+  background: transparent;
+  border: 1px solid;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+
+
 .preview-body {
   height: 100%;
 }
@@ -97,9 +109,8 @@
     top: 90px;
   }
 
-  .preview-buttons {
-    position: relative;
-    /* top: 20px */
+  .preview-button {
+    color: black;
   }
 
   .card-subtitle {
@@ -109,6 +120,11 @@
 
   .preview-body h5 {
     font-size: 0.95rem;
+  }
+
+  .preview-buttons{
+    position: relative;
+    top: 15px;
   }
 }
 

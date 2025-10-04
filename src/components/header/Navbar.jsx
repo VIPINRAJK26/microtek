@@ -34,14 +34,14 @@ function Navbar() {
 
   const categories = {
     "Home Inverter/Ups": [
-      { name: "Online Inverter/Ups", img: "/1. ONLINE UPS.png" },
       { name: "Offline Inverter/Ups", img: "/2. OFF LINE UPS.png" },
+      { name: "Online Inverter/Ups", img: "/1. ONLINE UPS.png" },
       { name: "HKVA UPS", img: "/3. HKVA UPS.png" },
       { name: "AVR UPS", img: "/avr.png" },
     ],
     "Lithium Inverter/Ups": [
-      { name: "Online Inverter/Ups", img: "/Lion 1.png" },
       { name: "Offline Inverter/Ups", img: "/Lion 2.png" },
+      { name: "Online Inverter/Ups", img: "/Lion 1.png" },
       { name: "HKVA UPS", img: "/lion hkva.png" },
       { name: "AVR UPS", img: "/lion hkva.png" },
     ],

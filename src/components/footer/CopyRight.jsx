@@ -10,8 +10,9 @@ const CopyrightSection = () => {
         </div>
         <div className="w-50 mx-auto">
           <p className="text-center ">
-            Our Parent Company's Legal Name Is VILAKKUMADATHIL YASAR ARAFATH our
-            trade Name Is Smart Enterprises, and warriorind Is A Subsidiary
+            Our Parent Company's Legal Name Is VILAKKUMADATHIL YASAR ARAFATH,
+            our trade Name Is Smart Enterprises, and Warriorind and Neogrid are
+            Subsidiaries.
           </p>
         </div>
         <div className="footer-links">

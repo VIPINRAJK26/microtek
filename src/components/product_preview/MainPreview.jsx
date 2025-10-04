@@ -1,5 +1,6 @@
 import useMainPreview from "../../hooks/useMainPreview";
 import { useParams } from "react-router-dom";
+import Loader from "../common/Loader";
 
 const MainPreview = () => {
   const { mainPreview, loading, error } = useMainPreview();
@@ -8,7 +9,7 @@ const MainPreview = () => {
   // console.log(categoryToShow, "main category");
   // console.log(category,"category from url")
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   if (error) return <div>Error: {error.message}</div>;
 
   const selectedPreview = mainPreview?.find(
@@ -23,7 +24,7 @@ const MainPreview = () => {
           src={selectedPreview.image}
           alt="no image"
           className="img-fluid"
-          // style={{ width: "100%", height: "vh" }}
+          style={{ width: "100%", height: "100%" }}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = "/No_image.jpg";

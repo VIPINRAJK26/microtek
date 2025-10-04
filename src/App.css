@@ -94,3 +94,29 @@
 .btn-primary:hover {
   transform: translateY(-2px); /* Lift effect on hover */
 }
+
+.solar-loader {
+  width: 80px;
+  height: 80px;
+  border: 8px solid transparent;
+  border-top: 8px solid #facc15;  /* Solar yellow */
+  border-right: 8px solid #0ea5e9; /* Battery blue */
+  border-radius: 50%;
+  animation: spin 1s linear infinite, glow 2s ease-in-out infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px #facc15, 0 0 10px #0ea5e9;
+  }
+  50% {
+    box-shadow: 0 0 20px #facc15, 0 0 30px #0ea5e9;
+  }
+}

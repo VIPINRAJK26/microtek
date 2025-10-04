@@ -125,7 +125,7 @@ const Footer = () => {
             <h5 className="pb-md-3">Address</h5>
             <p>
               <i className="fas fa-phone "></i>
-              <i className="fa-brands fa-whatsapp ps-2"></i> +91 9846151900
+              <i className="fa-brands fa-whatsapp ps-2"></i> +91 9846151800
             </p>
             <p>
               <i className="fas fa-phone "></i>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import usePreviewDetails from "../hooks/usePreviewDetails";
+import Loader from "../components/common/Loader";
 
 const LiBatInverter = ({ data, category, subcategory }) => {
   const { previewDetails, loading, error } = usePreviewDetails();
@@ -33,7 +34,7 @@ const LiBatInverter = ({ data, category, subcategory }) => {
   );
 
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loader />;
   if (error) return <div>Error: {error.message}</div>;
 
   // Filter all items matching string category (slug)
@@ -46,7 +47,7 @@ const LiBatInverter = ({ data, category, subcategory }) => {
   return (
     <div className=" ps-0 pl-0 pb-md-4 py-5">
       <div className="">
-        <div className="row align-items-center  justify-content-center">
+        <div className="row g-0 align-items-center  justify-content-center">
           <div className="">
             <div className="card border-0 shadow">
               {selectedPreview && selectedPreview.length > 0 ? (

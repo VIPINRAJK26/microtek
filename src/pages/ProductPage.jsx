@@ -3,31 +3,22 @@ import ProductFilter from "../components/products/ProductFilter";
 import ProductCard from "../components/products/ProductCard";
 import { Row, Col } from "react-bootstrap";
 import "./ProductPage.css";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useProducts from "../hooks/useProducts";
+import Loader from "../components/common/Loader";
 
-const Products = () => {
-  const { products } = useProducts();
+const Products = ({
+  variantData,
+  uniqueVariants,
+  previewDetails,
+  subcategory,
+}) => {
+  const { products, loading } = useProducts();
   const { category, variant } = useParams();
   const [baseProducts, setBaseProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState(baseProducts);
-  const location = useLocation();
-  const { variantData, uniqueVariants, previewDetails, subcategory } =
-    location.state || {};
 
-  // console.log("Subcategory:------------------", subcategory);
-  // console.log("All unique variants:", uniqueVariants);
-  // console.log("Current variant data:", variantData);
-  // console.log("Preview details--------------:", previewDetails);
-  // console.log(products, "products");
-  // console.log(
-  //   "New product present?",
-  //   products.find((p) => p?.slug === variant)?.title
-  // );
-  // console.log(category, variant, "cat,var");
-  // console.log(baseProducts, "base-products filter");
-  // console.log(filteredProducts, "filtered filter");
-
+  console.log(filteredProducts, "filtered products in product page");
   useEffect(() => {
     if (!products || products.length === 0) return;
 
@@ -36,15 +27,13 @@ const Products = () => {
     //   (p) => p?.variant_slug === variant
     // )?.subcategory;
 
-    if (category && variant && subcategory) {
+    if (category && subcategory) {
       const filtered = products.filter(
         (p) =>
           p?.category?.trim()?.toLowerCase() ===
             category.trim().toLowerCase() &&
           p?.subcategory?.trim()?.toLowerCase() ===
-            subcategory.trim().toLowerCase() &&
-          p?.variant_slug?.trim()?.toLowerCase() ===
-            variant.trim().toLowerCase()
+            subcategory.trim().toLowerCase() 
       );
       setBaseProducts(filtered);
       setFilteredProducts(filtered);
@@ -52,12 +41,16 @@ const Products = () => {
       setBaseProducts(products);
       setFilteredProducts(products);
     }
-  }, [category, variant, products]);
+  }, [category, products]);
 
   const handleDataChange = (filteredList) => {
     // console.log(filteredList, "filtered list");
     setFilteredProducts(filteredList);
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="product-page pt-5 px-4">

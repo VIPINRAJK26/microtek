@@ -4,10 +4,11 @@ import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
 import ImageSlider from "../components/products/ImageSlider";
 import useProducts from "../hooks/useProducts";
 import ProductDetails from "../components/products/ProductDetails";
+import Loader from "../components/common/Loader";
 
 const SingleProduct = () => {
   const { id } = useParams(); // This is sku or id passed in URL
-  const { products } = useProducts();
+  const { products, loading } = useProducts();
   const [activeKey, setActiveKey] = useState("description");
 
   // console.log(products, "products");
@@ -17,6 +18,8 @@ const SingleProduct = () => {
  // Match on SKU or use id
   
   // console.log(product, "product");
+
+  if (loading) return <Loader />;
 
   if (!product) {
     return <div className="pt-5 text-center">Product not found.</div>;
