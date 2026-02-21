@@ -33,6 +33,18 @@ const CopyrightSection = () => {
           </Link>
         </div>
       </div>
+      <div className="d-flex justify-content-center">
+        <p className="text-sm md:text-center font-light text-gray-300">
+          powered by{" "}
+          <a
+            href="https://extechnology.in"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <span className="font-bold pl-1">extechnology</span>
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

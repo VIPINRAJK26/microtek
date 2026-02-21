@@ -33,6 +33,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+           <a className="text-decoration-none text-black pt-0" href="https://www.warrantyregistration.warriorind.in/" target="_blank" rel="noopener noreferrer">Product Registration</a>
             <div className="d-flex gap-2 pt-md-5 pb-2 text-black">
               <a
                 href="https://www.facebook.com/warriorpowerindia/"
